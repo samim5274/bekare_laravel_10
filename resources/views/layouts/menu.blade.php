@@ -64,8 +64,10 @@
                         <li class="pc-item pc-hasmenu">
                             <a href="#!" class="pc-link">Select Date Report<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                             <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="#!">Selected Day wise Total Sale</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Item wise Sale</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/select-day-wise-sale-report')}}">Day wise Total Sale</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/select-day-wise-paid-sale-report')}}">Day wise Paid Sale</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/select-day-wise-due-sale-report')}}">Day wise Due Sale</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/item-wise-sale')}}">Item wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="#!">Item & Date wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="#!">Category Wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="#!">Category & Date Wise Sale</a></li>

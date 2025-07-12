@@ -39,7 +39,7 @@
     <div class="invoice-box">
         <h1 style="text-align:center;">Abir Bekare & Foods</h1>
         <p style="text-align:center;">House # 02, Road # 11, Sector # 6, Uttara, Dhaka-1230</p>
-        <h3 style="text-align:center;">Total Sale List</h3>
+        <h3 style="text-align:center;">{{$cart[0]->product->name}} Wise Sale List</h3>
         <p><mark>Note: All company info get from database company info table.</mark></p>
         <hr>
         <div class="qrImg">
@@ -50,48 +50,26 @@
                 <tr>
                     <th>#</th>
                     <th>date</th>
-                    <th>Name</th>
+                    <th>Product</th>
+                    <th>Seller</th>
                     <th>Reg</th>
-                    <th>Total (৳)</th>
-                    <th>Discount (৳)</th>
-                    <th>VAT % (৳)</th>
-                    <th>Payable (৳)</th>
-                    <th>Pay (৳)</th>
-                    <th>Due (৳)</th>
-                    <th class="text-center">Status</th>
+                    <th>Price (৳)</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($order as $key => $val)
+                @foreach($cart as $key => $val)
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{$val->date}}</td>
-                    <td>{{$val->user_id}}</td>
+                    <td>{{$val->product->name}}</td>
+                    <td>{{$val->user->name}}</td>
                     <td>{{$val->reg}}</td>
-                    <td>৳{{$val->total}}/-</td>
-                    <td>৳{{$val->discount}}/-</td>
-                    <td>৳{{$val->vat}}/-</td>
-                    <td>৳{{$val->payable}}/-</td>
-                    <td>৳{{$val->pay}}/-</td>
-                    <td>৳{{$val->due}}/-</td>
-                    <td class="text-center">
-                        @if($val->status == 2)
-                            <span class="badge bg-success">Paid</span>
-                        @else
-                            <span class="badge bg-danger">Due</span>
-                        @endif
-                    </td>
+                    <td class="text-center">৳{{$val->price}}/-</td>
                 </tr>
                 @endforeach
                 <tr class="table-info">
-                    <td colspan="4">Total:</td>
-                    <td>৳{{$total}}/-</td>
-                    <td>৳{{$discount}}/-</td>
-                    <td>৳{{$vat}}/-</td>
-                    <td>৳{{$payable}}/-</td>
-                    <td>৳{{$pay}}/-</td>
-                    <td>৳{{$due}}/-</td>
-                    <td></td>
+                    <td colspan="5">Total:</td>
+                    <td class="text-center">৳{{$price}}/-</td>
                 </tr>
             </tbody>
         </table>

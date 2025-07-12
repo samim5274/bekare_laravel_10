@@ -61,3 +61,11 @@ Route::get('/due-list', [ReportController::class, 'dueList'])->name('due.list.vi
 Route::get('/print-all-due-order', [ReportController::class, 'printDue']);
 Route::get('/paid-list', [ReportController::class, 'paidList'])->name('paid.list.view');
 Route::get('/print-all-paid-order', [ReportController::class, 'printPaid']);
+Route::get('/select-day-wise-sale-report', [ReportController::class, 'selsectDayWiseSaleReport'])->name('select.date.wise.sale.report.view');
+Route::post('/search-report-date-wise-sale-report', [ReportController::class, 'selsectDayWiseSaleReportFind']);
+Route::get('/select-day-wise-paid-sale-report', [ReportController::class, 'selsectDayWisePaidSaleReport'])->name('select.date.wise.paid.sale.report.view');
+Route::post('/search-report-date-wise-paid-sale-report', [ReportController::class, 'selsectDayWisePaidSaleReportFind']);
+Route::get('/select-day-wise-due-sale-report', [ReportController::class, 'selsectDayWiseDueSaleReport'])->name('select.date.wise.due.sale.report.view');
+Route::post('/search-report-date-wise-due-sale-report', [ReportController::class, 'selsectDayWiseDueSaleReportFind']);
+Route::get('/item-wise-sale', [ReportController::class, 'itemSale'])->name('item.sale.view');
+Route::get('/search-report-product', [ReportController::class, 'itemWiseSaleFind']);

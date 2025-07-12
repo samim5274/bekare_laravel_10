@@ -40,6 +40,7 @@
         <h1 style="text-align:center;">Abir Bekare & Foods</h1>
         <p style="text-align:center;">House # 02, Road # 11, Sector # 6, Uttara, Dhaka-1230</p>
         <h3 style="text-align:center;">Total Sale List</h3>
+        <h4 style="text-align:center;">Date Between: {{$start}} to {{$end}}</h4>
         <p><mark>Note: All company info get from database company info table.</mark></p>
         <hr>
         <div class="qrImg">
@@ -62,7 +63,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($order as $key => $val)
+                @foreach($data as $key => $val)
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{$val->date}}</td>

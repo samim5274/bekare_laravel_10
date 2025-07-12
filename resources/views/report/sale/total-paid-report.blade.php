@@ -21,55 +21,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}">
 
- <style>
-    .drop-zone {
-        border: 2px dashed #6c757d;
-        padding: 30px;
-        text-align: center;
-        color: #6c757d;
-        cursor: pointer;
-        border-radius: 8px;
-        transition: background-color 0.2s;
-    }
-
-    .drop-zone.dragover {
-        background-color: #e9ecef;
-    }
-
-    .preview-img {
-        max-width: 100%;
-        height: auto;
-        margin-top: 10px;
-        border-radius: 8px;
-        border: 1px solid #dee2e6;
-    }
-
-    .table td img {
-        object-fit: cover;
-        border-radius: 6px;
-    }
-
-    .loader {
-        width: 48px;
-        height: 48px;
-        border: 5px solid #000;
-        border-bottom-color: transparent;
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-    }
-
-    @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    } 
-</style>
-
 </head>
 
 <body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">

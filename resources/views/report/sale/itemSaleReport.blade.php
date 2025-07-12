@@ -36,7 +36,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{{url('/total-sale')}}">Report</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Total Sale</li>
+                                <li class="breadcrumb-item" aria-current="page">Item Sale</li>
                             </ul>
                         </div>
                     </div>
@@ -45,9 +45,41 @@
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="m-0">Total Sale Report</h4>
-                    <h5 class="m-0 text-primary">
-                        <a href="{{url('/print-total-sale')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
-                    </h5>
+                    <!-- <h5 class="m-0 text-primary">
+                        <a href="" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                    </h5> -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 grid-margin stretch-card">
+                        <div class="card mt-2">
+                            <div class="card-body p-2 p-md-4">
+                                <form action="{{url('/search-report-product')}}" method="GET" target="_blank">
+                                    @CSRF
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="input-group mb-3">
+                                                <div class="col-md-12">
+                                                    <select id="Product" name="cbxProduct" class="form-select" required>
+                                                        <option disabled selected >--Select Product--</option>
+                                                        @foreach($product as $val)
+                                                        <option value="{{$val->id}}">{{$val->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="input-group mb-3">
+                                                <input type="submit" class="btn btn-outline-primary w-50 py-2" value="Search">
+                                                <button type="submit" name="print" value="1" class="btn btn-sm btn-primary d-flex align-items-center justify-content-center w-50 gap-1"><i class="fa-solid fa-print"></i><span>Print</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped " id="printableTable">
@@ -55,48 +87,26 @@
                             <tr>
                                 <th>#</th>
                                 <th>date</th>
-                                <th>Name</th>
+                                <th>Product</th>
+                                <th>Seller</th>
                                 <th>Reg</th>
-                                <th>Total (৳)</th>
-                                <th>Discount (৳)</th>
-                                <th>VAT % (৳)</th>
-                                <th>Payable (৳)</th>
-                                <th>Pay (৳)</th>
-                                <th>Due (৳)</th>
-                                <th class="text-center">Status</th>
+                                <th>Price (৳)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($order as $key => $val)
+                            @foreach($cart as $key => $val)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{$val->date}}</td>
+                                <td>{{$val->product->name}}</td>
                                 <td>{{$val->user->name}}</td>
                                 <td>{{$val->reg}}</td>
-                                <td>৳{{$val->total}}/-</td>
-                                <td>৳{{$val->discount}}/-</td>
-                                <td>৳{{$val->vat}}/-</td>
-                                <td>৳{{$val->payable}}/-</td>
-                                <td>৳{{$val->pay}}/-</td>
-                                <td>৳{{$val->due}}/-</td>
-                                <td class="text-center">
-                                    @if($val->status == 2)
-                                        <span class="badge bg-success">Paid</span>
-                                    @else
-                                        <span class="badge bg-danger">Due</span>
-                                    @endif
-                                    <span class="text-primary"><a href="{{url('/specific-order-print/'.$val->reg)}}" target="_blank"><i class="fa-solid fa-print"></i></a></span>
-                                </td>
+                                <td class="text-center">৳{{$val->price}}/-</td>
                             </tr>
                             @endforeach
                             <tr class="table-info">
                                 <td colspan="4">Total:</td>
-                                <td>৳{{$total}}/-</td>
-                                <td>৳{{$discount}}/-</td>
-                                <td>৳{{$vat}}/-</td>
-                                <td>৳{{$payable}}/-</td>
-                                <td>৳{{$pay}}/-</td>
-                                <td>৳{{$due}}/-</td>
+                                <td class="text-center">৳{{$price}}/-</td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -104,7 +114,7 @@
                 </div>
                 <div class="d-flex justify-content-end mt-3">
                     <div class="d-flex justify-content-end mt-3">
-                        {{$order->links()}}
+                        {{$cart->links()}}
                     </div>
                 </div>
             </div>

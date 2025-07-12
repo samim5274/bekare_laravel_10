@@ -22,4 +22,9 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(Admin::class, 'user_id', 'id');
+    }
 }
