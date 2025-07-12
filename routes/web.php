@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Sale\SaleController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\Report\ReportController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
+Route::get('/clear', function () {
+    Artisan::call('config:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+
+    return "Caches cleared successfully.";
+});
+
+Auth::routes();
+
+Route::get('/login', function() {
+    return view('auth.login');
+});
+
+Route::post('/user-login', [AdminController::class, 'userLogin']);
+
+Route::get('/product-view', [ProductController::class, 'product'])->name('product.view');
+
+Route::post('/add-product', [ProductController::class, 'addProduct']);
+Route::get('/getSubCategory/{id}', [ProductController::class, 'getSubcategory']);
+Route::get('/edit-product/{id}', [ProductController::class, 'editProduct']);
+Route::post('/update-product/{id}', [ProductController::class, 'updateProduct']);
+Route::get('/product-delete/{id}', [ProductController::class, 'delete']);
+Route::get('/product-stock', [ProductController::class, 'stockShow'])->name('product.stock.show');
+Route::post('/stock-in/{id}', [ProductController::class, 'stockIn']);
+
+Route::get('/sale-view', [SaleController::class, 'saleView'])->name('sale.view');
+Route::get('/search', [SaleController::class, 'liveSearch']);
+Route::get('/add-to-cart/{id}', [SaleController::class, 'addCart']);
+Route::get('/add-to-cart-2', [SaleController::class, 'addCart2']);
+Route::get('/cart-view', [SaleController::class, 'cartView']);
+Route::post('/cart/update-quantity', [SaleController::class, 'updateQuantity']);
+Route::get('/remove-to-cart/{id}', [SaleController::class, 'removeCart']);
+
+Route::post('/confirm-order', [OrderController::class, 'confirmOrder']);
+Route::get('/payment-order', [OrderController::class, 'paymentOrder'])->name('order.payment');
+Route::post('/due-collection/{reg}', [OrderController::class, 'dueCollection']);
+Route::get('/print-all-order', [OrderController::class, 'printAllOrder']);
+Route::get('/specific-order-print/{reg}', [OrderController::class, 'specificOrderPrint'])->name('specific.order.print');
+
+Route::get('/total-sale', [ReportController::class, 'totalSale'])->name('total.sale.view');
+Route::get('/print-total-sale', [ReportController::class, 'printTotalSale']);
+Route::get('/due-list', [ReportController::class, 'dueList'])->name('due.list.view');
+Route::get('/print-all-due-order', [ReportController::class, 'printDue']);
+Route::get('/paid-list', [ReportController::class, 'paidList'])->name('paid.list.view');
+Route::get('/print-all-paid-order', [ReportController::class, 'printPaid']);

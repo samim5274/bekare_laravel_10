@@ -1,0 +1,77 @@
+$(document).ready(function () {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).on('click', '.btn-plus, .btn-minus', function () {
+        var id = $(this).data('id');
+        var input = $('input.qty-input[data-id="' + id + '"]');
+        var currentQty = parseInt(input.val());
+        var newQty = currentQty;
+
+        if ($(this).hasClass('btn-plus')) {
+            newQty = currentQty + 1;
+        } else if ($(this).hasClass('btn-minus') && currentQty > 1) {
+            newQty = currentQty - 1;
+        }
+
+        if (newQty === currentQty) return;
+
+        $.post('/cart/update-quantity', {
+            id: id,
+            quantity: newQty
+        }, function (response) {
+            if (response.status === 'success') {
+                input.val(response.quantity); 
+
+                var card = input.closest('.card-body');
+                var price = parseFloat(card.find('[data-price]').data('price'));
+                var subtotal = price * newQty;
+                card.find('.item-subtotal').text('৳' + subtotal.toFixed(2));
+
+                updateCartTotal();
+                console.log('Quantity updated:', response); 
+            } else {
+                alert(response.message || 'Update failed');
+            }
+        }).fail(function (xhr) {
+            console.error('AJAX error:', xhr.responseText);
+            alert('Something went wrong!');
+        });
+    });
+
+    function updateCartTotal() {
+        let total = 0;
+        $('.card-body').each(function () {
+            const price = parseFloat($(this).find('[data-price]').data('price'));
+            const qty = parseInt($(this).find('.qty-input').val());
+            if (!isNaN(price) && !isNaN(qty)) {
+                total += price * qty;
+            }
+        });
+        $('#cart-subtotal').text(total.toFixed(0));
+        $('#cart-total').text(total.toFixed(0));
+        $('#cart-total-input').val(Math.round(total));
+    }
+});
+
+
+
+// remove from cart get data in link 
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.remove-item-link').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            let id = this.dataset.id;
+            let input = document.querySelector('input[data-id="' + id + '"]');
+            let quantity = input ? input.value : 0;
+
+            // Dynamically set and redirect
+            window.location.href = `/remove-to-cart/${id}?txtStock=${quantity}`;
+        });
+    });
+});
