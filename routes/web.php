@@ -69,3 +69,5 @@ Route::get('/select-day-wise-due-sale-report', [ReportController::class, 'selsec
 Route::post('/search-report-date-wise-due-sale-report', [ReportController::class, 'selsectDayWiseDueSaleReportFind']);
 Route::get('/item-wise-sale', [ReportController::class, 'itemSale'])->name('item.sale.view');
 Route::get('/search-report-product', [ReportController::class, 'itemWiseSaleFind']);
+Route::get('/item-date-wise-sale', [ReportController::class, 'itemDateReport'])->name('item.date.report.view');
+Route::get('date-item-sale-report', [ReportController::class, 'dateItemReport']);

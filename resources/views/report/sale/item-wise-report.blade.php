@@ -86,7 +86,7 @@
                         <thead class="table-primary">
                             <tr>
                                 <th>#</th>
-                                <th>date</th>
+                                <th>Date</th>
                                 <th>Product</th>
                                 <th>Seller</th>
                                 <th>Reg</th>

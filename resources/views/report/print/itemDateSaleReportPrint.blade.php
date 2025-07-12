@@ -39,7 +39,7 @@
     <div class="invoice-box">
         <h1 style="text-align:center;">Abir Bekare & Foods</h1>
         <p style="text-align:center;">House # 02, Road # 11, Sector # 6, Uttara, Dhaka-1230</p>
-        <h3 style="text-align:center;">{{$cart[0]->product->name}} Wise Sale List</h3>
+        <h5 style="text-align:center;">{{$cart[0]->product->name}} and {{$start}} to {{$end}} Wise Sale List</h5>
         <p><mark>Note: All company info get from database company info table.</mark></p>
         <hr>
         <div class="qrImg">

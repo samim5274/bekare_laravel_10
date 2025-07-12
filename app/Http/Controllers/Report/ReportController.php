@@ -189,4 +189,29 @@ class ReportController extends Controller
         }
         return view('report.sale.item-wise-report', compact('cart', 'price', 'product'));
     }
+
+    public function itemDateReport(){
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $product = Product::all();
+        $cart = Cart::whereBetween('date', [$start, $end])->orderBy('id', 'desc')->paginate(15);
+        $price = Cart::whereBetween('date', [$start, $end])->sum('price');
+        return view('report.sale.itemDateSaleReport', compact('cart', 'price', 'product'));
+    }
+
+    public function dateItemReport(Request $request) {
+        $start = $request->input('dtpStartDate','');
+        $end = $request->input('dtpEndDate','');
+        $item = $request->input('cbxProduct', '');
+        if(!$item){
+            return redirect()->back()->with('warning', 'You need must be select item.');
+        }
+        $product = Product::all();
+        $price = Cart::where('product_id', $item)->whereBetween('date', [$start, $end])->sum('price');
+        $cart = Cart::where('product_id', $item)->whereBetween('date', [$start, $end])->orderBy('id', 'desc')->paginate(15);
+        if ($request->has('print')) {
+            return view('report.print.itemDateSaleReportPrint', compact('cart', 'price', 'product','start','end'));
+        }
+        return view('report.sale.itemDateSaleReport', compact('cart', 'price', 'product','start','end'));
+    }
 }

@@ -68,7 +68,7 @@
                                 <li class="pc-item"><a class="pc-link" href="{{url('/select-day-wise-paid-sale-report')}}">Day wise Paid Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="{{url('/select-day-wise-due-sale-report')}}">Day wise Due Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="{{url('/item-wise-sale')}}">Item wise Sale</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Item & Date wise Sale</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/item-date-wise-sale')}}">Item & Date wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="#!">Category Wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="#!">Category & Date Wise Sale</a></li>
                                 <li class="pc-item pc-hasmenu">

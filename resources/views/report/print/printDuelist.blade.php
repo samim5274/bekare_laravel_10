@@ -49,7 +49,7 @@
             <thead class="table-primary">
                 <tr>
                     <th>#</th>
-                    <th>date</th>
+                    <th>Date</th>
                     <th>Name</th>
                     <th>Reg</th>
                     <th>Total (৳)</th>

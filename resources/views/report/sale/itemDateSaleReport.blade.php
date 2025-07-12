@@ -36,44 +36,64 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{{url('/total-sale')}}">Report</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Total Sale</li>
+                                <li class="breadcrumb-item" aria-current="page">Item & Date Sale</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            @include('layouts.message')
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Selected Day wise Total Sale Report</h4>
-                    <h5 class="m-0 text-primary">
-                        <a href="{{url('/print-total-sale-date-wise')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
-                    </h5>
+                    <h4 class="m-0">Item and Date wise Total Sale Report</h4>
+                    <!-- <h5 class="m-0 text-primary">
+                        <a href=#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                    </h5> -->
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 grid-margin stretch-card">
                         <div class="card mt-2">
                             <div class="card-body p-2 p-md-4">
-                                <form action="{{url('/search-report-date-wise-sale-report')}}" method="POST" target="_blank">
+                                <form action="{{url('/date-item-sale-report')}}" method="GET" target="_blank">
                                     @CSRF
                                     <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="input-group mb-3">
-                                                <input type="date" id="dtpStartDate" required class="form-control py-2" name="dtpStartDate">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <!-- Start Date -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="dtpStartDate" class="form-label">Start Date</label>
+                                                    <input type="date" id="dtpStartDate" required class="form-control py-2" name="dtpStartDate">
+                                                </div>
+
+                                                <!-- End Date -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="dtpEndDate" class="form-label">End Date</label>
+                                                    <input type="date" id="dtpEndDate" required class="form-control py-2" name="dtpEndDate">
+                                                </div>
+
+                                                <!-- Product Dropdown -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="Product" class="form-label">Select Product</label>
+                                                    <select id="Product" name="cbxProduct" class="form-select py-2" required>
+                                                        <option disabled selected>--Select Product--</option>
+                                                        @foreach($product as $val)
+                                                            <option value="{{ $val->id }}">{{ $val->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <div class="input-group mb-3">
-                                                <input type="date" id="dtpEndDate" required class="form-control py-2" name="dtpEndDate">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="input-group mb-3">
+
+                                        <!-- Buttons -->
+                                        <div class="col-lg-12 d-flex align-items-end">
+                                            <div class="w-100 d-flex gap-2">
                                                 <input type="submit" class="btn btn-outline-primary w-50 py-2" value="Search">
-                                                <button type="submit" name="print" value="1" class="btn btn-sm btn-primary d-flex align-items-center justify-content-center w-50 gap-1"><i class="fa-solid fa-print"></i><span>Print</span></button>
+                                                <button type="submit" name="print" value="1" class="btn btn-primary w-50 d-flex align-items-center justify-content-center gap-2">
+                                                    <i class="fa-solid fa-print"></i><span>Print</span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -85,56 +105,33 @@
                             <tr>
                                 <th>#</th>
                                 <th>Date</th>
-                                <th>Name</th>
+                                <th>Product</th>
+                                <th>Seller</th>
                                 <th>Reg</th>
-                                <th>Total (৳)</th>
-                                <th>Discount (৳)</th>
-                                <th>VAT % (৳)</th>
-                                <th>Payable (৳)</th>
-                                <th>Pay (৳)</th>
-                                <th>Due (৳)</th>
-                                <th class="text-center">Status</th>
+                                <th>Price (৳)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $key => $val)
+                            @foreach($cart as $key => $val)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{$val->date}}</td>
+                                <td>{{$val->product->name}}</td>
                                 <td>{{$val->user->name}}</td>
                                 <td>{{$val->reg}}</td>
-                                <td>৳{{$val->total}}/-</td>
-                                <td>৳{{$val->discount}}/-</td>
-                                <td>৳{{$val->vat}}/-</td>
-                                <td>৳{{$val->payable}}/-</td>
-                                <td>৳{{$val->pay}}/-</td>
-                                <td>৳{{$val->due}}/-</td>
-                                <td class="text-center">
-                                    @if($val->status == 2)
-                                        <span class="badge bg-success">Paid</span>
-                                    @else
-                                        <span class="badge bg-danger">Due</span>
-                                    @endif
-                                    <span class="text-primary"><a href="{{url('/specific-order-print/'.$val->reg)}}" target="_blank"><i class="fa-solid fa-print"></i></a></span>
-                                </td>
+                                <td class="text-center">৳{{$val->price}}/-</td>
                             </tr>
                             @endforeach
                             <tr class="table-info">
-                                <td colspan="4">Total:</td>
-                                <td>৳{{$total}}/-</td>
-                                <td>৳{{$discount}}/-</td>
-                                <td>৳{{$vat}}/-</td>
-                                <td>৳{{$payable}}/-</td>
-                                <td>৳{{$pay}}/-</td>
-                                <td>৳{{$due}}/-</td>
-                                <td></td>
+                                <td colspan="5">Total:</td>
+                                <td class="text-center">৳{{$price}}/-</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="d-flex justify-content-end mt-3">
                     <div class="d-flex justify-content-end mt-3">
-                        {{$data->links()}}
+                        {{$cart->links()}}
                     </div>
                 </div>
             </div>
@@ -152,19 +149,13 @@
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
 
     <script>
-        window.onload = function () {
-            const today = new Date().toISOString().split('T')[0];
-
-            const startInput = document.getElementById('dtpStartDate');
-            const endInput = document.getElementById('dtpEndDate');
-
-            startInput.max = today;
-            endInput.max = today;
-
-            startInput.value = today;
-            endInput.value = today;
-        };
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dtpStartDate').value = today;
+        document.getElementById('dtpEndDate').value = today;
+        document.getElementById('dtpStartDate').max = today;
+        document.getElementById('dtpEndDate').max = today;
     </script>
+
 
 </body>
 </html>
