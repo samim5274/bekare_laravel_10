@@ -71,3 +71,10 @@ Route::get('/item-wise-sale', [ReportController::class, 'itemSale'])->name('item
 Route::get('/search-report-product', [ReportController::class, 'itemWiseSaleFind']);
 Route::get('/item-date-wise-sale', [ReportController::class, 'itemDateReport'])->name('item.date.report.view');
 Route::get('date-item-sale-report', [ReportController::class, 'dateItemReport']);
+Route::get('/category-wise-sale', [ReportController::class, 'categorySaleReport'])->name('category.sale.report.view');
+Route::get('/search-report-category', [ReportController::class, 'categorySaleReportFind']);
+Route::get('/category-date-sale', [ReportController::class, 'categoryDateReport'])->name('category.sale.date.report.view');
+Route::get('/search-report-date-category', [ReportController::class, 'categoryDateReportFind']);
+
+Route::get('/stock-report', [ReportController::class, 'stockReport'])->name('stock.report.view');
+Route::get('/print-total-stock', [ReportController::class, 'printStockReport']);

@@ -69,8 +69,8 @@
                                 <li class="pc-item"><a class="pc-link" href="{{url('/select-day-wise-due-sale-report')}}">Day wise Due Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="{{url('/item-wise-sale')}}">Item wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="{{url('/item-date-wise-sale')}}">Item & Date wise Sale</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Category Wise Sale</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Category & Date Wise Sale</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/category-wise-sale')}}">Category Wise Sale</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/category-date-sale')}}">Category & Date Wise Sale</a></li>
                                 <li class="pc-item pc-hasmenu">
                                 <a href="#!" class="pc-link">Level 3.3<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                                     <ul class="pc-submenu">
@@ -83,7 +83,7 @@
                         <li class="pc-item pc-hasmenu">
                             <a href="#!" class="pc-link">Stock Report<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                             <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="#!">Stock</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/stock-report')}}">Stock</a></li>
                                 <li class="pc-item"><a class="pc-link" href="#!">Product Stock</a></li>
                                 <li class="pc-item"><a class="pc-link" href="#!">Stock Category</a></li>
                                 <li class="pc-item pc-hasmenu">

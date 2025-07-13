@@ -36,7 +36,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{{url('/total-sale')}}">Report</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Item Sale</li>
+                                <li class="breadcrumb-item" aria-current="page">Category Sale</li>
                             </ul>
                         </div>
                     </div>
@@ -45,24 +45,24 @@
             @include('layouts.message')
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Total Sale Report</h4>
+                    <h4 class="m-0">Total Category Sale Report</h4>
                     <!-- <h5 class="m-0 text-primary">
-                        <a href="" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                        <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5> -->
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 grid-margin stretch-card">
                         <div class="card mt-2">
                             <div class="card-body p-2 p-md-4">
-                                <form action="{{url('/search-report-product')}}" method="GET" target="_blank">
+                                <form action="{{url('/search-report-category')}}" method="GET" target="_blank">
                                     @CSRF
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <div class="input-group mb-3">
                                                 <div class="col-md-12">
-                                                    <select id="Product" name="cbxProduct" class="form-select" required>
-                                                        <option disabled selected >--Select Product--</option>
-                                                        @foreach($product as $val)
+                                                    <select id="Category" name="cbxCategory" class="form-select" required>
+                                                        <option disabled selected >--Select Category--</option>
+                                                        @foreach($category as $val)
                                                         <option value="{{$val->id}}">{{$val->name}}</option>
                                                         @endforeach
                                                     </select>
@@ -106,9 +106,8 @@
                             </tr>
                             @endforeach
                             <tr class="table-info">
-                                <td colspan="4">Total:</td>
+                                <td colspan="5">Total:</td>
                                 <td class="text-center">৳{{$price}}/-</td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>

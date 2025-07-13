@@ -36,7 +36,7 @@
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                                 <li class="breadcrumb-item"><a href="{{url('/total-sale')}}">Report</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Item Sale</li>
+                                <li class="breadcrumb-item" aria-current="page">Category and Date Sale</li>
                             </ul>
                         </div>
                     </div>
@@ -45,34 +45,51 @@
             @include('layouts.message')
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Total Sale Report</h4>
+                    <h4 class="m-0">Total Category & Date Sale Report</h4>
                     <!-- <h5 class="m-0 text-primary">
-                        <a href="" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                        <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5> -->
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 grid-margin stretch-card">
                         <div class="card mt-2">
                             <div class="card-body p-2 p-md-4">
-                                <form action="{{url('/search-report-product')}}" method="GET" target="_blank">
+                                <form action="{{url('/search-report-date-category')}}" method="GET" target="_blank">
                                     @CSRF
                                     <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class="input-group mb-3">
-                                                <div class="col-md-12">
-                                                    <select id="Product" name="cbxProduct" class="form-select" required>
-                                                        <option disabled selected >--Select Product--</option>
-                                                        @foreach($product as $val)
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <!-- Start Date -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="dtpStartDate" class="form-label">Start Date</label>
+                                                    <input type="date" id="dtpStartDate" required class="form-control py-2" name="dtpStartDate">
+                                                </div>
+
+                                                <!-- End Date -->
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="dtpEndDate" class="form-label">End Date</label>
+                                                    <input type="date" id="dtpEndDate" required class="form-control py-2" name="dtpEndDate">
+                                                </div>
+
+                                                <!-- Product Dropdown -->
+                                                <div class="col-md-12 mb-3">
+                                                    <select id="Category" name="cbxCategory" class="form-select" required>
+                                                        <option disabled selected >--Select Category--</option>
+                                                        @foreach($category as $val)
                                                         <option value="{{$val->id}}">{{$val->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <div class="input-group mb-3">
+
+                                        <!-- Buttons -->
+                                        <div class="col-lg-12 d-flex align-items-end">
+                                            <div class="w-100 d-flex gap-2">
                                                 <input type="submit" class="btn btn-outline-primary w-50 py-2" value="Search">
-                                                <button type="submit" name="print" value="1" class="btn btn-sm btn-primary d-flex align-items-center justify-content-center w-50 gap-1"><i class="fa-solid fa-print"></i><span>Print</span></button>
+                                                <button type="submit" name="print" value="1" class="btn btn-primary w-50 d-flex align-items-center justify-content-center gap-2">
+                                                    <i class="fa-solid fa-print"></i><span>Print</span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -106,9 +123,8 @@
                             </tr>
                             @endforeach
                             <tr class="table-info">
-                                <td colspan="4">Total:</td>
+                                <td colspan="5">Total:</td>
                                 <td class="text-center">৳{{$price}}/-</td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -131,6 +147,14 @@
     <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
+
+    <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dtpStartDate').value = today;
+        document.getElementById('dtpEndDate').value = today;
+        document.getElementById('dtpStartDate').max = today;
+        document.getElementById('dtpEndDate').max = today;
+    </script>
 
 </body>
 </html>

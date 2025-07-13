@@ -42,6 +42,7 @@
                     </div>
                 </div>
             </div>
+            @include('layouts.message')
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="m-0">Selected Day wise Total Sale Report</h4>

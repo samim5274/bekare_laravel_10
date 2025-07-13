@@ -212,6 +212,6 @@ class ProductController extends Controller
         $stock->status = 2;
         $product->update();
         $stock->save();
-        return redirect()->route('product.stock.show')->with('success','Product stock in successfully submited.');
+        return redirect()->back()->with('success','Product stock in successfully submited.');
     }
 }

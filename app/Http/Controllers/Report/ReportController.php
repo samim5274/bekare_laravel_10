@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
+use App\Models\Category;
 use Auth;
 
 class ReportController extends Controller
@@ -213,5 +214,86 @@ class ReportController extends Controller
             return view('report.print.itemDateSaleReportPrint', compact('cart', 'price', 'product','start','end'));
         }
         return view('report.sale.itemDateSaleReport', compact('cart', 'price', 'product','start','end'));
+    }
+
+    public function categorySaleReport(){
+        $category = Category::all();
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $cart = Cart::whereBetween('date', [$start, $end])->orderBy('id', 'desc')->paginate(15);
+        $price = Cart::whereBetween('date', [$start, $end])->sum('price');
+        return view('report.sale.categorySaleReport', compact('category','cart','price'));
+    }
+
+    public function categorySaleReportFind(Request $request){
+        $category = Category::all();
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $catId = $request->input('cbxCategory','');
+        if(!$catId){
+            return redirect()->back()->with('warning', 'You need must be select Category.');
+        }
+        $findCatName = Category::where('id', $catId)->first();
+        $productId = Product::where('category_id', $catId)->pluck('id');
+        $cart = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->with('product')->orderBy('id', 'desc')->paginate(15);
+        $price = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->sum('price');
+        if ($request->has('print')) {
+            return view('report.print.categorySaleReportPrint', compact('category','cart','price','start','end','findCatName'));
+        }
+        return view('report.sale.categorySaleReport', compact('category','cart','price'));
+    }
+
+    public function categoryDateReport(){
+        $category = Category::all();
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $cart = Cart::whereBetween('date', [$start, $end])->orderBy('id', 'desc')->paginate(15);
+        $price = Cart::whereBetween('date', [$start, $end])->sum('price');
+        return view('report.sale.categoryDateSaleReport', compact('category','cart','price'));
+    }
+
+    public function categoryDateReportFind(Request $request){
+        $category = Category::all();
+        $catId = $request->input('cbxCategory','');
+        if(!$catId){
+            return redirect()->back()->with('warning', 'You need must be select Category.');
+        }
+        $findCatName = Category::where('id', $catId)->first();
+        $start = $request->input('dtpStartDate','');
+        $end = $request->input('dtpEndDate','');
+        $productId = Product::where('category_id', $catId)->pluck('id');
+        $cart = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->with('product')->orderBy('id', 'desc')->paginate(15);
+        $price = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->with('product')->sum('price');
+        if ($request->has('print')) {
+            return view('report.print.categoryDateSaleReportPrint', compact('category','cart','price','start','end','findCatName'));
+        }
+        return view('report.sale.categoryDateSaleReport', compact('category','cart','price'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function stockReport() {
+        $product = Product::paginate(20);
+        $stock = Product::sum('stock');
+        $price = Product::sum('price');
+        return view('report.stock.totalStock', compact('product','stock','price'));
+    }
+
+    public function printStockReport(){
+        $product = Product::all();
+        $stock = Product::sum('stock');
+        $price = Product::sum('price');
+        return view('report.stock.totalStockPrint', compact('product','stock','price'));
     }
 }
