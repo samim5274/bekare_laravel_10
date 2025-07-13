@@ -14,6 +14,12 @@ use Auth;
 
 class OrderController extends Controller
 {
+    function generateRegNum() {
+        $order = Order::count() + 1;
+        $userId = Auth::guard('admin')->user()->id;
+        return Carbon::now()->format('Ymd') . str_pad($userId, 2, '0', STR_PAD_LEFT) . str_pad($order, 4, '0', STR_PAD_LEFT);
+    }
+
     public function confirmOrder(Request $request) {
         try{
             $order = new Order();
@@ -81,13 +87,15 @@ class OrderController extends Controller
     }
 
     public function paymentOrder(){
-        $order = Order::orderBy('id', 'desc')->paginate(15);
-        $total = Order::sum('total');
-        $discount = Order::sum('discount');
-        $payable = Order::sum('payable');
-        $pay = Order::sum('pay');
-        $due = Order::sum('due');
-        $vat = Order::sum('vat');
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $order = Order::whereBetween('date', [$start, $end])->whereNot('status', 1)->orderBy('id', 'desc')->paginate(15);
+        $total = Order::whereBetween('date', [$start, $end])->sum('total');
+        $discount = Order::whereBetween('date', [$start, $end])->sum('discount');
+        $payable = Order::whereBetween('date', [$start, $end])->sum('payable');
+        $pay = Order::whereBetween('date', [$start, $end])->sum('pay');
+        $due = Order::whereBetween('date', [$start, $end])->sum('due');
+        $vat = Order::whereBetween('date', [$start, $end])->sum('vat');
         return view('order.orderlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 
@@ -129,13 +137,15 @@ class OrderController extends Controller
     }
 
     public function printAllOrder() {
-        $order = Order::orderBy('id', 'desc')->get();
-        $total = Order::sum('total');
-        $discount = Order::sum('discount');
-        $payable = Order::sum('payable');
-        $pay = Order::sum('pay');
-        $due = Order::sum('due');
-        $vat = Order::sum('vat');
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $order = Order::whereBetween('date', [$start, $end])->orderBy('id', 'desc')->get();
+        $total = Order::whereBetween('date', [$start, $end])->sum('total');
+        $discount = Order::whereBetween('date', [$start, $end])->sum('discount');
+        $payable = Order::whereBetween('date', [$start, $end])->sum('payable');
+        $pay = Order::whereBetween('date', [$start, $end])->sum('pay');
+        $due = Order::whereBetween('date', [$start, $end])->sum('due');
+        $vat = Order::whereBetween('date', [$start, $end])->sum('vat');
         // dd($order);
         return view('order.print.printOrderlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
@@ -145,5 +155,49 @@ class OrderController extends Controller
         $cart = Cart::where('reg', $reg)->get();
         // dd($cart);
         return view('order.print.printSpecificOrderlist', compact('order','cart'));
+    }
+
+    public function returnOrderList(){
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $order = Order::whereBetween('date', [$start, $end])->orderBy('id', 'desc')->paginate(15);
+        $total = Order::whereBetween('date', [$start, $end])->sum('total');
+        $discount = Order::whereBetween('date', [$start, $end])->sum('discount');
+        $payable = Order::whereBetween('date', [$start, $end])->sum('payable');
+        $pay = Order::whereBetween('date', [$start, $end])->sum('pay');
+        $due = Order::whereBetween('date', [$start, $end])->sum('due');
+        $vat = Order::whereBetween('date', [$start, $end])->sum('vat');
+        return view('order.returnOrderlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+    }
+
+    public function returnCart($reg){
+        $cart = Cart::where('reg', $reg)->with('product','user')->get();
+        $order = Order::where('reg', $reg)->get();
+        $count = Cart::where('reg', $reg)->count();
+        return view('order.cart', compact('cart','reg','count','order'));
+    }
+
+    public function returnConfirm($reg){
+        $order = Order::where('reg', $reg)->first();
+        if(!$order){
+            return redirect()->back()->with('error', $reg.' - Order return not possile. Try again latter. Or contact with manager. Thanks!');
+        }
+        $order->status = 1; // status 1 means order returned
+        $order->update();
+        return redirect()->route('return.order.list.view')->with('success', $reg.' - Order return successfully complete.');
+    }
+
+    public function printReturnList(){
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        $order = Order::whereBetween('date', [$start, $end])->where('status', 1)->orderBy('id', 'desc')->get();
+        $total = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('total');
+        $discount = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('discount');
+        $payable = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('payable');
+        $pay = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('pay');
+        $due = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('due');
+        $vat = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('vat');
+        // dd($order);
+        return view('order.print.printReturnlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 }

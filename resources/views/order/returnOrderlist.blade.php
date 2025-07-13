@@ -84,8 +84,7 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('/product-view')}}">Product</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Product</li>
+                                <li class="breadcrumb-item" aria-current="page">Return</li>
                             </ul>
                         </div>
                     </div>
@@ -94,9 +93,9 @@
             @include('layouts.message')
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Bakery Product List</h4>
+                    <h4 class="m-0">Product Return List</h4>
                     <h5 class="m-0 text-primary">
-                        <a href="{{url('/print-all-order')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                        <a href="{{url('/print-return-list')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5>
                 </div>
                 <div class="table-responsive">
@@ -113,7 +112,7 @@
                                 <th>Payable (৳)</th>
                                 <th>Pay (৳)</th>
                                 <th>Due (৳)</th>
-                                <th class="text-center">Status</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,7 +121,7 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{$val->date}}</td>
                                 <td>{{$val->user->name}}</td>
-                                <td>{{$val->reg}}</td>
+                                <td><a href="{{url('/return-product-cart/'.$val->reg)}}">{{$val->reg}}</a></td>
                                 <td>৳{{$val->total}}/-</td>
                                 <td>৳{{$val->discount}}/-</td>
                                 <td>৳{{$val->vat}}/-</td>
@@ -130,13 +129,11 @@
                                 <td>৳{{$val->pay}}/-</td>
                                 <td>৳{{$val->due}}/-</td>
                                 <td class="text-center">
-                                    @if($val->status == 2)
-                                        <span class="badge bg-success">Paid</span>
+                                    @if($val->status == 1)
+                                    <span class="badge bg-danger">Return</span>
                                     @else
-                                        <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#due{{$val->id}}">Due</span>
+                                    <a href="{{url('/return-product-cart/'.$val->reg)}}"><i class="fa-regular fa-share-from-square"></i></a>
                                     @endif
-                                    <span class="text-primary"><a href="{{url('/specific-order-print/'.$val->reg)}}" target="_blank"><i class="fa-solid fa-print"></i></a></span>
-                                    <a href="{{url('/return-product-cart/'.$val->reg)}}" class="text-danger"><i class="fa-regular fa-share-from-square"></i></a>
                                 </td>
                             </tr>
                             @endforeach

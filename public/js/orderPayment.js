@@ -16,7 +16,7 @@ function calculateAmount() {
         return;
     }
 
-    // Calculate VAT and total
+    // Calculate VAT and grand total
     const vatAmount = (subtotal * vatPercent) / 100;
     const grandTotal = subtotal + vatAmount - discount;
 
@@ -24,7 +24,10 @@ function calculateAmount() {
     document.getElementById('vat-amount').innerText = vatAmount.toFixed(2);
     document.getElementById('discount-amount').innerText = discount.toFixed(2);
 
-    // Determine due/return
+    // Update calculated subtotal (grandTotal)
+    document.getElementById('cart-subtotal').innerText = grandTotal.toFixed(2);
+
+    // Determine due or return
     const balance = pay - grandTotal;
     let message = "";
 
@@ -47,4 +50,3 @@ function calculateAmount() {
 
     result.innerText = message;
 }
-

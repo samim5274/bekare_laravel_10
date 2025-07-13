@@ -44,6 +44,12 @@
                     </a>
                 </li>
                 <li class="pc-item">
+                    <a href="{{url('/return-order-list')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-regular fa-share-from-square"></i></i></span>
+                        <span class="pc-mtext">Return</span>
+                    </a>
+                </li>
+                <li class="pc-item">
                     <a href="{{url('/product-stock')}}" class="pc-link">
                         <span class="pc-micon"><i class="fa-solid fa-chart-pie"></i></span>
                         <span class="pc-mtext">Stock</span>
@@ -101,6 +107,12 @@
                     <a href="#" class="pc-link">
                         <span class="pc-micon"><i class="fa-solid fa-gear"></i></span>
                         <span class="pc-mtext">Setting</span>
+                    </a>
+                </li>
+                <li class="pc-item">
+                    <a href="{{url('/backup-database')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-download"></i></span>
+                        <span class="pc-mtext">Backup DB</span>
                     </a>
                 </li>
                 <li class="pc-item">
