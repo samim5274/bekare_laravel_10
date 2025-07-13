@@ -84,13 +84,13 @@
                             <a href="#!" class="pc-link">Stock Report<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                             <ul class="pc-submenu">
                                 <li class="pc-item"><a class="pc-link" href="{{url('/stock-report')}}">Stock</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Product Stock</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Stock Category</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/product-stock-report')}}">Product Stock</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/category-stock')}}">Stock Category</a></li>
                                 <li class="pc-item pc-hasmenu">
                                 <a href="#!" class="pc-link">Date Wise<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                                     <ul class="pc-submenu">
                                         <li class="pc-item"><a class="pc-link" href="#!">Date wise Stock</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="#!">Date & Category wise Stock</a></li>
+                                        <li class="pc-item"><a class="pc-link" href="#!">Date & Category Stock</a></li>
                                     </ul>
                                 </li>
                             </ul>

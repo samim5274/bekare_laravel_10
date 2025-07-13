@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Report;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Models\Product;
 use App\Models\Cart;
@@ -295,5 +297,110 @@ class ReportController extends Controller
         $stock = Product::sum('stock');
         $price = Product::sum('price');
         return view('report.stock.totalStockPrint', compact('product','stock','price'));
+    }
+
+    public function productStock(){
+        $product = Product::all();
+
+        $stockSummary = DB::table('stocks')
+                            ->select('product_id', 
+                                DB::raw('SUM(stockIn) as total_in'), 
+                                DB::raw('SUM(stockOut) as total_out'))
+                            ->groupBy('product_id')->get();
+
+        $totalStockIn = $stockSummary->sum('total_in');
+        $totalStockOut = $stockSummary->sum('total_out');
+
+        $perPage = 20;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $paginatedSummary = new LengthAwarePaginator(
+            $stockSummary->forPage($currentPage, $perPage),
+            $stockSummary->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $productIds = $paginatedSummary->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+        
+        return view('report.stock.productStock', compact('product','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
+    }
+
+    public function itemStockFind(Request $request){
+        $product = Product::all();
+        $item = $request->input('cbxProduct', '');        
+        if(!$item){
+            return redirect()->back()->with('warning', 'You need must be select Product.');
+        }
+        $stock = Stock::where('product_id', $item)->paginate(20);
+        $stockIn = Stock::where('product_id', $item)->sum('stockIn');
+        $stockOut = Stock::where('product_id', $item)->sum('stockOut');
+        if ($request->has('print')) {
+            return view('report.stock.productStockPrint', compact('product','stock','stockOut','stockIn'));
+        }
+        return view('report.stock.productStock', compact('product','stock','stockOut','stockIn'));
+    }
+
+    public function categoryStock(){
+        $category = Category::all();
+        $stockSummary = DB::table('stocks')
+                            ->select('product_id', 
+                                DB::raw('SUM(stockIn) as total_in'), 
+                                DB::raw('SUM(stockOut) as total_out'))
+                            ->groupBy('product_id')->get();
+
+        $totalStockIn = $stockSummary->sum('total_in');
+        $totalStockOut = $stockSummary->sum('total_out');
+
+        $perPage = 20;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $paginatedSummary = new LengthAwarePaginator(
+            $stockSummary->forPage($currentPage, $perPage),
+            $stockSummary->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $productIds = $paginatedSummary->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+        return view('report.stock.productStockCategory', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
+    }
+
+    public function categoryStockFind(Request $request){
+        $category = Category::all();
+        $catId = $request->input('cbxCategory','');
+        $productIdsByCategory = Product::where('category_id', $catId)->pluck('id')->toArray();
+        $stockSummary = DB::table('stocks')
+                            ->select('product_id', 
+                                DB::raw('SUM(stockIn) as total_in'), 
+                                DB::raw('SUM(stockOut) as total_out'))
+                            ->whereIn('product_id', $productIdsByCategory)
+                            ->groupBy('product_id')->get(); 
+
+        $totalStockIn = $stockSummary->sum('total_in');
+        $totalStockOut = $stockSummary->sum('total_out');
+
+        $perPage = 20;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $paginatedSummary = new LengthAwarePaginator(
+            $stockSummary->forPage($currentPage, $perPage),
+            $stockSummary->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $productIds = $paginatedSummary->pluck('product_id')->toArray();
+        $products = Product::with('category')->whereIn('id', $productIds)->get()->keyBy('id');
+        if ($request->has('print')) {
+            return view('report.stock.productStockCategoryPrint', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
+        }
+        // dd($catId, $productIdsByCategory, $stockSummary, $paginatedSummary, $productIds, $products);
+        return view('report.stock.productStockCategory', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
     }
 }

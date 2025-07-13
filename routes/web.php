@@ -78,3 +78,7 @@ Route::get('/search-report-date-category', [ReportController::class, 'categoryDa
 
 Route::get('/stock-report', [ReportController::class, 'stockReport'])->name('stock.report.view');
 Route::get('/print-total-stock', [ReportController::class, 'printStockReport']);
+Route::get('/product-stock-report', [ReportController::class, 'productStock']);
+Route::get('/item-stock-find', [ReportController::class, 'itemStockFind']);
+Route::get('/category-stock', [ReportController::class, 'categoryStock'])->name('category.stock.view');
+Route::get('/category-stock-find', [ReportController::class, 'categoryStockFind']);
