@@ -61,6 +61,12 @@
                         <span class="pc-mtext">Profile</span>
                     </a>
                 </li>
+                <li class="pc-item">
+                    <a href="{{url('/branch')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-code-branch"></i></span>
+                        <span class="pc-mtext">Branch</span>
+                    </a>
+                </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Reports</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">

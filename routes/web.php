@@ -11,10 +11,35 @@ use App\Http\Controllers\Sale\SaleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Report\ReportController;
+use App\Http\Controllers\Branch\BranchController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+Route::get('/backup-database', function(){
+    Artisan::call('backup:run', ['--only-db' => true]);
+
+    $diskName = config('backup.backup.destination.disks')[0];
+    $disk = Storage::disk($diskName);
+
+    $files = collect($disk->allFiles(config('backup.backup.name')))
+                ->filter(fn ($file) => Str::endsWith($file, '.zip'))
+                ->sortDesc();
+
+    $latestBackup = $files->first();
+
+    if (!$latestBackup) {
+        return back()->with('error', 'No backup file found!');
+    }
+
+    $path = $disk->path($latestBackup);
+
+    return response()->download($path);
+})->name('download.db.backup');
+
 
 
 Route::get('/clear', function () {
@@ -90,29 +115,6 @@ Route::get('/item-stock-find', [ReportController::class, 'itemStockFind']);
 Route::get('/category-stock', [ReportController::class, 'categoryStock'])->name('category.stock.view');
 Route::get('/category-stock-find', [ReportController::class, 'categoryStockFind']);
 
-
-
-
-
-
-
-Route::get('/backup-database', function(){
-    Artisan::call('backup:run', ['--only-db' => true]);
-
-    $diskName = config('backup.backup.destination.disks')[0];
-    $disk = Storage::disk($diskName);
-
-    $files = collect($disk->allFiles(config('backup.backup.name')))
-                ->filter(fn ($file) => Str::endsWith($file, '.zip'))
-                ->sortDesc();
-
-    $latestBackup = $files->first();
-
-    if (!$latestBackup) {
-        return back()->with('error', 'No backup file found!');
-    }
-
-    $path = $disk->path($latestBackup);
-
-    return response()->download($path);
-})->name('download.db.backup');
+Route::get('/branch', [BranchController::class, 'branch'])->name('branch.view');
+Route::post('/add-branch', [BranchController::class, 'addBranch']);
+Route::get('/update-branch/{id}', [BranchController::class, 'updateBranch']);
