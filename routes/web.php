@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Report\ReportController;
 use App\Http\Controllers\Branch\BranchController;
+use App\Http\Controllers\Purchase\PurchaseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -118,3 +119,10 @@ Route::get('/category-stock-find', [ReportController::class, 'categoryStockFind'
 Route::get('/branch', [BranchController::class, 'branch'])->name('branch.view');
 Route::post('/add-branch', [BranchController::class, 'addBranch']);
 Route::get('/update-branch/{id}', [BranchController::class, 'updateBranch']);
+
+Route::get('/purchase', [PurchaseController::class, 'purchaseView'])->name('purchase.view');
+Route::get('/make-purchase-order', [PurchaseController::class, 'purchaseCart']);
+Route::post('/update-purchase-cart-qty', [PurchaseController::class, 'updateQty']);
+Route::get('/remove-to-cart/{id}', [PurchaseController::class, 'removeFromCart']);
+Route::post('/confirm-purchase-order', [PurchaseController::class, 'confirmPurchase']);
+Route::get('/purchase-list', [PurchaseController::class, 'purchaseList'])->name('purchase.list.view');

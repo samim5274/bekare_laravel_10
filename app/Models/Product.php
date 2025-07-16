@@ -44,4 +44,9 @@ class Product extends Model
         return $this->belongsTo(Stock::class, 'product_id', 'id');
     }
 
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class, 'product_id', 'id');
+    }
+
 }

@@ -24,6 +24,7 @@ class Admin extends Authenticatable
         'phone',
         'address',
         'dob',
+        'branch',
         'role',
         'status',
     ];
@@ -41,5 +42,15 @@ class Admin extends Authenticatable
     public function branch()
     {
         return $this->hasMany(Branch::class, 'manager_id', 'id');
+    }
+
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class, 'user_id', 'id');
+    }
+
+    public function purchaseorder()
+    {
+        return $this->hasMany(Purchaseorder::class, 'user_id', 'id');
     }
 }

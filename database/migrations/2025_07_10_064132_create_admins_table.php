@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->date('dob')->nullable();
+            $table->integer('branch')->default(0);
             $table->integer('role')->default(0);
             $table->integer('status')->default(0);
             $table->timestamps();

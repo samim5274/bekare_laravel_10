@@ -68,6 +68,13 @@
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-shop"></i></span></span><span class="pc-mtext">Purchase</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{url('/purchase')}}">Purchase Order</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{url('/purchase-list')}}">Purchase List</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Reports</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{url('/total-sale')}}">Total Sale</a></li>
@@ -263,7 +270,7 @@
                     aria-expanded="false"
                 >
                     <img src="{{ asset('/img/LOGO35 pix.png') }}" alt="user-image" class="user-avtar">
-                    <span>SAMIM-HosseN</span>
+                    <span>{{ Auth::guard('admin')->user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                     <div class="dropdown-header">
@@ -272,8 +279,18 @@
                         <img src="{{ asset('/img/LOGO35 pix.png') }}" alt="user-image" class="user-avtar wid-35">
                         </div>
                         <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-1">SAMIM-HosseN</h6>
-                        <span>Admin</span>
+                        <h6 class="mb-1">{{ Auth::guard('admin')->user()->name }}</h6>
+                        @php
+                            $roles = [
+                                1 => 'Admin',
+                                2 => 'Manager',
+                                3 => 'Incharge',
+                                4 => 'Cashier'
+                            ];
+
+                            $roleId = Auth::guard('admin')->user()->role;
+                        @endphp
+                        <span>{{ $roles[$roleId] ?? 'Unknown' }}</span>
                         </div>
                         <a href="{{url('/login')}}" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
                     </div>

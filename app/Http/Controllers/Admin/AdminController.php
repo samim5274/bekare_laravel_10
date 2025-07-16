@@ -30,7 +30,7 @@ class AdminController extends Controller
         if (Auth::guard('admin')->attempt($credentials, $remember)) {
             $userId = Auth::guard('admin')->id();
             $username = Auth::guard('admin')->user()->name;
-
+            $branch = Auth::guard('admin')->user()->branch;
             return redirect('/')->with('success', 'Welcome back, ' . $username);
         }
 

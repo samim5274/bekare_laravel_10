@@ -116,7 +116,7 @@
                             @foreach($branch as $key => $val)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td><a href="/">{{ $val->name }}</a></td>
+                                <td data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}"><a href="#">{{ $val->name }}</a></td>
                                 <td data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}">{{ $val->location }}</td>
                                 <td data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}">+88 {{ $val->phone }}</td>
                                 <td data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}">{{ $val->manager->name }}</td>

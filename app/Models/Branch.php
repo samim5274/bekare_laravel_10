@@ -21,4 +21,9 @@ class Branch extends Model
     {
         return $this->belongsTo(Admin::class, 'manager_id', 'id');
     }
+
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class, 'branch', 'id');
+    }
 }
