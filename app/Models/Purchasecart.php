@@ -34,6 +34,11 @@ class Purchasecart extends Model
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
+    public function branchs()
+    {
+        return $this->belongsTo(Branch::class, 'branch', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo(Admin::class, 'user_id', 'id');

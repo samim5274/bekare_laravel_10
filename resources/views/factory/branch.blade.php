@@ -150,7 +150,7 @@
 
 
     <!-- Modal -->
-@foreach($order as $key => $val)
+<!-- @foreach($order as $key => $val)
     <div class="modal fade" id="exampleModal{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -182,7 +182,7 @@
             </div>
         </div>
     </div>
-@endforeach
+@endforeach -->
 
 
     @include('layouts.footer')

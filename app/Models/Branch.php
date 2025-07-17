@@ -26,4 +26,9 @@ class Branch extends Model
     {
         return $this->hasMany(Purchase::class, 'branch', 'id');
     }
+
+    public function purchasecart()
+    {
+        return $this->hasMany(Branch::class, 'branch', 'id');
+    }
 }

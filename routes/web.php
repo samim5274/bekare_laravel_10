@@ -134,3 +134,6 @@ Route::post('/purchase-status', [FactoryController::class, 'updateStatus']);
 Route::post('/update-ready-delivery-qty', [FactoryController::class, 'updateReadyDelivaryQty']);
 Route::get('/order-list-branch', [FactoryController::class, 'OrderListBranch']);
 Route::get('/search-branch-purchase-order', [FactoryController::class, 'findBranchAndOrder']);
+Route::get('/product-order', [FactoryController::class, 'productOrder']);
+Route::get('/search-product-wise-order-qty', [FactoryController::class, 'findOrderStock']);
+Route::get('/find-product-order/{id}', [FactoryController::class, 'findOrderStockId']);

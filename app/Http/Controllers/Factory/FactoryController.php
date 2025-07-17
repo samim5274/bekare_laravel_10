@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Factory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Models\Branch;
 use App\Models\Purchaseorder;
@@ -52,8 +54,8 @@ class FactoryController extends Controller
         $ready = $request->input('ready_qty','');
         $delivery = $request->input('delivery_qty','');
         $order = Purchasecart::where('chalan_reg', $chalanReg)->where('product_id', $ProductId)->first();
-        $order->ready_qty += $ready;
-        $order->delivery_qty += $delivery;
+        $order->ready_qty = $ready;
+        $order->delivery_qty = $delivery;
         $order->update();
         return redirect()->back()->with('success', 'Updated successfully submited your ready & delivery qty.');
     }
@@ -81,5 +83,68 @@ class FactoryController extends Controller
                                     ->paginate(20);
         // dd($findOrder);
         return view('factory.findOrderListByBranch', compact('findOrder','branches'));
+    }
+
+    public function productOrder(){
+        $product = Product::orderByRaw('LOWER(name) ASC')->get()->keyBy('id');
+        $stockSummary = Purchasecart::with('product')
+                            ->select('product_id', 
+                                DB::raw('SUM(order_qty) as order_qty'), 
+                                DB::raw('SUM(ready_qty) as ready_qty'),
+                                DB::raw('SUM(delivery_qty) as delivery_qty'))
+                            ->whereDate('date', Carbon::today())
+                            ->groupBy('product_id')->get();
+
+        $totalOrder_qty = $stockSummary->sum('order_qty');
+        $totalReady_qty = $stockSummary->sum('ready_qty');
+        $totalDelivery_qty = $stockSummary->sum('delivery_qty');
+
+        $perPage = 20;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $paginatedSummary = new LengthAwarePaginator(
+            $stockSummary->forPage($currentPage, $perPage),
+            $stockSummary->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $productIds = $paginatedSummary->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+
+        // dd($product,$stockSummary,$totalOrder_qty,$totalReady_qty,$totalDelivery_qty,$paginatedSummary);
+        return view('factory.productOrder', compact('product','stockSummary','totalOrder_qty','totalReady_qty','totalDelivery_qty','paginatedSummary'));
+    }
+
+    public function findOrderStock(Request $request){
+        $product = Product::orderByRaw('LOWER(name) ASC')->get()->keyBy('id');
+        $item = $request->input('cbxProduct', '');        
+        if(!$item){
+            return redirect()->back()->with('warning', 'You need must be select Product.');
+        }
+        $stock = Purchasecart::where('product_id', $item)->paginate(20);
+        $stockOrder = Purchasecart::where('product_id', $item)->sum('order_qty');
+        $stockReady = Purchasecart::where('product_id', $item)->sum('ready_qty');
+        $stockDelivery = Purchasecart::where('product_id', $item)->sum('delivery_qty');
+        // dd($stock,$stockOrder,$stockReady,$stockDelivery);
+
+        // if ($request->has('print')) {
+        //     return view('report.stock.productStockPrint', compact('product','stock','stockOut','stockIn'));
+        // }
+        return view('factory.productOrder', compact('product','stockOrder','stockReady','stockDelivery','stock'));
+    }
+
+    public function findOrderStockId($id){
+        $product = Product::orderByRaw('LOWER(name) ASC')->get()->keyBy('id');
+        $item = $id;
+        if(!$item){
+            return redirect()->back()->with('warning', 'You need must be select Product.');
+        }
+        $stock = Purchasecart::where('product_id', $item)->paginate(20);
+        $stockOrder = Purchasecart::where('product_id', $item)->sum('order_qty');
+        $stockReady = Purchasecart::where('product_id', $item)->sum('ready_qty');
+        $stockDelivery = Purchasecart::where('product_id', $item)->sum('delivery_qty');
+        return view('factory.productOrder', compact('product','stockOrder','stockReady','stockDelivery','stock'));
     }
 }
