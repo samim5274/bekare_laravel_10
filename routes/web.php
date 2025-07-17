@@ -13,6 +13,7 @@ use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Report\ReportController;
 use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\Purchase\PurchaseController;
+use App\Http\Controllers\Factory\FactoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -126,3 +127,10 @@ Route::post('/update-purchase-cart-qty', [PurchaseController::class, 'updateQty'
 Route::get('/remove-to-cart/{id}', [PurchaseController::class, 'removeFromCart']);
 Route::post('/confirm-purchase-order', [PurchaseController::class, 'confirmPurchase']);
 Route::get('/purchase-list', [PurchaseController::class, 'purchaseList'])->name('purchase.list.view');
+
+Route::get('/factory', [FactoryController::class, 'factoryView'])->name('factory.view');
+Route::get('/view-order-item/{reg}', [FactoryController::class, 'orderViewById']);
+Route::post('/purchase-status', [FactoryController::class, 'updateStatus']);
+Route::post('/update-ready-delivery-qty', [FactoryController::class, 'updateReadyDelivaryQty']);
+Route::get('/order-list-branch', [FactoryController::class, 'OrderListBranch']);
+Route::get('/search-branch-purchase-order', [FactoryController::class, 'findBranchAndOrder']);

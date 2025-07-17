@@ -72,9 +72,9 @@
                                 <td>{{$val->time}}</td>
                                 <td>{{$val->user->name}}</td>
                                 <td>{{$val->branchs->name}}</td>
-                                <td>CH-{{$val->chalan_reg}}</td>
+                                <td><a href="{{url('/view-order-item/'.$val->chalan_reg)}}">CH-{{$val->chalan_reg}}</a></td>
                                 <td>৳{{$val->total}}/-</td>
-                                <td>
+                                <td data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}">
                                     @switch($val->status)
                                         @case(1)
                                             <span class="badge bg-warning text-dark">Pending</span>
@@ -107,12 +107,49 @@
                 </div>
                 <div class="d-flex justify-content-end mt-3">
                     <div class="d-flex justify-content-end mt-3">
-                        1 of 1
+                        {{$order->links()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+@foreach($order as $key => $val)
+    <div class="modal fade" id="exampleModal{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{url('/purchase-status')}}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">CH-{{$val->chalan_reg}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" value="{{$val->chalan_reg}}" hidden name="txtChalanNo">
+                        <div class="col-md-12">
+                            <label for="Status" class="form-label">Status</label>
+                            <select id="Status" name="cbxStatus" class="form-select" required>
+                                <option disabled selected>--Select Status--</option>                
+                                <option value="1">Pending</option>
+                                <option value="2">Processing</option>
+                                <option value="3">Completed</option>
+                                <option value="4">Delivery</option>
+                                <option value="0">Cancelled</option>                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
+
 
     @include('layouts.footer')
 
@@ -122,8 +159,6 @@
     <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
-    <script src="{{ asset('./js/due.js') }}"></script>
-    <script src="{{ asset('./js/orderListPrint.js') }}"></script>
 
 </body>
 </html>

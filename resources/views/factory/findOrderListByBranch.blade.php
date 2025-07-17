@@ -35,8 +35,8 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('/purchase')}}">Purchase Order</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Order List</li>
+                                <li class="breadcrumb-item"><a href="{{url('/factory')}}">Factory</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Order List With Branch</li>
                             </ul>
                         </div>
                     </div>
@@ -44,13 +44,47 @@
             </div>
             @include('layouts.message')
             <div class="container mt-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Purchase Order List</h4>
-                    <!-- <h5 class="m-0 text-primary">
-                        <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
-                    </h5> -->
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                    @php
+                        $today = date('Y-m-d');
+                    @endphp
+
+                    <form action="{{url('/search-branch-purchase-order')}}" method="GET" class="bg-white border rounded p-3 mb-4 w-100">
+                        @csrf
+                        <div class="row g-3 align-items-end">
+                            <div class="col-12">
+                                <h4 class="fw-bold text-secondary">Purchase Order Branch List</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dtpStart" class="form-label">Start Date</label>
+                                <input type="date" id="dtpStart" name="dtpStart" value="{{ request('dtpStart', $today) }}" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="dtpEnd" class="form-label">End Date</label>
+                                <input type="date" id="dtpEnd" name="dtpEnd" value="{{ request('dtpEnd', $today) }}" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Branch" class="form-label">Select Branch</label>
+                                <select id="Branch" name="cbxBranch" class="form-select" required>
+                                    <option disabled selected>-- Select Branch --</option>
+                                    @foreach($branches as $brnc)
+                                        <option value="{{ $brnc->id }}">
+                                            {{ $brnc->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 d-grid">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+
                 <div class="table-responsive">
+                    <div id="branch-data"></div>
                     <table class="table table-bordered table-striped " id="printableTable">
                         <thead class="table-primary">
                             <tr>
@@ -64,17 +98,17 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($order as $key => $val)
+                        <tbody>                            
+                            @foreach($findOrder as $key => $val)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{$val->date}}</td>
                                 <td>{{$val->time}}</td>
                                 <td>{{$val->user->name}}</td>
                                 <td>{{$val->branchs->name}}</td>
-                                <td>CH-{{$val->chalan_reg}}</td>
+                                <td><a href="{{url('/view-order-item/'.$val->chalan_reg)}}">CH-{{$val->chalan_reg}}</a></td>
                                 <td>৳{{$val->total}}/-</td>
-                                <td>
+                                <td data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}">
                                     @switch($val->status)
                                         @case(1)
                                             <span class="badge bg-warning text-dark">Pending</span>
@@ -107,12 +141,49 @@
                 </div>
                 <div class="d-flex justify-content-end mt-3">
                     <div class="d-flex justify-content-end mt-3">
-                        1 of 1
+                        {{$findOrder->links()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+@foreach($findOrder as $key => $val)
+    <div class="modal fade" id="exampleModal{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{url('/purchase-status')}}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">CH-{{$val->chalan_reg}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" value="{{$val->chalan_reg}}" hidden name="txtChalanNo">
+                        <div class="col-md-12">
+                            <label for="Status" class="form-label">Status</label>
+                            <select id="Status" name="cbxStatus" class="form-select" required>
+                                <option disabled selected>--Select Status--</option>                
+                                <option value="1">Pending</option>
+                                <option value="2">Processing</option>
+                                <option value="3">Completed</option>
+                                <option value="4">Delivery</option>
+                                <option value="0">Cancelled</option>                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
+
 
     @include('layouts.footer')
 
@@ -122,8 +193,24 @@
     <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
-    <script src="{{ asset('./js/due.js') }}"></script>
-    <script src="{{ asset('./js/orderListPrint.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const today = new Date().toISOString().split('T')[0];
+
+            const startInput = document.getElementById('dtpStart');
+            const endInput = document.getElementById('dtpEnd');
+
+            // Set default value as today if not already set
+            if (!startInput.value) startInput.value = today;
+            if (!endInput.value) endInput.value = today;
+
+            // Disable future dates
+            startInput.max = today;
+            endInput.max = today;
+        });
+    </script>
+
 
 </body>
 </html>
