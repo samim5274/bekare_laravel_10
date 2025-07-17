@@ -208,19 +208,28 @@ class SaleController extends Controller
         ]);
     }
 
-    public function removeCart(Request $request, $id) {
-        $cart = Cart::where('id', $id)->first();
-        $product = Product::where('id', $cart->product_id)->first();
-        $stock = Stock::where('product_id', $cart->product_id)->where('reg', $cart->reg)->first();
+    public function removeCart($id, $reg) {
+        $cart = Cart::where('reg', $reg)->where('product_id', $id)->first();
         
-        if($cart) {
-            $product->stock += $request->input('txtStock','');
-            $product->update();
-            $stock->delete();
-            $cart->delete();
-            return redirect()->back()->with('success', 'Item remove to card successfully.');
-        } else {
-            return redirect()->back()->with('warning','This item not availabel righ now');
+        if (!$cart) {
+            return redirect()->back()->with('warning', 'This item is no longer available.');
         }
+        $product = Product::where('id', $cart->product_id)->first();        
+        $stock = Stock::where('product_id', $cart->product_id)
+                    ->where('reg', $cart->reg)
+                    ->first();
+        
+        if ($product) {
+            $txtStock = $cart->quantity;
+            $product->stock += $txtStock;
+            $product->update();
+        }
+
+        if ($stock) {
+            $stock->delete();
+        }
+
+        $cart->delete();
+        return redirect()->back()->with('success', 'The item has been successfully removed from the cart.');
     }
 }

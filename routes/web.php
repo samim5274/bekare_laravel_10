@@ -77,7 +77,7 @@ Route::get('/add-to-cart/{id}', [SaleController::class, 'addCart']);
 Route::get('/add-to-cart-2', [SaleController::class, 'addCart2']);
 Route::get('/cart-view', [SaleController::class, 'cartView']);
 Route::post('/cart/update-quantity', [SaleController::class, 'updateQuantity']);
-Route::get('/remove-to-cart/{id}', [SaleController::class, 'removeCart']);
+Route::get('/remove-to-cart/{id}/{reg}', [SaleController::class, 'removeCart']);
 
 Route::post('/confirm-order', [OrderController::class, 'confirmOrder']);
 Route::get('/payment-order', [OrderController::class, 'paymentOrder'])->name('order.payment');

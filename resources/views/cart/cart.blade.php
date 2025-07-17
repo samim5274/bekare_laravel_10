@@ -69,25 +69,30 @@
                             @if($cart)
                             @foreach($cart as $key => $val)
                             <div class="col-lg-4 col-md-6 mt-3">
-                                <div class="card shadow-sm border-0 h-100">
+                                <div class="card shadow-sm border-0 h-100 mb-3">
                                     <div class="card-body p-3">
+
+                                        <!-- Product Name and Item No -->
                                         <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <h5 class="mb-0 text-success">{{ $val->product->name }}</h5>
-                                            <span class="badge bg-light text-dark">#{{ $key + 1 }}</span>
+                                            <h5 class="mb-0 text-primary fw-semibold">{{ $val->product->name }}</h5>
+                                            <span class="badge bg-secondary rounded-pill">#{{ $key + 1 }}</span>
                                         </div>
 
+                                        <!-- Price -->
                                         <div class="mb-2">
-                                            <small class="text-muted">Price per item:</small><br>
-                                            <strong class="text-dark" data-price="{{ $val->price }}">৳{{ number_format($val->price, 2) }}</strong>
+                                            <small class="text-muted d-block">Price per item:</small>
+                                            <span class="text-dark fw-bold" data-price="{{ $val->price }}">
+                                                ৳{{ number_format($val->price, 2) }}
+                                            </span>
                                         </div>
 
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <div class="text-muted">Quantity:</div>
+                                        <!-- Quantity Controls -->
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <small class="text-muted">Quantity:</small>
                                             <div class="input-group input-group-sm" style="width: 120px;">
                                                 <button type="button" 
-                                                    class="btn btn-outline-secondary btn-minus"
-                                                    data-id="{{ $val->id }}"
-                                                    style="padding: 0 6px; font-size: 14px; height: 28px;">−</button>
+                                                        class="btn btn-outline-secondary btn-minus"
+                                                        data-id="{{ $val->id }}">−</button>
 
                                                 <input type="number"
                                                     class="form-control text-center qty-input"
@@ -95,29 +100,26 @@
                                                     min="1"
                                                     name="txtStock"
                                                     readonly
-                                                    data-id="{{ $val->id }}"
-                                                    style="width: 36px; height: 28px; font-size: 13px; padding: 0;">
+                                                    data-id="{{ $val->id }}">
 
                                                 <button type="button" 
                                                         class="btn btn-outline-secondary btn-plus"
-                                                        data-id="{{ $val->id }}"
-                                                        style="padding: 0 6px; font-size: 14px; height: 28px;">+</button>
+                                                        data-id="{{ $val->id }}">+</button>
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="text-muted">Total:</div>
-                                            <h6 class="mb-0 text-success">
-                                                <span class="item-subtotal">৳{{ number_format($val->price * $val->quantity, 2) }}</span>
-                                            </h6>
+                                        <!-- Total Price -->
+                                        <div class="d-flex justify-content-between">
+                                            <small class="text-muted">Subtotal:</small>
+                                            <span class="text-success fw-semibold item-subtotal">
+                                                ৳{{ number_format($val->price * $val->quantity, 2) }}
+                                            </span>
                                         </div>
                                     </div>
 
-                                    <div class="card-footer bg-white border-0 d-flex justify-content-end">
-                                        <button class="btn btn-sm btn-outline-danger remove-item-link"
-                                                data-id="{{ $val->id }}" title="Remove item">
-                                            <i class="mdi mdi-cart-off"></i> Remove
-                                        </button>
+                                    <!-- Card Footer with Remove Button -->
+                                    <div class="card-footer bg-white border-0 text-end">
+                                        <a href="{{url('/remove-to-cart/'.$val->product_id.'/'.$val->reg)}}" class="btn btn-sm btn-outline-danger remove-item-link">Remove</a>
                                     </div>
                                 </div>
                             </div>

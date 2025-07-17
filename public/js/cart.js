@@ -57,21 +57,3 @@ $(document).ready(function () {
         $('#cart-total-input').val(Math.round(total));
     }
 });
-
-
-
-// remove from cart get data in link 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.remove-item-link').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            let id = this.dataset.id;
-            let input = document.querySelector('input[data-id="' + id + '"]');
-            let quantity = input ? input.value : 0;
-
-            // Dynamically set and redirect
-            window.location.href = `/remove-to-cart/${id}?txtStock=${quantity}`;
-        });
-    });
-});
