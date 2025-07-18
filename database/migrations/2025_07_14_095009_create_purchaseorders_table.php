@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('purchaseorders', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->date('delivary_date')->nullable();
             $table->time('time')->nullable();
             $table->foreignId('user_id')->constrained('admins')->onDelete('restrict');
             $table->integer('branch')->default(0);

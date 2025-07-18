@@ -75,6 +75,21 @@
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-industry"></i></i></span><span class="pc-mtext">Factory</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{url('/factory')}}">Purchase Order List</a></li>
+                        <li class="pc-item pc-hasmenu">
+                            <a href="#!" class="pc-link">Purchase Report<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                            <ul class="pc-submenu">
+                                <li class="pc-item"><a class="pc-link" href="{{url('/order-list-branch')}}">Branch Order</a></li> 
+                                <li class="pc-item"><a class="pc-link" href="{{url('/product-order')}}">Product Order</a></li>                               
+                                <li class="pc-item"><a class="pc-link" href="{{url('/received-order')}}">Received Order</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/delivery-order')}}">Delivery Order</a></li>                               
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Reports</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{url('/total-sale')}}">Total Sale</a></li>
@@ -114,14 +129,6 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </li>
-                <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-industry"></i></i></span></span><span class="pc-mtext">Factory</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{url('/factory')}}">Purchase Order List</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{url('/product-order')}}">Product Order</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{url('/order-list-branch')}}">Branch Order</a></li>
                     </ul>
                 </li>
                 <li class="pc-item">

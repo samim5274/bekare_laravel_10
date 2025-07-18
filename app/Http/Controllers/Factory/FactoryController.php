@@ -147,4 +147,33 @@ class FactoryController extends Controller
         $stockDelivery = Purchasecart::where('product_id', $item)->sum('delivery_qty');
         return view('factory.productOrder', compact('product','stockOrder','stockReady','stockDelivery','stock'));
     }
+
+    public function receivedOrder(){
+        $order = Purchaseorder::where('status', 2)->where('date', Carbon::today())->with('user','branchs')->paginate(20);
+        return view('factory.receivedOrder', compact('order'));
+    }
+
+    public function FindReceivedOrder(Request $request){
+        $start = $request->input('dtpStart','');
+        $end = $request->input('dtpEnd','');
+        $order = Purchaseorder::where('status', 2)->whereBetween('date', [$start, $end])->with('user','branchs')->paginate(20);
+        return view('factory.receivedOrder', compact('order'));
+    }
+
+    public function deliveryOrder(){
+        $order = Purchaseorder::where('date', Carbon::today())->where('status', 4)->with('user','branchs')->paginate(20);
+        return view('factory.delivaryOrder', compact('order'));
+    }
+
+    public function searchDeliveryOrder(Request $request){
+        $start = $request->input('dtpStart','');
+        $end = $request->input('dtpEnd','');
+        $order = Purchaseorder::whereBetween('date', [$start, $end])->where('status', 4)->with('user','branchs')->paginate(20);
+        return view('factory.delivaryOrder', compact('order'));
+    }
+
+    public function deliveryCart($reg){
+        $deliveryCart = Purchasecart::where('chalan_reg', $reg)->get();
+        return view('factory.deliveryCart', compact('deliveryCart'));
+    }
 }

@@ -137,3 +137,8 @@ Route::get('/search-branch-purchase-order', [FactoryController::class, 'findBran
 Route::get('/product-order', [FactoryController::class, 'productOrder']);
 Route::get('/search-product-wise-order-qty', [FactoryController::class, 'findOrderStock']);
 Route::get('/find-product-order/{id}', [FactoryController::class, 'findOrderStockId']);
+Route::get('/received-order', [FactoryController::class, 'receivedOrder']);
+Route::get('/search-date-received-purchase-order', [FactoryController::class, 'FindReceivedOrder']);
+Route::get('/delivery-order', [FactoryController::class, 'deliveryOrder']);
+Route::get('/search-date-purchase-order', [FactoryController::class, 'searchDeliveryOrder']);
+Route::get('/view-delivery-item/{reg}', [FactoryController::class, 'deliveryCart']);
