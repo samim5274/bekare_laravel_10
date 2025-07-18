@@ -161,19 +161,43 @@ class FactoryController extends Controller
     }
 
     public function deliveryOrder(){
-        $order = Purchaseorder::where('date', Carbon::today())->where('status', 4)->with('user','branchs')->paginate(20);
+        $branch = Auth::guard('admin')->user()->branch;
+        $order = Purchaseorder::where('date', Carbon::today())->where('status', 4)->where('branch', $branch)->with('user','branchs')->paginate(20);
         return view('factory.delivaryOrder', compact('order'));
     }
 
     public function searchDeliveryOrder(Request $request){
         $start = $request->input('dtpStart','');
         $end = $request->input('dtpEnd','');
-        $order = Purchaseorder::whereBetween('date', [$start, $end])->where('status', 4)->with('user','branchs')->paginate(20);
+        $branch = Auth::guard('admin')->user()->branch;
+        $order = Purchaseorder::whereBetween('date', [$start, $end])->where('status', 4)->where('branch', $branch)->with('user','branchs')->paginate(20);
         return view('factory.delivaryOrder', compact('order'));
     }
 
-    public function deliveryCart($reg){
+    public function deliveryCart($reg){        
         $deliveryCart = Purchasecart::where('chalan_reg', $reg)->get();
         return view('factory.deliveryCart', compact('deliveryCart'));
+    }
+
+    public function stockReceived($p_id, $reg){
+        $product = Product::where('id', $p_id)->first();
+        $purchasecart = Purchasecart::where('chalan_reg', $reg)->where('product_id', $p_id)->first();
+
+        $product->stock += $purchasecart->delivery_qty;
+        $purchasecart->status = 2;
+
+        $stock = new Stock();
+        $stock->reg = $reg;
+        $stock->date = Carbon::today();
+        $stock->product_id = $p_id;
+        $stock->stockIn = $purchasecart->delivery_qty;
+        $stock->stockOut = 0;
+        $stock->remark = 'In from Factory.';
+        $stock->status = 2;
+        $product->update();
+        $purchasecart->update();
+        $stock->save();
+        // dd($product, $purchasecart,$stock);
+        return redirect()->back()->with('success','Stock received successfully.');
     }
 }

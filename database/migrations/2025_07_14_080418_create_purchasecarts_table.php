@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('ready_qty')->default(0);
             $table->integer('delivery_qty')->default(0);
 
-            $table->integer('status')->default(1); // ['1 = pending', '2 = processing', '3 = completed', '4 = delivery' , '0 = cancelled']
+            $table->integer('status')->default(1); // ['1 = pending','2 = Received']
             $table->string('remark')->nullable();
 
             $table->integer('unit_price')->nullable();

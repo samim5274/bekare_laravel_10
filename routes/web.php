@@ -127,6 +127,8 @@ Route::post('/update-purchase-cart-qty', [PurchaseController::class, 'updateQty'
 Route::get('/remove-to-cart/{id}', [PurchaseController::class, 'removeFromCart']);
 Route::post('/confirm-purchase-order', [PurchaseController::class, 'confirmPurchase']);
 Route::get('/purchase-list', [PurchaseController::class, 'purchaseList'])->name('purchase.list.view');
+Route::get('/edit-purchase-order/{reg}', [PurchaseController::class, 'editPurchaseOrder']);
+Route::get('/update-order-qty/{reg}/{id}', [PurchaseController::class, 'UpdatePurchaseQty']);
 
 Route::get('/factory', [FactoryController::class, 'factoryView'])->name('factory.view');
 Route::get('/view-order-item/{reg}', [FactoryController::class, 'orderViewById']);
@@ -142,3 +144,4 @@ Route::get('/search-date-received-purchase-order', [FactoryController::class, 'F
 Route::get('/delivery-order', [FactoryController::class, 'deliveryOrder']);
 Route::get('/search-date-purchase-order', [FactoryController::class, 'searchDeliveryOrder']);
 Route::get('/view-delivery-item/{reg}', [FactoryController::class, 'deliveryCart']);
+Route::get('/stock-received/{p_id}/{reg}', [FactoryController::class, 'stockReceived']);

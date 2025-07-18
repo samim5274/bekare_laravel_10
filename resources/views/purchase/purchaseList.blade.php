@@ -72,7 +72,7 @@
                                 <td>{{$val->time}}</td>
                                 <td>{{$val->user->name}}</td>
                                 <td>{{$val->branchs->name}}</td>
-                                <td>CH-{{$val->chalan_reg}}</td>
+                                <td><a href="{{url('/edit-purchase-order/'.$val->chalan_reg)}}">CH-{{$val->chalan_reg}}</a></td>
                                 <td>৳{{$val->total}}/-</td>
                                 <td>
                                     @switch($val->status)

@@ -54,7 +54,7 @@
                         <!-- <h5 class="m-0 text-primary">
                             <a href="#" class="btn btn-primary w-100"><i class="fa-solid fa-circle-plus me-2"></i> Add </a>
                         </h5> -->
-                        <h5>CH-{{$deliveryCart[0]->chalan_reg}}</h5>
+                        <h5>CH-{{$reg}}</h5>
                     </div>
                     <div class="col-lg-12 col-md-6">                        
                         <div class="row g-3"> 
@@ -66,14 +66,12 @@
                                             <th>Product</th>
                                             <th>Price (৳)</th>
                                             <th>Quantity</th>
-                                            <th>Ready</th>
-                                            <th>Delivery</th>
                                             <th>Subtotal (৳)</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($deliveryCart as $key => $val)
+                                    @foreach ($cart as $key => $val)
                                         <tr class="cart-item">
                                             <td>{{ $key + 1 }}</td>
                                             <td>
@@ -92,23 +90,12 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <span data-price="{{ $val->unit_price }}">
-                                                    {{ $val->ready_qty }}
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <span data-price="{{ $val->unit_price }}">
-                                                    {{ $val->delivery_qty }}
-                                                </span>
-                                            </td>
-                                            <td>
                                                 <span class="item-subtotal fw-semibold text-success" data-id="{{ $val->id }}">
                                                     ৳{{ $val->unit_price * $val->order_qty }}/-
                                                 </span>
                                             </td>
-                                            <td>
-                                                <i class="fa-regular fa-circle-xmark text-danger fs-3 me-3"></i>
-                                                @if($val->status != 2)<a href="{{url('/stock-received/'.$val->product_id.'/'.$val->chalan_reg)}}"><i class="fa-regular fa-square-check text-success fs-3"></i></a>@endif
+                                            <td data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}">
+                                                <i class="fa-solid fa-pen-to-square text-success fs-4 me-3"></i>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -121,6 +108,33 @@
             </div>
         </div>
     </div> 
+
+
+
+<!-- Modal -->
+ @foreach ($cart as $key => $val)
+<div class="modal fade" id="exampleModal{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{url('/update-order-qty/'.$val->chalan_reg.'/'.$val->product_id)}}" method="GET">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ $val->product->name }} - ৳{{ $val->unit_price }}/-</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="txtQty" class="form-control" placeholder="Insert update order qty" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+
 
 
     @include('layouts.footer')

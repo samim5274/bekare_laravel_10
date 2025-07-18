@@ -125,4 +125,22 @@ class PurchaseController extends Controller
         $order = Purchaseorder::where('user_id', $userId)->with('user','branchs')->paginate(20);
         return view('purchase.purchaseList', compact('order'));
     }
+
+    public function editPurchaseOrder($reg){
+        $cart = Purchasecart::where('chalan_reg', $reg)->get();
+        return view('purchase.editPurchaseOrder', compact('cart','reg'));
+    }
+
+    public function UpdatePurchaseQty(Request $request,$reg, $id){
+        $purchaseOrder = Purchaseorder::where('chalan_reg', $reg)->where('status', 4)->first();
+        if($purchaseOrder){
+            return redirect()->back()->with('error', 'Your purchase order already processing. Right now you can not change order qty. Thank you.');
+        }
+        $product = Purchasecart::where('chalan_reg', $reg)->where('product_id', $id)->first();
+        $qty = $request->input('txtQty','');
+        $product->order_qty = $qty;
+        $product->total_price = $product->unit_price * $qty;
+        $product->update();
+        return redirect()->back()->with('success','Order qty update successfully.');
+    }
 }
