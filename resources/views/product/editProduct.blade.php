@@ -95,7 +95,7 @@
             <div class="container">
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Add New Product</h4>
+                        <h4 class="mb-0">Edit Product</h4>
                     </div>
                     <div class="card-body">
                         <form id="productForm" action="{{url('/update-product/'.$data->id)}}" method="POST" enctype="multipart/form-data">

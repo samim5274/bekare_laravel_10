@@ -70,6 +70,10 @@ class SaleController extends Controller
             return redirect()->back()->with('warning','Sorry 😞 This item stock not availabel righ now. Try to another. Thank You!');
         }
 
+        if($product->expired < Carbon::today()){
+            return redirect()->back()->with('warning','Sorry 😞 This item is expried. Try to another. Thank You!');
+        }
+
         $reg = $this->generateRegNum();
         $findFood = Cart::where('reg', $reg)->where('product_id', $product->id)->first();
         if($findFood) {
@@ -78,6 +82,7 @@ class SaleController extends Controller
         $cart->reg = $reg;
         $cart->date = Carbon::now()->format('Y-m-d');
         $cart->user_id = Auth::guard('admin')->user()->id;
+        $cart->branch_id = Auth::guard('admin')->user()->branch;
         $cart->product_id = $product->id;
         $cart->price = $product->price;
 
@@ -111,6 +116,10 @@ class SaleController extends Controller
             return redirect()->back()->with('warning','Sorry 😞 This item stock not availabel righ now. Try to another. Thank You!');
         }
 
+        if($product->expired < Carbon::today()){
+            return redirect()->back()->with('warning','Sorry 😞 This item is expried. Try to another. Thank You!');
+        }
+
         $reg = $this->generateRegNum();
         $findFood = Cart::where('reg', $reg)->where('product_id', $product->id)->first();
         if($findFood) {
@@ -119,6 +128,7 @@ class SaleController extends Controller
         $cart->reg = $reg;
         $cart->date = Carbon::now()->format('Y-m-d');
         $cart->user_id = Auth::guard('admin')->user()->id;
+        $cart->branch_id = Auth::guard('admin')->user()->branch;
         $cart->product_id = $product->id;
         $cart->price = $product->price;
 

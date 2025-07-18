@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Sale\SaleController;
 use App\Http\Controllers\Admin\AdminController;
@@ -15,9 +16,7 @@ use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Factory\FactoryController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index']);
 
 
 

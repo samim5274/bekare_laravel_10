@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+use App\Models\Branch;
+use App\Models\Purchaseorder;
+use App\Models\Purchasecart;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Stock;
+use App\Models\Category;
+use App\Models\Subcategory;
+use Auth;
+
+class DashboardController extends Controller
+{
+    public function index(){
+        $today = Carbon::today();
+        $last3day = Carbon::today()->addDays(2);
+
+        $total = Order::where('date', Carbon::today())->sum('total');
+        $discount = Order::where('date', Carbon::today())->sum('discount');
+        $vat = Order::where('date', Carbon::today())->sum('vat');
+        $payable = Order::where('date', Carbon::today())->sum('payable');
+        $pay = Order::where('date', Carbon::today())->sum('pay');
+        $due = Order::where('date', Carbon::today())->sum('due');
+
+        $totalProduct = Product::count();
+        $active = Product::where('availability', 1)->count();
+        $deactive = Product::where('availability', 2)->count();
+
+        $expiredSoon = Product::whereBetween('expired', [$today, $last3day])->count();
+        $expired = Product::where('expired', '<=', Carbon::today())->count();
+
+        $bracnh = Branch::count();
+        
+        return view('welcome', compact('total', 'discount', 'vat', 'due', 'payable', 'pay','totalProduct', 'active', 'deactive','expired','expiredSoon','bracnh'));
+    }
+}

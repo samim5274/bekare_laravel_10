@@ -20,7 +20,11 @@
     <link rel="stylesheet" href="./assets/fonts/material.css" >
     <link rel="stylesheet" href="./assets/css/style.css" id="main-style-link" >
     <link rel="stylesheet" href="./assets/css/style-preset.css" >
-
+<style>
+    .icon{
+        width:48px; height:48px; font-size:24px; box-shadow: 0 2px 6px rgba(13, 110, 253, 0.4);
+    }
+</style>
     </head>
 
     <body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('date');            
             $table->foreignId('user_id')->constrained('admins')->onDelete('restrict');
             $table->foreignId('product_id')->constrained('products')->onDelete('restrict');
+            $table->foreignId('branch_id')->constrained('branches')->onDelete('restrict');
             $table->integer('quantity')->default(1);
             $table->unsignedBigInteger('price');
             $table->timestamps();

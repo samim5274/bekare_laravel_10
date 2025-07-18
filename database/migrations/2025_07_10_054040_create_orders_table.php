@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('user_id')->constrained('admins')->onDelete('restrict');
+            $table->foreignId('branch_id')->constrained('branches')->onDelete('restrict');
             $table->unsignedBigInteger('reg')->unique();
             $table->unsignedBigInteger('total')->nullable();
             $table->unsignedBigInteger('discount')->nullable();

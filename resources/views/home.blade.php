@@ -1,178 +1,185 @@
-
-<div class="row">
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Page Views</h6>
-                <h4 class="mb-3">4,42,236 <span class="badge bg-light-primary border border-primary"><i
-                    class="ti ti-trending-up"></i> 59.3%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-primary">35,000</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Users</h6>
-                <h4 class="mb-3">78,250 <span class="badge bg-light-success border border-success"><i
-                        class="ti ti-trending-up"></i> 70.5%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-success">8,900</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Order</h6>
-                <h4 class="mb-3">18,800 <span class="badge bg-light-warning border border-warning"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-warning">1,943</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Sales</h6>
-                <h4 class="mb-3">$35,078 <span class="badge bg-light-danger border border-danger"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-danger">$20,395</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Page Views</h6>
-                <h4 class="mb-3">4,42,236 <span class="badge bg-light-primary border border-primary"><i
-                    class="ti ti-trending-up"></i> 59.3%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-primary">35,000</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Users</h6>
-                <h4 class="mb-3">78,250 <span class="badge bg-light-success border border-success"><i
-                        class="ti ti-trending-up"></i> 70.5%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-success">8,900</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Order</h6>
-                <h4 class="mb-3">18,800 <span class="badge bg-light-warning border border-warning"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-warning">1,943</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Sales</h6>
-                <h4 class="mb-3">$35,078 <span class="badge bg-light-danger border border-danger"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-danger">$20,395</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Page Views</h6>
-                <h4 class="mb-3">4,42,236 <span class="badge bg-light-primary border border-primary"><i
-                    class="ti ti-trending-up"></i> 59.3%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-primary">35,000</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Users</h6>
-                <h4 class="mb-3">78,250 <span class="badge bg-light-success border border-success"><i
-                        class="ti ti-trending-up"></i> 70.5%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-success">8,900</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Order</h6>
-                <h4 class="mb-3">18,800 <span class="badge bg-light-warning border border-warning"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-warning">1,943</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Sales</h6>
-                <h4 class="mb-3">$35,078 <span class="badge bg-light-danger border border-danger"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-danger">$20,395</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Page Views</h6>
-                <h4 class="mb-3">4,42,236 <span class="badge bg-light-primary border border-primary"><i
-                    class="ti ti-trending-up"></i> 59.3%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-primary">35,000</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Users</h6>
-                <h4 class="mb-3">78,250 <span class="badge bg-light-success border border-success"><i
-                        class="ti ti-trending-up"></i> 70.5%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-success">8,900</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Order</h6>
-                <h4 class="mb-3">18,800 <span class="badge bg-light-warning border border-warning"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-warning">1,943</span> this year</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <h6 class="mb-2 f-w-400 text-muted">Total Sales</h6>
-                <h4 class="mb-3">$35,078 <span class="badge bg-light-danger border border-danger"><i
-                        class="ti ti-trending-down"></i> 27.4%</span></h4>
-                <p class="mb-0 text-muted text-sm">You made an extra <span class="text-danger">$20,395</span> this year
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="row g-4">
     
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <!-- BS5 classes দিয়ে icon circle -->
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Total Sale</h6>
+                    <h4 class="mb-1">৳ {{$total}}/-</h4>
+                    <small class="text-muted">Extra <span class="text-primary fw-bold">35,000</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Discount</h6>
+                    <h4 class="mb-1">৳ {{$discount}}/-</h4>
+                    <small class="text-muted">Extra <span class="text-danger fw-bold">8,900</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <!-- <i class="fa-solid fa-money-bill-1-wave"></i> -->
+                    <i class="fa-solid fa-percent"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Vat</h6>
+                    <h4 class="mb-1">৳ {{$vat}}/-</h4>
+                    <small class="text-muted">Extra <span class="text-warning fw-bold">1,943</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-percent"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Due</h6>
+                    <h4 class="mb-1">৳ {{$due}}/-</h4>
+                    <small class="text-muted">Extra <span class="text-success fw-bold">$20,395</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-comments-dollar"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Payable</h6>
+                    <h4 class="mb-1">৳ {{$payable}}/-</h4>
+                    <small class="text-muted">Extra <span class="text-info fw-bold">35,000</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Pay</h6>
+                    <h4 class="mb-1">৳ {{$pay}}/-</h4>
+                    <small class="text-muted">Extra <span class="text-secondary fw-bold">8,900</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Product</h6>
+                    <h4 class="mb-1">{{$totalProduct}}</h4>
+                    <small class="text-muted">Extra <span class="text-success fw-bold">1,943</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Active Product</h6>
+                    <h4 class="mb-1">{{$active}}</h4>
+                    <small class="text-muted">Extra <span class="text-secondary fw-bold">1,943</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">De-active Product</h6>
+                    <h4 class="mb-1">{{$deactive}}</h4>
+                    <small class="text-muted">Extra <span class="text-danger fw-bold">1,943</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fas fa-list"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Expired Product</h6>
+                    <h4 class="mb-1">{{$expired}}</h4>
+                    <small class="text-muted">Extra <span class="text-danger fw-bold">$20,395</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Expired Soon Product</h6>
+                    <h4 class="mb-1">{{$expiredSoon}}</h4>
+                    <small class="text-muted">Extra <span class="text-warning fw-bold">35,000</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Branch -->
+    <div class="col-md-6 col-xl-3">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body d-flex align-items-center gap-3">
+                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                    <i class="fa-solid fa-code-branch"></i>
+                </div>
+                <div>
+                    <h6 class="text-muted mb-1">Branch</h6>
+                    <h4 class="mb-1">{{$bracnh}}</h4>
+                    <small class="text-muted">Extra <span class="text-success fw-bold">8,900</span> this year</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
