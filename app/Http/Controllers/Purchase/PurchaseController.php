@@ -132,7 +132,7 @@ class PurchaseController extends Controller
     }
 
     public function UpdatePurchaseQty(Request $request,$reg, $id){
-        $purchaseOrder = Purchaseorder::where('chalan_reg', $reg)->where('status', 4)->first();
+        $purchaseOrder = Purchaseorder::where('chalan_reg', $reg)->where('status', '>', 1)->first();
         if($purchaseOrder){
             return redirect()->back()->with('error', 'Your purchase order already processing. Right now you can not change order qty. Thank you.');
         }
