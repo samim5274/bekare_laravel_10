@@ -108,6 +108,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/search-report-category', [ReportController::class, 'categorySaleReportFind']);
     Route::get('/category-date-sale', [ReportController::class, 'categoryDateReport'])->name('category.sale.date.report.view');
     Route::get('/search-report-date-category', [ReportController::class, 'categoryDateReportFind']);
+    Route::get('/expired-list', [ReportController::class, 'ExpiredList']);
+    Route::get('/search-expired-item', [ReportController::class, 'findExpiredItem']);
 
     Route::get('/stock-report', [ReportController::class, 'stockReport'])->name('stock.report.view');
     Route::get('/print-total-stock', [ReportController::class, 'printStockReport']);

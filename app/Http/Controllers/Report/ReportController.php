@@ -403,4 +403,9 @@ class ReportController extends Controller
         // dd($catId, $productIdsByCategory, $stockSummary, $paginatedSummary, $productIds, $products);
         return view('report.stock.productStockCategory', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
     }
+
+    public function ExpiredList(){
+        $product = Product::whereBetween('expired', [Carbon::today(), Carbon::today()->addDays(3)])->get();
+        return view('report.product.expired-list', compact('product'));
+    }
 }

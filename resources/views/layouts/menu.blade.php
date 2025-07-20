@@ -129,6 +129,7 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="pc-item"><a class="pc-link" href="{{url('/expired-list')}}">Expired</a></li>
                     </ul>
                 </li>
                 <li class="pc-item">

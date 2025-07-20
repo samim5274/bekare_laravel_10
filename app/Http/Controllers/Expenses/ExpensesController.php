@@ -56,14 +56,12 @@ class ExpensesController extends Controller
         if(empty($request->input('cbxCategory', '')) || empty($request->input('cbxsubcategory', ''))){
             return redirect()->back()->with('success', 'Some information is missing. Please full fill all information & try again. Thank You!');
         }
-        dd($request->all());
-        $expenses = Expenses::where('id', $id)->first();
+        $data = Expenses::where('id', $id)->first();
         $data->catId = $request->input('cbxCategory', '');
         $data->subcatId = $request->input('cbxsubcategory', '');
         $data->amount = $request->input('txtAmount', '');
         $data->remark = $request->input('txtRemark', '');
-        
-        // $data->update();
+        $data->update();
         return redirect()->route('expenses.view')->with('success', 'Daily expenses edit successfully.');
     }
 

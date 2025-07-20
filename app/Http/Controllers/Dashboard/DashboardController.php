@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+use App\Models\Expenses;
 use App\Models\Branch;
 use App\Models\Purchaseorder;
 use App\Models\Purchasecart;
@@ -22,7 +23,7 @@ class DashboardController extends Controller
 {
     public function index(){
         $today = Carbon::today();
-        $last3day = Carbon::today()->addDays(2);
+        $last3day = Carbon::today()->addDays(3);
 
         $total = Order::where('date', Carbon::today())->sum('total');
         $discount = Order::where('date', Carbon::today())->sum('discount');
@@ -30,6 +31,8 @@ class DashboardController extends Controller
         $payable = Order::where('date', Carbon::today())->sum('payable');
         $pay = Order::where('date', Carbon::today())->sum('pay');
         $due = Order::where('date', Carbon::today())->sum('due');
+
+        $expenses = Expenses::where('date', Carbon::today())->sum('amount');
 
         $totalProduct = Product::count();
         $active = Product::where('availability', 1)->count();
@@ -39,7 +42,11 @@ class DashboardController extends Controller
         $expired = Product::where('expired', '<=', Carbon::today())->count();
 
         $bracnh = Branch::count();
+
+        $totalPhurchaseOrder = Purchasecart::where('date', Carbon::today())->sum('order_qty');
+        $totalPhurchaseReady = Purchasecart::where('date', Carbon::today())->sum('ready_qty');
+        $totalPhurchaseDelivery = Purchasecart::where('date', Carbon::today())->sum('delivery_qty');
         
-        return view('welcome', compact('total', 'discount', 'vat', 'due', 'payable', 'pay','totalProduct', 'active', 'deactive','expired','expiredSoon','bracnh'));
+        return view('welcome', compact('total', 'discount', 'vat', 'due', 'payable', 'pay','expenses','totalProduct', 'active', 'deactive','expired','expiredSoon','bracnh','totalPhurchaseOrder','totalPhurchaseReady','totalPhurchaseDelivery'));
     }
 }
