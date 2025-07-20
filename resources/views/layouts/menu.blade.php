@@ -132,6 +132,12 @@
                     </ul>
                 </li>
                 <li class="pc-item">
+                    <a href="{{url('/expenses-view')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-circle-dollar-to-slot"></i></i></span>
+                        <span class="pc-mtext">Expenses</span>
+                    </a>
+                </li>
+                <li class="pc-item">
                     <a href="#" class="pc-link">
                         <span class="pc-micon"><i class="fa-solid fa-gear"></i></span>
                         <span class="pc-mtext">Setting</span>
@@ -144,7 +150,7 @@
                     </a>
                 </li>
                 <li class="pc-item">
-                    <a href="#" class="pc-link">
+                    <a href="{{url('/login')}}" class="pc-link">
                         <span class="pc-micon"><i class="fa-solid fa-right-from-bracket"></i></span>
                         <span class="pc-mtext">Logout</span>
                     </a>

@@ -1,5 +1,5 @@
 <div class="row g-4">
-    
+    <label for="">Account Details</label>
     <div class="col-md-6 col-xl-3">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body d-flex align-items-center gap-3">
@@ -20,7 +20,7 @@
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body d-flex align-items-center gap-3">
                 <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-wallet"></i>
+                    <i class="fa-solid fa-percent"></i>
                 </div>
                 <div>
                     <h6 class="text-muted mb-1">Discount</h6>
@@ -36,7 +36,7 @@
             <div class="card-body d-flex align-items-center gap-3">
                 <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center icon">
                     <!-- <i class="fa-solid fa-money-bill-1-wave"></i> -->
-                    <i class="fa-solid fa-percent"></i>
+                    <i class="fa-solid fa-wallet"></i>
                 </div>
                 <div>
                     <h6 class="text-muted mb-1">Vat</h6>
@@ -51,7 +51,7 @@
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body d-flex align-items-center gap-3">
                 <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-percent"></i>
+                    <i class="fa-solid fa-money-bill-transfer"></i>
                 </div>
                 <div>
                     <h6 class="text-muted mb-1">Due</h6>
@@ -92,6 +92,10 @@
         </div>
     </div>
 
+</div>
+
+<div class="row g-4 mt-2">
+    <label for="">Product Details</label>
     <div class="col-md-6 col-xl-3">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body d-flex align-items-center gap-3">
@@ -167,7 +171,10 @@
         </div>
     </div>
 
-    <!-- Branch -->
+</div>
+
+<div class="row g-4 mt-2">
+    <label for="">Other's Details</label>
     <div class="col-md-6 col-xl-3">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body d-flex align-items-center gap-3">

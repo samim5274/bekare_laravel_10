@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 18, 2025 at 03:10 PM
+-- Generation Time: Jul 20, 2025 at 11:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -117,7 +117,19 @@ INSERT INTO `carts` (`id`, `reg`, `date`, `user_id`, `product_id`, `branch_id`, 
 (13, 20250718010003, '2025-07-18', 1, 2, 1, 1, 100, '2025-07-18 12:35:50', '2025-07-18 12:35:50'),
 (14, 20250718010003, '2025-07-18', 1, 3, 1, 1, 120, '2025-07-18 12:35:51', '2025-07-18 12:35:51'),
 (33, 20250718010004, '2025-07-18', 1, 5, 1, 1, 180, '2025-07-18 12:42:08', '2025-07-18 12:42:08'),
-(34, 20250718010004, '2025-07-18', 1, 9, 1, 1, 100, '2025-07-18 12:42:11', '2025-07-18 12:42:11');
+(34, 20250718010004, '2025-07-18', 1, 9, 1, 1, 100, '2025-07-18 12:42:11', '2025-07-18 12:42:11'),
+(35, 20250718010005, '2025-07-18', 1, 7, 1, 3, 140, '2025-07-18 13:51:34', '2025-07-18 13:51:42'),
+(36, 20250718010005, '2025-07-18', 1, 8, 1, 3, 80, '2025-07-18 13:51:35', '2025-07-18 13:51:41'),
+(37, 20250718010005, '2025-07-18', 1, 9, 1, 3, 100, '2025-07-18 13:51:36', '2025-07-18 13:51:44'),
+(38, 20250718010005, '2025-07-18', 1, 6, 1, 3, 120, '2025-07-18 13:51:38', '2025-07-18 13:51:43'),
+(39, 20250720010006, '2025-07-20', 1, 10, 1, 5, 160, '2025-07-20 04:29:41', '2025-07-20 04:30:26'),
+(40, 20250720010006, '2025-07-20', 1, 2, 1, 4, 100, '2025-07-20 04:29:41', '2025-07-20 04:30:28'),
+(41, 20250720010006, '2025-07-20', 1, 4, 1, 4, 80, '2025-07-20 04:29:43', '2025-07-20 04:30:29'),
+(42, 20250720010006, '2025-07-20', 1, 6, 1, 5, 120, '2025-07-20 04:29:44', '2025-07-20 04:30:31'),
+(43, 20250720010007, '2025-07-20', 1, 6, 1, 3, 120, '2025-07-20 04:31:08', '2025-07-20 04:31:12'),
+(44, 20250720010007, '2025-07-20', 1, 4, 1, 3, 80, '2025-07-20 04:31:09', '2025-07-20 04:31:13'),
+(45, 20250720010007, '2025-07-20', 1, 9, 1, 3, 100, '2025-07-20 04:31:10', '2025-07-20 04:31:14'),
+(46, 20250720010007, '2025-07-20', 1, 7, 1, 3, 140, '2025-07-20 04:31:10', '2025-07-20 04:31:15');
 
 -- --------------------------------------------------------
 
@@ -145,6 +157,137 @@ INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (6, 'Sweets', '2025-07-14 03:21:20', '2025-07-14 03:21:20'),
 (7, 'Dairy Items', '2025-07-14 03:21:20', '2025-07-14 03:21:20'),
 (8, 'Beverages', '2025-07-14 03:21:20', '2025-07-14 03:21:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `excategories`
+--
+
+CREATE TABLE `excategories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `excategories`
+--
+
+INSERT INTO `excategories` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Raw Materials / Ingredients', NULL, NULL),
+(2, 'Packaging Materials', NULL, NULL),
+(3, 'Staff & Wages', NULL, NULL),
+(4, 'Utilities', NULL, NULL),
+(5, 'Maintenance & Repairs', NULL, NULL),
+(6, 'Marketing & Advertising', NULL, NULL),
+(7, 'Rent & Licenses', NULL, NULL),
+(8, 'Equipment Purchase', NULL, NULL),
+(9, 'Other Operational Costs', NULL, NULL),
+(10, 'Transportation & Delivery', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE `expenses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `catId` bigint(20) UNSIGNED NOT NULL,
+  `subcatId` bigint(20) UNSIGNED NOT NULL,
+  `userId` bigint(20) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `amount` int(11) NOT NULL,
+  `remark` text NOT NULL DEFAULT 'N/A',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`id`, `catId`, `subcatId`, `userId`, `date`, `amount`, `remark`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, '2025-07-20', 500, 'N/A', '2025-07-20 07:28:35', '2025-07-20 07:28:35'),
+(2, 1, 2, 1, '2025-07-20', 240, 'N/A', '2025-07-20 07:36:00', '2025-07-20 07:36:00'),
+(3, 3, 18, 1, '2025-07-20', 150, 'N/A', '2025-07-20 07:41:07', '2025-07-20 07:41:07'),
+(4, 5, 26, 1, '2025-07-20', 460, 'N/A', '2025-07-20 08:40:57', '2025-07-20 08:40:57'),
+(5, 7, 36, 1, '2025-07-20', 1200, 'N/A', '2025-07-20 08:43:52', '2025-07-20 08:43:52'),
+(6, 8, 40, 1, '2025-07-20', 4500, 'N/A', '2025-07-20 08:44:03', '2025-07-20 08:44:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exsubcategories`
+--
+
+CREATE TABLE `exsubcategories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cat_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `exsubcategories`
+--
+
+INSERT INTO `exsubcategories` (`id`, `cat_id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Flour', NULL, NULL),
+(2, 1, 'Sugar', NULL, NULL),
+(3, 1, 'Butter / Margarine', NULL, NULL),
+(4, 1, 'Eggs', NULL, NULL),
+(5, 1, 'Milk / Cream', NULL, NULL),
+(6, 1, 'Chocolate / Cocoa', NULL, NULL),
+(7, 1, 'Yeast / Baking Powder', NULL, NULL),
+(8, 1, 'Dry Fruits / Nuts', NULL, NULL),
+(9, 1, 'Food Colors & Flavors', NULL, NULL),
+(10, 2, 'Bread Bags', NULL, NULL),
+(11, 2, 'Cake Boxes', NULL, NULL),
+(12, 2, 'Pastry Trays', NULL, NULL),
+(13, 2, 'Stickers / Labels', NULL, NULL),
+(14, 2, 'Wrapping Paper', NULL, NULL),
+(15, 2, 'Disposable Cutlery', NULL, NULL),
+(16, 3, 'Bakers\' Salaries', NULL, NULL),
+(17, 3, 'Helpers / Assistants', NULL, NULL),
+(18, 3, 'Delivery Staff', NULL, NULL),
+(19, 3, 'Cashier / Sales Staff', NULL, NULL),
+(20, 3, 'Bonuses', NULL, NULL),
+(21, 4, 'Electricity', NULL, NULL),
+(22, 4, 'Gas', NULL, NULL),
+(23, 4, 'Water', NULL, NULL),
+(24, 4, 'Internet', NULL, NULL),
+(25, 4, 'Generator Fuel', NULL, NULL),
+(26, 5, 'Oven Repair', NULL, NULL),
+(27, 5, 'Refrigerator Maintenance', NULL, NULL),
+(28, 5, 'Cleaning Supplies', NULL, NULL),
+(29, 5, 'Electrical Repair', NULL, NULL),
+(30, 5, 'Furniture Repair', NULL, NULL),
+(31, 6, 'Facebook Ads', NULL, NULL),
+(32, 6, 'Flyers / Posters', NULL, NULL),
+(33, 6, 'Online Marketing', NULL, NULL),
+(34, 6, 'Branding Materials', NULL, NULL),
+(35, 6, 'Loyalty Cards', NULL, NULL),
+(36, 7, 'Shop Rent', NULL, NULL),
+(37, 7, 'Trade License', NULL, NULL),
+(38, 7, 'Food Safety License', NULL, NULL),
+(39, 7, 'Fire Safety Certificate', NULL, NULL),
+(40, 8, 'Oven', NULL, NULL),
+(41, 8, 'Mixers', NULL, NULL),
+(42, 8, 'Display Showcase', NULL, NULL),
+(43, 8, 'Freezer', NULL, NULL),
+(44, 8, 'Weighing Machine', NULL, NULL),
+(45, 9, 'POS Software', NULL, NULL),
+(46, 9, 'Uniforms', NULL, NULL),
+(47, 9, 'Mobile Recharge', NULL, NULL),
+(48, 9, 'Staff Meals', NULL, NULL),
+(49, 9, 'Waste Disposal', NULL, NULL),
+(50, 10, 'Fuel', NULL, NULL),
+(51, 10, 'Vehicle Maintenance', NULL, NULL),
+(52, 10, 'Courier Services', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -193,7 +336,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (26, '2025_07_14_080418_create_purchasecarts_table', 2),
 (27, '2025_07_14_095009_create_purchaseorders_table', 2),
 (31, '2025_07_10_054040_create_orders_table', 3),
-(32, '2025_07_10_052213_create_carts_table', 4);
+(32, '2025_07_10_052213_create_carts_table', 4),
+(33, '2025_07_20_105349_create_excategories_table', 5),
+(34, '2025_07_20_105356_create_exsubcategories_table', 5),
+(35, '2025_07_20_105407_create_expenses_table', 5);
 
 -- --------------------------------------------------------
 
@@ -226,7 +372,10 @@ INSERT INTO `orders` (`id`, `date`, `user_id`, `branch_id`, `reg`, `total`, `dis
 (1, '2025-07-18', 1, 1, 20250718010001, 480, 0, 0, 480, 480, 0, 2, '2025-07-18 12:24:54', '2025-07-18 12:24:54'),
 (2, '2025-07-18', 1, 1, 20250718010002, 600, 0, 0, 600, 500, 100, 3, '2025-07-18 12:35:45', '2025-07-18 12:35:45'),
 (3, '2025-07-18', 1, 1, 20250718010003, 600, 0, 0, 600, 500, 100, 3, '2025-07-18 12:35:54', '2025-07-18 12:35:54'),
-(4, '2025-07-18', 1, 1, 20250718010004, 280, 0, 0, 280, 200, 80, 3, '2025-07-18 12:52:06', '2025-07-18 12:52:06');
+(4, '2025-07-18', 1, 1, 20250718010004, 280, 0, 0, 280, 200, 80, 3, '2025-07-18 12:52:06', '2025-07-18 12:52:06'),
+(5, '2025-07-18', 1, 1, 20250718010005, 1320, 50, 198, 1468, 1468, 0, 2, '2025-07-18 13:51:54', '2025-07-18 13:51:54'),
+(6, '2025-07-20', 1, 1, 20250720010006, 2120, 50, 318, 2388, 2388, 0, 2, '2025-07-20 04:30:59', '2025-07-20 04:30:59'),
+(7, '2025-07-20', 1, 1, 20250720010007, 1320, 20, 198, 1498, 1200, 298, 3, '2025-07-20 04:31:25', '2025-07-20 04:31:25');
 
 -- --------------------------------------------------------
 
@@ -300,16 +449,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `subcategory_id`, `price`, `stock`, `description`, `image`, `availability`, `size`, `ingredients`, `manufactured`, `expired`, `created_at`, `updated_at`) VALUES
-(2, 'Vanilla Cupcake', 2, 7, 100, 16, 'Soft and moist individual cake with sweet vanilla flavor and creamy topping.', 'FD-1752485052.jpg', 1, '1 pcs', 'Flour, Sugar, Eggs, Vanilla essence, Butter, Baking powder', '2025-07-14', '2025-07-31', '2025-07-14 03:24:12', '2025-07-18 12:43:25'),
+(2, 'Vanilla Cupcake', 2, 7, 100, 12, 'Soft and moist individual cake with sweet vanilla flavor and creamy topping.', 'FD-1752485052.jpg', 1, '1 pcs', 'Flour, Sugar, Eggs, Vanilla essence, Butter, Baking powder', '2025-07-14', '2025-07-31', '2025-07-14 03:24:12', '2025-07-20 04:30:28'),
 (3, 'Chocolate Donut', 4, 15, 120, 16, 'Ring-shaped fried dough topped with rich chocolate glaze.', 'FD-1752485100.jpg', 1, '1 pcs', 'Flour, Cocoa powder, Sugar, Yeast, Milk, Butter, Chocolate glaze', '2025-07-14', '2025-07-20', '2025-07-14 03:25:00', '2025-07-18 12:42:38'),
-(4, 'Chicken Patties', 5, 19, 80, 16, 'Crispy puff stuffed with spicy chicken filling, ideal for snacks.', 'FD-1752485151.jpg', 1, '1 pcs', 'Flour, Butter, Chicken, Onion, Garlic, Spices', '2025-07-14', '2025-07-31', '2025-07-14 03:25:51', '2025-07-18 12:43:00'),
+(4, 'Chicken Patties', 5, 19, 80, 9, 'Crispy puff stuffed with spicy chicken filling, ideal for snacks.', 'FD-1752485151.jpg', 1, '1 pcs', 'Flour, Butter, Chicken, Onion, Garlic, Spices', '2025-07-14', '2025-07-31', '2025-07-14 03:25:51', '2025-07-20 04:31:13'),
 (5, 'Red Velvet Slice', 2, 6, 180, 12, 'Moist red cake slice layered with smooth cream cheese frosting.', 'FD-1752485194.jpg', 1, '1 pcs', 'Flour, Cocoa, Buttermilk, Vinegar, Sugar, Eggs, Cream cheese frosting', '2025-07-15', '2025-07-20', '2025-07-14 03:26:34', '2025-07-18 12:45:38'),
-(6, 'Cheese Bun', 1, 4, 120, 14, 'Soft and fluffy bun filled or topped with melted cheese.', 'FD-1752485249.jpg', 1, '1 pcs', 'Flour, Yeast, Milk, Sugar, Cheese, Butter', '2025-07-14', '2025-07-31', '2025-07-14 03:27:29', '2025-07-18 12:43:14'),
-(7, 'Butter Croissant', 4, 15, 140, 24, 'Flaky and buttery French-style crescent-shaped pastry.', 'FD-1752485306.jpg', 1, '1 pcs', 'Laminated dough (Flour, Butter), Yeast, Sugar, Salt', '2025-07-14', '2025-07-31', '2025-07-14 03:28:26', '2025-07-18 12:43:57'),
-(8, 'Veg Sandwich', 6, 25, 80, 21, 'Fresh sandwich packed with vegetables and creamy dressing.', 'FD-1752485357.jpg', 1, '10 pcs', 'Bread, Tomato, Cucumber, Lettuce, Cheese, Mayonnaise', '2025-07-14', '2025-07-20', '2025-07-14 03:29:17', '2025-07-18 12:44:38'),
-(9, 'Chocolate Cookie', 3, 12, 100, 16, 'Crispy outside, chewy inside, loaded with chocolate chips.', 'FD-1752485413.jpg', 1, '1 pcs', 'Flour, Butter, Eggs, Chocolate chips, Baking soda, Sugar', '2025-07-09', '2025-07-31', '2025-07-14 03:30:13', '2025-07-18 12:45:01'),
-(10, 'Garlic Bread', 1, 2, 160, 27, 'Toasted bread slices flavored with garlic butter and herbs.', 'FD-1752485456.jpg', 1, '1 pcs', 'Flour, Garlic, Butter, Herbs, Yeast, Salt', '2025-07-14', '2025-07-31', '2025-07-14 03:30:56', '2025-07-18 12:45:13'),
-(11, 'Birthday Cake', 2, 5, 420, 24, 'Classic round cake decorated with cream, ideal for celebrations.', 'FD-1752485498.jpg', 1, '1 LB', 'Flour, Eggs, Sugar, Butter, Milk, Cream, Flavoring, Food color', '2025-07-14', '2025-07-31', '2025-07-14 03:31:38', '2025-07-18 12:45:26');
+(6, 'Cheese Bun', 1, 4, 120, 3, 'Soft and fluffy bun filled or topped with melted cheese.', 'FD-1752485249.jpg', 1, '1 pcs', 'Flour, Yeast, Milk, Sugar, Cheese, Butter', '2025-07-14', '2025-07-31', '2025-07-14 03:27:29', '2025-07-20 04:31:12'),
+(7, 'Butter Croissant', 4, 15, 140, 18, 'Flaky and buttery French-style crescent-shaped pastry.', 'FD-1752485306.jpg', 1, '1 pcs', 'Laminated dough (Flour, Butter), Yeast, Sugar, Salt', '2025-07-14', '2025-07-31', '2025-07-14 03:28:26', '2025-07-20 04:31:15'),
+(8, 'Veg Sandwich', 6, 25, 80, 19, 'Fresh sandwich packed with vegetables and creamy dressing.', 'FD-1752485357.jpg', 1, '10 pcs', 'Bread, Tomato, Cucumber, Lettuce, Cheese, Mayonnaise', '2025-07-14', '2025-07-20', '2025-07-14 03:29:17', '2025-07-18 13:53:14'),
+(9, 'Chocolate Cookie', 3, 12, 100, 11, 'Crispy outside, chewy inside, loaded with chocolate chips.', 'FD-1752485413.jpg', 1, '1 pcs', 'Flour, Butter, Eggs, Chocolate chips, Baking soda, Sugar', '2025-07-09', '2025-07-31', '2025-07-14 03:30:13', '2025-07-20 04:31:14'),
+(10, 'Garlic Bread', 1, 2, 160, 22, 'Toasted bread slices flavored with garlic butter and herbs.', 'FD-1752485456.jpg', 1, '1 pcs', 'Flour, Garlic, Butter, Herbs, Yeast, Salt', '2025-07-14', '2025-07-31', '2025-07-14 03:30:56', '2025-07-20 04:30:26'),
+(11, 'Birthday Cake', 2, 5, 420, 25, 'Classic round cake decorated with cream, ideal for celebrations.', 'FD-1752485498.jpg', 1, '1 LB', 'Flour, Eggs, Sugar, Butter, Milk, Cream, Flavoring, Food color', '2025-07-14', '2025-07-31', '2025-07-14 03:31:38', '2025-07-18 13:53:16');
 
 -- --------------------------------------------------------
 
@@ -357,7 +506,12 @@ INSERT INTO `purchasecarts` (`id`, `date`, `time`, `user_id`, `chalan_reg`, `pro
 (13, '2025-07-18', '12:35:54', 1, 250718000100000003, 6, 1, 3, 3, 3, 2, 'N/A', 120, 360, '1 pcs', '2025-07-18 06:35:54', '2025-07-18 09:44:31'),
 (14, '2025-07-18', '15:19:33', 1, 250718000100000004, 2, 1, 20, 0, 0, 1, 'N/A', 100, 2000, '1 pcs', '2025-07-18 09:19:33', '2025-07-18 09:37:12'),
 (15, '2025-07-18', '15:19:34', 1, 250718000100000004, 3, 1, 20, 0, 0, 1, 'N/A', 120, 2400, '1 pcs', '2025-07-18 09:19:34', '2025-07-18 09:37:16'),
-(16, '2025-07-18', '15:19:35', 1, 250718000100000004, 5, 1, 12, 0, 0, 1, 'N/A', 180, 2160, '1 pcs', '2025-07-18 09:19:35', '2025-07-18 09:44:58');
+(16, '2025-07-18', '15:19:35', 1, 250718000100000004, 5, 1, 8, 0, 0, 1, 'N/A', 180, 1440, '1 pcs', '2025-07-18 09:19:35', '2025-07-18 13:59:34'),
+(24, '2025-07-18', '19:52:05', 1, 250718000100000005, 8, 1, 1, 1, 1, 2, 'N/A', 80, 80, '10 pcs', '2025-07-18 13:52:05', '2025-07-18 13:53:14'),
+(25, '2025-07-18', '19:52:06', 1, 250718000100000005, 9, 1, 1, 1, 1, 2, 'N/A', 100, 100, '1 pcs', '2025-07-18 13:52:06', '2025-07-18 13:53:15'),
+(26, '2025-07-18', '19:52:06', 1, 250718000100000005, 11, 1, 1, 1, 1, 2, 'N/A', 420, 420, '1 LB', '2025-07-18 13:52:06', '2025-07-18 13:53:16'),
+(27, '2025-07-20', '11:10:47', 1, 250720000100000001, 5, 1, 100, 0, 0, 1, 'N/A', 180, 180, '1 pcs', '2025-07-20 05:10:47', '2025-07-20 05:10:52'),
+(28, '2025-07-20', '11:10:48', 1, 250720000100000001, 6, 1, 100, 0, 0, 1, 'N/A', 120, 120, '1 pcs', '2025-07-20 05:10:48', '2025-07-20 05:10:54');
 
 -- --------------------------------------------------------
 
@@ -392,7 +546,9 @@ INSERT INTO `purchaseorders` (`id`, `date`, `delivary_date`, `time`, `user_id`, 
 (1, '2025-07-18', NULL, '12:35:30', 1, 1, 250718000100000001, 340, 0, 0, 340, 0, 340, 2, '2025-07-18 06:35:30', '2025-07-18 06:36:30'),
 (2, '2025-07-18', NULL, '12:35:50', 1, 1, 250718000100000002, 800, 0, 0, 800, 0, 800, 4, '2025-07-18 06:35:50', '2025-07-18 08:58:13'),
 (3, '2025-07-18', NULL, '12:36:05', 1, 1, 250718000100000003, 760, 0, 0, 760, 0, 760, 4, '2025-07-18 06:36:05', '2025-07-18 06:44:18'),
-(4, '2025-07-18', NULL, '15:19:37', 1, 1, 250718000100000004, 400, 0, 0, 400, 0, 400, 1, '2025-07-18 09:19:37', '2025-07-18 09:19:37');
+(4, '2025-07-18', NULL, '15:19:37', 1, 1, 250718000100000004, 400, 0, 0, 400, 0, 400, 2, '2025-07-18 09:19:37', '2025-07-18 13:59:42'),
+(5, '2025-07-18', NULL, '19:52:16', 1, 1, 250718000100000005, 600, 0, 0, 600, 0, 600, 4, '2025-07-18 13:52:16', '2025-07-18 13:53:00'),
+(6, '2025-07-20', NULL, '11:10:55', 1, 1, 250720000100000001, 300, 0, 0, 300, 0, 300, 1, '2025-07-20 05:10:55', '2025-07-20 05:10:55');
 
 -- --------------------------------------------------------
 
@@ -462,7 +618,22 @@ INSERT INTO `stocks` (`id`, `reg`, `date`, `product_id`, `stockIn`, `stockOut`, 
 (42, 20250718010003, '2025-07-18', 2, 0, 1, 'Out', 1, '2025-07-18 12:35:50', '2025-07-18 12:35:50'),
 (43, 20250718010003, '2025-07-18', 3, 0, 1, 'Out', 1, '2025-07-18 12:35:51', '2025-07-18 12:35:51'),
 (62, 20250718010004, '2025-07-18', 5, 0, 1, 'Out', 1, '2025-07-18 12:42:08', '2025-07-18 12:42:08'),
-(63, 20250718010004, '2025-07-18', 9, 0, 1, 'Out', 1, '2025-07-18 12:42:11', '2025-07-18 12:42:11');
+(63, 20250718010004, '2025-07-18', 9, 0, 1, 'Out', 1, '2025-07-18 12:42:11', '2025-07-18 12:42:11'),
+(64, 20250718010005, '2025-07-18', 7, 0, 3, 'Out', 1, '2025-07-18 13:51:34', '2025-07-18 13:51:42'),
+(65, 20250718010005, '2025-07-18', 8, 0, 3, 'Out', 1, '2025-07-18 13:51:35', '2025-07-18 13:51:41'),
+(66, 20250718010005, '2025-07-18', 9, 0, 3, 'Out', 1, '2025-07-18 13:51:36', '2025-07-18 13:51:44'),
+(67, 20250718010005, '2025-07-18', 6, 0, 3, 'Out', 1, '2025-07-18 13:51:38', '2025-07-18 13:51:43'),
+(68, 250718000100000005, '2025-07-18', 8, 1, 0, 'In from Factory.', 2, '2025-07-18 13:53:14', '2025-07-18 13:53:14'),
+(69, 250718000100000005, '2025-07-18', 9, 1, 0, 'In from Factory.', 2, '2025-07-18 13:53:15', '2025-07-18 13:53:15'),
+(70, 250718000100000005, '2025-07-18', 11, 1, 0, 'In from Factory.', 2, '2025-07-18 13:53:16', '2025-07-18 13:53:16'),
+(71, 20250720010006, '2025-07-20', 10, 0, 5, 'Out', 1, '2025-07-20 04:29:41', '2025-07-20 04:30:26'),
+(72, 20250720010006, '2025-07-20', 2, 0, 4, 'Out', 1, '2025-07-20 04:29:41', '2025-07-20 04:30:28'),
+(73, 20250720010006, '2025-07-20', 4, 0, 4, 'Out', 1, '2025-07-20 04:29:43', '2025-07-20 04:30:29'),
+(74, 20250720010006, '2025-07-20', 6, 0, 5, 'Out', 1, '2025-07-20 04:29:44', '2025-07-20 04:30:31'),
+(75, 20250720010007, '2025-07-20', 6, 0, 3, 'Out', 1, '2025-07-20 04:31:08', '2025-07-20 04:31:12'),
+(76, 20250720010007, '2025-07-20', 4, 0, 3, 'Out', 1, '2025-07-20 04:31:09', '2025-07-20 04:31:13'),
+(77, 20250720010007, '2025-07-20', 9, 0, 3, 'Out', 1, '2025-07-20 04:31:10', '2025-07-20 04:31:14'),
+(78, 20250720010007, '2025-07-20', 7, 0, 3, 'Out', 1, '2025-07-20 04:31:10', '2025-07-20 04:31:15');
 
 -- --------------------------------------------------------
 
@@ -566,6 +737,28 @@ ALTER TABLE `carts`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `excategories`
+--
+ALTER TABLE `excategories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `expenses_catid_foreign` (`catId`),
+  ADD KEY `expenses_subcatid_foreign` (`subcatId`),
+  ADD KEY `expenses_userid_foreign` (`userId`);
+
+--
+-- Indexes for table `exsubcategories`
+--
+ALTER TABLE `exsubcategories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `exsubcategories_cat_id_foreign` (`cat_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -672,13 +865,31 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `excategories`
+--
+ALTER TABLE `excategories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `expenses`
+--
+ALTER TABLE `expenses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `exsubcategories`
+--
+ALTER TABLE `exsubcategories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -690,13 +901,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -714,19 +925,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `purchasecarts`
 --
 ALTER TABLE `purchasecarts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `purchaseorders`
 --
 ALTER TABLE `purchaseorders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `subcategories`
@@ -751,6 +962,20 @@ ALTER TABLE `carts`
   ADD CONSTRAINT `carts_branch_id_foreign` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`),
   ADD CONSTRAINT `carts_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
+
+--
+-- Constraints for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD CONSTRAINT `expenses_catid_foreign` FOREIGN KEY (`catId`) REFERENCES `excategories` (`id`),
+  ADD CONSTRAINT `expenses_subcatid_foreign` FOREIGN KEY (`subcatId`) REFERENCES `exsubcategories` (`id`),
+  ADD CONSTRAINT `expenses_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `admins` (`id`);
+
+--
+-- Constraints for table `exsubcategories`
+--
+ALTER TABLE `exsubcategories`
+  ADD CONSTRAINT `exsubcategories_cat_id_foreign` FOREIGN KEY (`cat_id`) REFERENCES `excategories` (`id`);
 
 --
 -- Constraints for table `orders`

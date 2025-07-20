@@ -53,4 +53,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(Purchaseorder::class, 'user_id', 'id');
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(Admin::class, 'userId', 'id');
+    }
 }
