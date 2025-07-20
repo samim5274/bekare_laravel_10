@@ -46,7 +46,7 @@
             @include('layouts.message')
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Total Product Stock Report</h4>
+                    <h4 class="m-0">Expired List</h4>
                     <h5 class="m-0 text-primary">
                         <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5>
@@ -55,7 +55,7 @@
                     <div class="col-lg-12 col-md-12 grid-margin stretch-card">
                         <div class="card mt-2">
                             <div class="card-body p-2 p-md-4">
-                                <form action="#" method="GET" target="_blank">
+                                <form action="{{url('/search-expired-item')}}" method="GET" target="_blank">
                                     @CSRF
                                     <div class="row g-3 align-items-end">
                                         
@@ -136,8 +136,8 @@
             const startInput = document.getElementById('dtpStartDate');
             const endInput = document.getElementById('dtpEndDate');
 
-            startInput.max = today;
-            endInput.max = today;
+            // startInput.max = today;
+            // endInput.max = today;
 
             startInput.value = today;
             endInput.value = today;

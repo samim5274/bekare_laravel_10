@@ -408,4 +408,18 @@ class ReportController extends Controller
         $product = Product::whereBetween('expired', [Carbon::today(), Carbon::today()->addDays(3)])->get();
         return view('report.product.expired-list', compact('product'));
     }
+
+    public function findExpiredItem(Request $request){
+        $start = $request->input('dtpStart', '');
+        $end = $request->input('dtpEnd', '');
+        if(empty($start) || empty($end)){
+            return redirect()->back()->with('error', 'You need must be set date duration.');
+        }
+        $product = Product::whereBetween('expired', [$start, $end])->get();
+        $total = Product::whereBetween('expired', [$start, $end])->sum('price');
+        if ($request->has('print')) {
+            return view('report.print.expired-list-print', compact('product','start','end','total'));
+        }
+        return view('report.product.expired-list', compact('product'));
+    }
 }
