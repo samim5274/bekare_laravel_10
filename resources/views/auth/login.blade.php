@@ -43,7 +43,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-end mb-4">
               <h3 class="mb-0"><b>Login</b></h3>
-              <a href="#" class="link-primary">Don't have an account?</a>
+              <a href="{{url('/create-new-account')}}" class="link-primary">Don't have an account?</a>
             </div>
             @include('layouts.message')
             <form action="{{url('/user-login')}}" method="POST">

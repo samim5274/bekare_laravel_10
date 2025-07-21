@@ -154,4 +154,9 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/update-expenses/{id}', [ExpensesController::class, 'updateExpenses']);
     Route::get('/specific-expenses-list-print/{id}', [ExpensesController::class, 'expensesSpecificPrint']);
     Route::get('/print-expenses-list', [ExpensesController::class, 'expensesListPrint']);
+
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile.view');
+    Route::get('/edit-profile', [AdminController::class, 'editProfile'])->name('profile.edit.view');
+    Route::post('/update-profile/{id}', [AdminController::class, 'updateProfile']);
+    Route::get('/create-new-account', [AdminController::class, 'createAccount'])->name('create.new.account.view');
 });
