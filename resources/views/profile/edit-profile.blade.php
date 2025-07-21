@@ -161,6 +161,11 @@
                                                 </div>
 
                                                 <div class="form-group">
+                                                    <label for="email">Branch</label>
+                                                    <input type="text" name="branch" class="form-control" value="{{ $user->branch[0]->name }}">
+                                                </div>
+
+                                                <div class="form-group">
                                                     <label for="phone">Phone Number</label>
                                                     <input type="text" name="phone" class="form-control" maxlength="10" pattern="\d{10}" value="{{ $user->phone }}" placeholder="Enter 10-digit phone number without zero '0'">
                                                 </div>
@@ -181,7 +186,7 @@
 
                                                 <div class="form-group">
                                                     <label for="password">Old Password</label>
-                                                    <input type="password" name="password" class="form-control" value="Sh@mim4746" required placeholder="Enter your password for updated your profile.">
+                                                    <input type="password" name="password" class="form-control" required placeholder="Enter your password for updated your profile.">
                                                 </div>
 
                                                 <button type="submit" class="btn btn-outline-success px-4 btn-sm w-100 d-flex align-items-center justify-content-center">

@@ -82,7 +82,7 @@ class SaleController extends Controller
         $cart->reg = $reg;
         $cart->date = Carbon::now()->format('Y-m-d');
         $cart->user_id = Auth::guard('admin')->user()->id;
-        $cart->branch_id = Auth::guard('admin')->user()->branch;
+        $cart->branch_id = Auth::guard('admin')->user()->branch_id;
         $cart->product_id = $product->id;
         $cart->price = $product->price;
 
@@ -128,7 +128,7 @@ class SaleController extends Controller
         $cart->reg = $reg;
         $cart->date = Carbon::now()->format('Y-m-d');
         $cart->user_id = Auth::guard('admin')->user()->id;
-        $cart->branch_id = Auth::guard('admin')->user()->branch;
+        $cart->branch_id = Auth::guard('admin')->user()->branch_id;
         $cart->product_id = $product->id;
         $cart->price = $product->price;
 

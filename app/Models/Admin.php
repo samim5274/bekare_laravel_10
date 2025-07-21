@@ -24,7 +24,7 @@ class Admin extends Authenticatable
         'phone',
         'address',
         'dob',
-        'branch',
+        'branch_id',
         'role',
         'status',
     ];
@@ -57,9 +57,5 @@ class Admin extends Authenticatable
     public function expenses()
     {
         return $this->hasMany(Admin::class, 'userId', 'id');
-    }
-
-    public function branches(){
-        return $this->belongsTo(Branch::class, 'branch', 'id');
     }
 }

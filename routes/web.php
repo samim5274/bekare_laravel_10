@@ -26,6 +26,9 @@ Route::get('/login', function() {
     return view('auth.login');
 });
 
+Route::get('/create-new-account', [AdminController::class, 'createAccount'])->name('create.new.account.view');
+Route::post('/create-account', [AdminController::class, 'CreateAccountNew']);
+
 Route::group(['middleware' => ['admin']], function() {
 
     Route::get('/', [DashboardController::class, 'index']);
@@ -158,5 +161,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile.view');
     Route::get('/edit-profile', [AdminController::class, 'editProfile'])->name('profile.edit.view');
     Route::post('/update-profile/{id}', [AdminController::class, 'updateProfile']);
-    Route::get('/create-new-account', [AdminController::class, 'createAccount'])->name('create.new.account.view');
+    Route::get('/account-permission', [AdminController::class, 'permission'])->name('account.permission.view');
+    Route::get('/account-status/{id}', [AdminController::class, 'updateStatus']);
+    Route::get('/profile-permission/{id}', [AdminController::class, 'permissionViewId']);
 });

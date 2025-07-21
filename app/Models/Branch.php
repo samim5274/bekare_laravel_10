@@ -24,15 +24,15 @@ class Branch extends Model
 
     public function purchase()
     {
-        return $this->hasMany(Purchase::class, 'branch', 'id');
+        return $this->hasMany(Purchase::class, 'branch_id', 'id');
     }
 
     public function purchasecart()
     {
-        return $this->hasMany(Branch::class, 'branch', 'id');
+        return $this->hasMany(Branch::class, 'branch_id', 'id');
     }
 
     public function admins(){
-        return $this->belongsTo(Admin::class, 'branch', 'id');
+        return $this->hasMany(Admin::class, 'branch_id', 'id');
     }
 }

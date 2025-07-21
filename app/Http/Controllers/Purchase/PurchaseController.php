@@ -50,7 +50,7 @@ class PurchaseController extends Controller
         $cart->user_id = Auth::guard('admin')->user()->id;
         $cart->chalan_reg = $chalanReg;
         $cart->product_id = $product->id;
-        $cart->branch = Auth::guard('admin')->user()->branch;
+        $cart->branch = Auth::guard('admin')->user()->branch_id;
         $cart->order_qty = 1;
         $cart->ready_qty = 0;
         $cart->delivery_qty = 0;
@@ -106,7 +106,7 @@ class PurchaseController extends Controller
         $order->date = Carbon::now()->format('Y-m-d');
         $order->time = Carbon::now()->format('H:i:s');
         $order->user_id = Auth::guard('admin')->user()->id;
-        $order->branch = Auth::guard('admin')->user()->branch;
+        $order->branch = Auth::guard('admin')->user()->branch_id;
         $order->chalan_reg = $chalanReg;
         $order->total = Purchasecart::where('chalan_reg', $chalanReg)->sum('unit_price');
         $order->discount = 0;

@@ -379,7 +379,7 @@
                         <i class="ti ti-user"></i>
                         <span>Account Settings</span>
                         </a>
-                        <a href="#!" class="dropdown-item">
+                        <a href="{{url('/account-permission')}}" class="dropdown-item">
                         <i class="ti ti-lock"></i>
                         <span>Permission Center</span>
                         </a>

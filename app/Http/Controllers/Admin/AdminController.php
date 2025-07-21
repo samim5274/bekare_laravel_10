@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Session;
 use App\Models\Admin;
+use App\Models\Branch;
 
 class AdminController extends Controller
 {
@@ -39,18 +40,18 @@ class AdminController extends Controller
 
     public function profile(){
         $id = Auth::guard('admin')->user()->id;
-        $user = Admin::where('id', $id)->with('branches')->first();
+        $user = Admin::where('id', $id)->with('branch')->first();
         return view('profile.profile', compact('user'));
     }
 
     public function editProfile(){
         $id = Auth::guard('admin')->user()->id;
-        $user = Admin::where('id', $id)->with('branches')->first();
+        $user = Admin::where('id', $id)->with('branch')->first();
         return view('profile.edit-profile', compact('user'));
     }
 
     public function updateProfile(Request $request, $id){
-        $user = Admin::where('id', $id)->with('branches')->first();
+        $user = Admin::where('id', $id)->with('branch')->first();
         if(empty($user)){
             return redirect()->back()->with('error', 'User not found. Please try again!');
         }
@@ -106,6 +107,37 @@ class AdminController extends Controller
 
     public function createAccount(){
         return view('auth.register');
+    }
+
+    public function CreateAccountNew(Request $request){
+        $data = new Admin();
+        $first = $request->input('txtFirstName','');
+        $last = $request->input('txtLastName','');
+        $email = $request->input('txtEmail','');
+        $password = $request->input('txtPassword','');
+        
+        if(empty($first) || empty($last) || empty($email) || empty($password)){
+            return redirect()->back()->with('error','Some information is missing. Please fill all information and try again.');
+        }
+
+        $data->name = $first .' '. $last;
+        $data->email = $email;
+        $data->password = Hash::make($password);
+        $data->save();
+        return redirect('/login')->with('success','Your account is created successfully. Now contact with Admin for active your account. Thank You!');
+    }
+
+    public function permission(){
+        $user = Admin::with('branch')->paginate(20);
+        $branches = Branch::all(); 
+        return view('account.permission', compact('user','branches'));
+    }
+
+    public function updateStatus($id){
+        $findUser = Admin::where('id', $id)->first();
+        $findUser->status = $findUser->status == 0 ? 1 : 0;
+        $findUser->update();
+        return redirect()->back()->with('success', 'Status updated successfully.');
     }
 
 }

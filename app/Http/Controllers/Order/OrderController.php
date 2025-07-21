@@ -55,7 +55,7 @@ class OrderController extends Controller
 
             $order->date = Carbon::now()->format('Y-m-d');
             $order->user_id = Auth::guard('admin')->user()->id;
-            $order->branch_id = Auth::guard('admin')->user()->branch;
+            $order->branch_id = Auth::guard('admin')->user()->branch_id;
             $order->reg = $reg;
             $order->total = $total;
             $order->discount = $discount;

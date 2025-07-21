@@ -50,11 +50,11 @@
               @csrf
               <div class="form-group mb-3">
                 <label class="form-label">Email Address</label>
-                <input type="email" name="txtEmail" value="admin@admin.net" class="form-control" placeholder="Email Address">
+                <input type="email" name="txtEmail" value="sabbir@gmail.com" class="form-control" placeholder="Email Address">
               </div>
               <div class="form-group mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" name="txtPassword" value="Sh@mim4746" class="form-control" placeholder="Password">
+                <input type="password" name="txtPassword" value="123456789" class="form-control" placeholder="Password">
               </div>
               <div class="d-flex mt-1 justify-content-between">
                 <div class="form-check">

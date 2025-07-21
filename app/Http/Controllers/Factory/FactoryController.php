@@ -161,7 +161,7 @@ class FactoryController extends Controller
     }
 
     public function deliveryOrder(){
-        $branch = Auth::guard('admin')->user()->branch;
+        $branch = Auth::guard('admin')->user()->branch_id;
         $order = Purchaseorder::where('date', Carbon::today())->where('status', 4)->where('branch', $branch)->with('user','branchs')->paginate(20);
         return view('factory.delivaryOrder', compact('order'));
     }
@@ -169,7 +169,7 @@ class FactoryController extends Controller
     public function searchDeliveryOrder(Request $request){
         $start = $request->input('dtpStart','');
         $end = $request->input('dtpEnd','');
-        $branch = Auth::guard('admin')->user()->branch;
+        $branch = Auth::guard('admin')->user()->branch_id;
         $order = Purchaseorder::whereBetween('date', [$start, $end])->where('status', 4)->where('branch', $branch)->with('user','branchs')->paginate(20);
         return view('factory.delivaryOrder', compact('order'));
     }
