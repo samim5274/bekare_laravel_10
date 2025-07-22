@@ -134,10 +134,24 @@ class AdminController extends Controller
     }
 
     public function updateStatus($id){
-        $findUser = Admin::where('id', $id)->first();
+        $findUser = Admin::where('id', $id)->with('branch')->first();
         $findUser->status = $findUser->status == 0 ? 1 : 0;
         $findUser->update();
         return redirect()->back()->with('success', 'Status updated successfully.');
+    }
+
+    public function profilePermissionView($id){
+        $user = Admin::with('branchs')->where('id', $id)->first();
+        $branches = Branch::all(); 
+        return view('profile.permission-profile', compact('user','branches'));
+    }
+
+    public function updatePermission(Request $request){
+        $user = Admin::where('id', $request->input('txtStdIt',''))->first();
+        $user->branch_id = $request->input('branch_id', '');
+        $user->role = $request->input('role_id', '');
+        $user->update();
+        return redirect()->back()->with('success', 'Permission updated successfully.');
     }
 
 }

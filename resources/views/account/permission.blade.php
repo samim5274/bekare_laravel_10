@@ -55,6 +55,7 @@
                                     <th>Name</th>
                                     <th>Date of Birth</th>
                                     <th>Phone</th>
+                                    <th>Email</th>
                                     <th>Address</th>
                                     <th>Branch</th>
                                     <th>Role</th>
@@ -65,27 +66,19 @@
                                 @foreach($user as $key => $val)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>
+                                    <td  data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$val->id}}">
                                         @if($val->photo)
                                             <a href="#"><img src="{{ asset('img/employee/' . $val->photo) }}" alt="Product Image" style="height: 60px; width: 60px; border-radius: 6px;"></a>
                                         @else
                                             <a href="#"><span class="text-muted">No Image</span></a>
                                         @endif
                                     </td>
-                                    <td><a href="#">{{ $val->name }}</a></td>                                   
+                                    <td data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$val->id}}"><a href="#">{{ $val->name }}</a></td>                                   
                                     <td>{{ \Carbon\Carbon::parse($val->dob)->format('d M Y') }}</td>
                                     <td>{{ $val->phone }}</td>
+                                    <td>{{ $val->email }}</td>
                                     <td>{{ $val->address }}</td>
-                                    <td>
-                                        <select class="form-control" name="branch_id" id="branch_id">
-                                            <option selected disabled>--Select Branch--</option>
-                                            @foreach($branches as $branch)
-                                                <option value="{{ $branch->id }}" {{ $val->branch_id == $branch->id ? 'selected' : '' }}>
-                                                    {{ $branch->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
+                                    <td>{{ $val->branchs->name }}</td>
                                     <td>
                                         @php
                                             $roles = [
@@ -100,9 +93,9 @@
                                         {{ $roles[$roleId] ?? 'Unknown' }}
                                     </td>
                                     @if($val->status == 1)
-                                    <td class="text-center"><a href="{{url('/account-status/'.$val->id)}}"><i class="text-success fa-solid fa-eye"></i></i></a></td>
+                                        <td class="text-center"><a href="{{url('/account-status/'.$val->id)}}"><i class="text-success fa-solid fa-eye"></i></i></a></td>
                                     @else
-                                    <td class="text-center"><a href="{{url('/account-status/'.$val->id)}}"><i class="text-danger fa-solid fa-eye-slash"></i></a></td>
+                                        <td class="text-center"><a href="{{url('/account-status/'.$val->id)}}"><i class="text-danger fa-solid fa-eye-slash"></i></a></td>
                                     @endif
                                 </tr>
                                 @endforeach
@@ -118,7 +111,55 @@
             </div>
         </div> 
 
-        
+
+@foreach($user as $key => $val)
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop{{$val->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{url('/update-user-permission')}}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{ $val->name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="txtStdIt" value="{{$val->id}}" hidden>
+                    <label for="Branch" class="form-label">Select Branch</label>
+                    <select class="form-control" name="branch_id" id="branch_id">
+                        <option selected disabled>--Select Branch--</option>
+                        @foreach($branches as $branch)
+                            <option value="{{ $branch->id }}" {{ $val->branch_id == $branch->id ? 'selected' : '' }}>
+                                {{ $branch->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @php
+                        $roles = [
+                            1 => 'Admin',
+                            2 => 'Manager',
+                            3 => 'Incharge',
+                            4 => 'Cashier'
+                        ];
+                    @endphp
+                    <br>
+                    <label for="role_id" class="form-label">Select Role</label>
+                    <select name="role_id" id="role_id" class="form-control">
+                        <option disabled {{ empty($user->role_id) ? 'selected' : '' }}>-- Select Role --</option>
+                        @foreach($roles as $key => $label)
+                            <option value="{{ $key }}" {{ $val->role == $key ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
         
 
         @include('layouts.footer')

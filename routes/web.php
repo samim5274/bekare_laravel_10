@@ -164,4 +164,6 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/account-permission', [AdminController::class, 'permission'])->name('account.permission.view');
     Route::get('/account-status/{id}', [AdminController::class, 'updateStatus']);
     Route::get('/profile-permission/{id}', [AdminController::class, 'permissionViewId']);
+
+    Route::post('/update-user-permission', [AdminController::class, 'updatePermission']);
 });

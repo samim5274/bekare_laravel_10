@@ -58,4 +58,8 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(Admin::class, 'userId', 'id');
     }
+
+    public function branchs(){
+        return $this->belongsTo(Branch::class, 'branch_id', 'id');
+    }
 }
