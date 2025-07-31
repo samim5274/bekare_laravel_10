@@ -47,7 +47,10 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.message')
+            @include('layouts.message') 
+            <div id="successMessage" class="alert alert-success d-none">
+                <strong>✅ Success!</strong> Order confirmed successfully!
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
@@ -225,19 +228,60 @@
     <script src="{{ asset('./js/cart.js') }}"></script>
     <script src="{{ asset('./js/orderPayment.js') }}"></script>
 
-    <script>
-        window.onload = function () {
-            const searchInput = document.getElementById('search');
-            if (searchInput) {
-                searchInput.focus();
-            }
-            @if(session('success'))
-                const reg = "{{ session('reg') }}";
-                const printUrl = `{{ url('/specific-order-print') }}/${reg}`;
-                window.open(printUrl, '_blank');
-            @endif
-        };
-    </script>
+
+<script>
+    document.getElementById('myForm').addEventListener('submit', function(e){
+        e.preventDefault();
+
+        const btn = document.getElementById('confirmBtn');
+        const btnText = document.getElementById('btnText');
+
+        // Loading Spinner
+        btn.disabled = true;
+        btnText.innerHTML = `<h4 class="m-0"><i class="fas fa-spinner fa-spin"></i> Loading...</h4>`;
+
+        let formData = new FormData(this);
+
+        axios.post('{{ url("/confirm-order") }}', formData)
+        .then(response => {
+            const reg = response.data.reg;
+
+            const printUrl = `{{ url('/specific-order-print') }}/${reg}`;
+            window.open(printUrl, '_blank'); 
+
+            localStorage.setItem('orderSuccess', '1');
+
+            document.getElementById('myForm').reset();
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000); 
+        })
+        .catch(error => {
+            alert('Failed to confirm order!');
+            console.error(error);
+
+            btn.disabled = false;
+            btnText.innerHTML = `<h4 class="m-0">Confirm Order</h4>`;
+        });
+    });
+
+    window.onload = function () {
+        if (localStorage.getItem('orderSuccess')) {
+            document.getElementById('successMessage').classList.remove('d-none');
+
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.add('d-none');
+            }, 5000);
+
+            localStorage.removeItem('orderSuccess');
+        }
+        const searchInput = document.getElementById('search');
+        if (searchInput) {
+            searchInput.focus();
+        }
+    };
+</script>
     
 </body>
 </html>

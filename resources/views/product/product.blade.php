@@ -76,6 +76,124 @@
 
     @include('layouts.menu')
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fa fa-box-open me-2"></i> Add New Product
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form id="productForm" action="{{ url('/add-product') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+          <div class="row g-4">
+            <!-- Product Name -->
+            <div class="col-md-6">
+              <label for="productName" class="form-label">Product Name</label>
+              <input type="text" name="txtProductName" id="productName" class="form-control" required>
+            </div>
+
+            <!-- Price -->
+            <div class="col-md-6">
+              <label for="price" class="form-label">Price (৳)</label>
+              <input type="number" name="txtPrice" id="price" class="form-control" required>
+            </div>
+
+            <!-- Category -->
+            <div class="col-md-6">
+              <label for="category" class="form-label">Category</label>
+              <select name="cbxCategory" id="category" class="form-select" required>
+                <option disabled selected>-- Select Category --</option>
+                @foreach($category as $val)
+                  <option value="{{ $val->id }}">{{ $val->name }}</option>
+                @endforeach
+              </select>
+            </div>
+            <span class="loader" id="loader"></span>
+            <!-- Sub-Category -->
+            <div class="col-md-6">
+              <label for="subCategory" class="form-label">Sub-Category</label>
+              <select name="cbxSubCategory" id="subCategory" class="form-select" required>
+                <option disabled selected>-- Select Sub-Category --</option>
+              </select>
+            </div>
+
+            <!-- Stock -->
+            <div class="col-md-6">
+              <label for="stock" class="form-label">Stock</label>
+              <input type="number" name="txtStock" id="stock" class="form-control" required>
+            </div>
+
+            <!-- Weight/Size -->
+            <div class="col-md-6">
+              <label for="ws" class="form-label">Weight/Size</label>
+              <input type="text" name="txtWeightSize" id="ws" class="form-control" required>
+            </div>
+
+            <!-- Dates -->
+            <div class="col-md-6">
+              <label for="Manufacturing-Date" class="form-label">Manufacturing Date</label>
+              <input type="date" name="dtpManuDate" id="Manufacturing-Date" class="form-control" required>
+            </div>
+
+            <div class="col-md-6">
+              <label for="Expiry-Date" class="form-label">Expiry Date</label>
+              <input type="date" name="dtpExpireDate" id="Expiry-Date" class="form-control" required>
+            </div>
+
+            <!-- Ingredients -->
+            <div class="col-md-6">
+              <label for="ingredients" class="form-label">Ingredients</label>
+              <textarea name="txtIngredient" id="ingredients" rows="3" class="form-control"></textarea>
+            </div>
+
+            <!-- Description -->
+            <div class="col-md-6">
+              <label for="description" class="form-label">Description</label>
+              <textarea name="txtDescription" id="description" rows="3" class="form-control"></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="col-md-12">
+              <label class="form-label">Upload Product Image</label>
+              <div class="border rounded p-3 text-center bg-light" id="dropZone" style="cursor: pointer;">
+                Click or drag & drop image here
+                <input type="file" id="imageInput" name="fileImage" accept="image/*" hidden>
+              </div>
+              <div class="mt-2">
+                <img id="previewImage" src="#" class="img-thumbnail d-none" width="120" />
+              </div>
+            </div>
+
+            <!-- Availability -->
+            <div class="col-md-6 mt-3">
+              <label class="form-label">Availability</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="availability" name="availability" value="1">
+                <label class="form-check-label" for="availability">Available</label>
+              </div>
+              <input type="hidden" name="availability_hidden" id="availability_hidden" value="0">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fa fa-times me-1"></i> Cancel
+          </button>
+          <button type="submit" class="btn btn-success">
+            <i class="fa fa-plus-circle me-1"></i> Add Product
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
     <div class="pc-container">
         <div class="pc-content">
             <div class="page-header">
@@ -90,10 +208,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>                
             @include('layouts.message')
             <div class="container">
-                <div class="card shadow">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="m-0">Product Details</h4>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa-solid fa-circle-plus me-2"></i> Add
+                        </a>
+                    </div>
+                </div>
+                <!-- <div class="card shadow">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Add New Product</h4>
                     </div>
@@ -101,19 +227,16 @@
                         <form id="productForm" action="{{url('/add-product')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
-                            <!-- Product Name -->
                                 <div class="col-md-6">
                                     <label for="productName" class="form-label">Product Name</label>
                                     <input type="text" id="productName" name="txtProductName" class="form-control" required>
                                 </div>
 
-                                <!-- Price -->
                                 <div class="col-md-6">
                                     <label for="price" class="form-label">Price (৳)</label>
                                     <input type="number" id="price" name="txtPrice" class="form-control" required>
                                 </div>
 
-                                <!-- Category Dropdown -->
                                 <div class="col-md-6">
                                     <label for="category" class="form-label">Category</label>
                                     <select id="category" name="cbxCategory" class="form-select" required>
@@ -189,14 +312,14 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="container mt-4">
-                <h4 class="mb-3">Bakery Product List</h4>
+                <!-- <h4 class="mb-3">Bakery Product List</h4> -->
 
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped ">
-                        <thead class="table-dark">
+                        <thead class="table-primary">
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>

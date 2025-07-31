@@ -177,7 +177,7 @@ class ProductController extends Controller
                 }
                 // dd($data->image);
                 $data->update();
-                return redirect()->back()->with('success', 'Product updated successfully.');
+                return redirect()->route('product.view')->with('success', 'Product updated successfully.');
             } catch (Exception $e) {
                 return redirect()->back()->with('warning', 'Something is wrong.'. $e->getMessage());
             }

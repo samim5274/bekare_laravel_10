@@ -20,28 +20,44 @@ $(document).ready(function () {
 
         if (newQty === currentQty) return;
 
+        updateQuantity(id, newQty, input);
+    });
+
+    $(document).on('change', '.qty-input', function () {
+        var id = $(this).data('id');
+        var newQty = parseInt($(this).val());
+
+        if (newQty < 1 || isNaN(newQty)) {
+            alert('Invalid quantity');
+            $(this).val(1);
+            newQty = 1;
+        }
+
+        updateQuantity(id, newQty, $(this));
+    });
+
+    function updateQuantity(id, newQty, input) {
         $.post('/cart/update-quantity', {
             id: id,
             quantity: newQty
         }, function (response) {
             if (response.status === 'success') {
-                input.val(response.quantity); 
+                input.val(response.quantity);
 
                 var card = input.closest('.card-body');
                 var price = parseFloat(card.find('[data-price]').data('price'));
-                var subtotal = price * newQty;
+                var subtotal = price * response.quantity;
                 card.find('.item-subtotal').text('৳' + subtotal.toFixed(2));
 
                 updateCartTotal();
-                console.log('Quantity updated:', response); 
             } else {
                 alert(response.message || 'Update failed');
             }
         }).fail(function (xhr) {
-            console.error('AJAX error:', xhr.responseText);
             alert('Something went wrong!');
+            console.error(xhr.responseText);
         });
-    });
+    }
 
     function updateCartTotal() {
         let total = 0;

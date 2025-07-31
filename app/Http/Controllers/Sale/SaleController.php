@@ -99,7 +99,8 @@ class SaleController extends Controller
         $product->update();
         $stock->save();
         $cart->save();
-        return redirect()->back()->with('success', 'Item add to card successfully.');
+        return redirect()->back();
+        // return redirect()->back()->with('success', 'Item add to card successfully.');
     }
 
     public function addCart2(Request $request) {
@@ -145,7 +146,8 @@ class SaleController extends Controller
         $product->update();
         $stock->save();
         $cart->save();
-        return redirect()->back()->with('success', 'Item add to card successfully.');
+        return redirect()->back();
+        // return redirect()->back()->with('success', 'Item add to card successfully.');
     }
 
     public function cartView(){
@@ -240,6 +242,7 @@ class SaleController extends Controller
         }
 
         $cart->delete();
-        return redirect()->back()->with('success', 'The item has been successfully removed from the cart.');
+        return redirect()->back();
+        // return redirect()->back()->with('success', 'The item has been successfully removed from the cart.');
     }
 }

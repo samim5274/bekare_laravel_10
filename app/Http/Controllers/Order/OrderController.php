@@ -78,10 +78,8 @@ class OrderController extends Controller
             } 
             // dd($reg);
             $order->save();
-            return response()->json([
-                'success' => true,
-                'reg' => $reg
-            ]);
+            return redirect()->back()->with('success', 'Order sale successfully.')->with('reg', $reg);
+            // return response()->json([ 'success' => true, 'reg' => $reg ]);
         } catch(Exception $e) {
             return redirect()->back()->with('error', 'Your cart is empty. Try again.'.$e);
         }
