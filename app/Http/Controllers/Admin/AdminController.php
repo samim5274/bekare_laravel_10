@@ -124,7 +124,7 @@ class AdminController extends Controller
         $data->email = $email;
         $data->password = Hash::make($password);
         $data->save();
-        return redirect('/login')->with('success','Your account is created successfully. Now contact with Admin for active your account. Thank You!');
+        return redirect()->back()->with('success','Your account is created successfully. Now contact with Admin for active your account. Thank You!');
     }
 
     public function permission(){

@@ -46,7 +46,28 @@ class DashboardController extends Controller
         $totalPhurchaseOrder = Purchasecart::where('date', Carbon::today())->sum('order_qty');
         $totalPhurchaseReady = Purchasecart::where('date', Carbon::today())->sum('ready_qty');
         $totalPhurchaseDelivery = Purchasecart::where('date', Carbon::today())->sum('delivery_qty');
-        
+
         return view('welcome', compact('total', 'discount', 'vat', 'due', 'payable', 'pay','expenses','totalProduct', 'active', 'deactive','expired','expiredSoon','bracnh','totalPhurchaseOrder','totalPhurchaseReady','totalPhurchaseDelivery'));
+    }
+
+    public function chart(){
+        $last7Days = collect();
+        $dates = [];
+        $sales = [];
+        $dues = [];
+        $dies = [];
+
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::today()->subDays($i);
+            $dates[] = $date->format('d M');
+            $dayTotal = Order::whereDate('date', $date)->sum('pay');
+            $dayDue = Order::whereDate('date', $date)->sum('due');
+            $dayDis = Order::whereDate('date', $date)->sum('discount');
+            $sales[] = (float)$dayTotal;
+            $dues[] = (float)$dayDue;
+            $dies[] = (float)$dayDis;
+        }
+
+        return view('chart.chart', compact('dates','sales','dues','dies'));
     }
 }

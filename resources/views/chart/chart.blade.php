@@ -21,13 +21,8 @@
     <link rel="stylesheet" href="./assets/css/style.css" id="main-style-link" >
     <link rel="stylesheet" href="./assets/css/style-preset.css" >
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <style>
-        .icon{
-            width:48px; height:48px; font-size:24px; box-shadow: 0 2px 6px rgba(13, 110, 253, 0.4);
-        }
-    </style>
-</head>
 
+</head>
 <body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
 
     @include('layouts.menu')
@@ -40,19 +35,27 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Home</li>
+                                <li class="breadcrumb-item"><a href="{{url('/chart')}}">Chart</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Chart</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            @include('home') 
+            <div class="row m-3">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Last 7 days Sale</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="bar-chart-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div> 
-
-    
-    
+    </div>     
 
     @include('layouts.footer')
     
@@ -62,6 +65,66 @@
     <script src="./assets/js/fonts/custom-font.js"></script>
     <script src="./assets/js/pcoded.js"></script>
     <script src="./assets/js/plugins/feather.min.js"></script>
+    
+    <script>
+        var categories = @json($dates);
+        var salesData = @json($sales);
+        var dueData = @json($dues);
+        var diesData = @json($dies);
+
+        var options_bar_chart_1 = {
+            chart: {
+                height: 350,
+                type: 'bar'
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                }
+            },
+            dataLabels: {
+                enabled: true
+            },
+            colors: ['#2fcc49ff','#fd562cff','#2cfdfdff'],
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            series: [
+                {
+                    name: 'Sales',
+                    data: salesData
+                },
+                {
+                    name: 'Due',
+                    data: dueData
+                },
+                {
+                    name: 'Discount',
+                    data: diesData
+                }
+            ],
+            xaxis: {
+                categories: categories
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return '৳ ' + val.toLocaleString() + ' taka';
+                    }
+                }
+            }
+        };
+
+        var chart_bar_chart_1 = new ApexCharts(document.querySelector('#bar-chart-1'), options_bar_chart_1);
+        chart_bar_chart_1.render();
+    </script>
 
 </body>
 </html>

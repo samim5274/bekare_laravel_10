@@ -48,7 +48,7 @@
 
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped ">
-                            <thead class="table-dark">
+                            <thead class="table-primary">
                                 <tr>
                                     <th>#</th>
                                     <th>Image</th>
@@ -78,7 +78,7 @@
                                     <td>{{ $val->phone }}</td>
                                     <td>{{ $val->email }}</td>
                                     <td>{{ $val->address }}</td>
-                                    <td>{{ $val->branchs->name }}</td>
+                                    <td>{{ $val->branchs->name?? 'Unknown' }}</td>
                                     <td>
                                         @php
                                             $roles = [

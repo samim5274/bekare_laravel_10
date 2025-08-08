@@ -16,6 +16,8 @@ use App\Http\Controllers\Branch\BranchController;
 use App\Http\Controllers\Purchase\PurchaseController;
 use App\Http\Controllers\Factory\FactoryController;
 use App\Http\Controllers\Expenses\ExpensesController;
+use App\Http\Controllers\Setting\SettingController;
+use App\Http\Controllers\Permission\PermissionController;
 
 
 Auth::routes();
@@ -32,6 +34,7 @@ Route::post('/create-account', [AdminController::class, 'CreateAccountNew']);
 Route::group(['middleware' => ['admin']], function() {
 
     Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/chart', [DashboardController::class, 'chart']);
 
     Route::get('/backup-database', function(){
         Artisan::call('backup:run', ['--only-db' => true]);
@@ -60,7 +63,7 @@ Route::group(['middleware' => ['admin']], function() {
         Artisan::call('view:clear');
         Artisan::call('route:clear');
 
-        return "Caches cleared successfully.";
+        return redirect()->back()->with('success','Caches cleared successfully.');
     });
 
     Route::get('/product-view', [ProductController::class, 'product'])->name('product.view');
@@ -164,6 +167,10 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/account-permission', [AdminController::class, 'permission'])->name('account.permission.view');
     Route::get('/account-status/{id}', [AdminController::class, 'updateStatus']);
     Route::get('/profile-permission/{id}', [AdminController::class, 'permissionViewId']);
-
     Route::post('/update-user-permission', [AdminController::class, 'updatePermission']);
+
+    Route::get('/setting', [SettingController::class, 'setting'])->name('setting.view');
+
+    Route::get('/permission', [PermissionController::class, 'permission'])->name('user.permission.view');
+    Route::get('/user-permission-update', [PermissionController::class, 'permissionUpdate']);
 });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 01, 2025 at 06:51 AM
+-- Generation Time: Aug 08, 2025 at 01:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,9 +51,12 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `facebook_id`, `google_id`, `github_id`, `password`, `photo`, `phone`, `address`, `dob`, `branch_id`, `role`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Sabbir Hossain', 'sabbir@gmail.com', NULL, NULL, NULL, '$2y$12$MCADF4zAqdJJ4EDlDG4MTuIivOTeDvdW2Tr7tACjjX1xFi3KtJCam', 'user-1753961928.jpg', '1762141514', NULL, '1999-07-07', 1, 1, 1, '2025-07-21 10:29:17', '2025-07-31 11:38:48'),
-(2, 'Hossain', 'sabbir2@gmail.com', NULL, NULL, NULL, '$2y$12$6wSniueGHC5jvKQkm0YO.O3sp6mJ1Entu7foD3teYIPU1TQzBJSfe', NULL, NULL, NULL, NULL, 2, 2, 1, '2025-07-21 11:45:35', '2025-07-22 05:13:10'),
-(4, 'Milon', 'sabbir3@gmail.com', NULL, NULL, NULL, '$2y$12$DABvMVjEPrL5nDbkWzXMTOuC1CD0moNcHkcqzGKJs9qWWnHEDHQde', NULL, NULL, NULL, NULL, 2, 3, 1, '2025-07-21 11:45:51', '2025-07-22 05:13:11');
+(1, 'Sabbir Hossain', 'sabbir@gmail.com', NULL, NULL, NULL, '$2y$12$MCADF4zAqdJJ4EDlDG4MTuIivOTeDvdW2Tr7tACjjX1xFi3KtJCam', 'user-1753961928.jpg', '1762141514', 'Dhaka', '1999-07-07', 1, 1, 1, '2025-07-21 10:29:17', '2025-08-08 05:24:34'),
+(2, 'Hossain', 'sabbir2@gmail.com', NULL, NULL, NULL, '$2y$12$6wSniueGHC5jvKQkm0YO.O3sp6mJ1Entu7foD3teYIPU1TQzBJSfe', NULL, '1762141514', 'Dhaka', '2005-08-03', 2, 3, 1, '2025-07-21 11:45:35', '2025-08-08 05:28:12'),
+(4, 'Milon', 'sabbir3@gmail.com', NULL, NULL, NULL, '$2y$12$DABvMVjEPrL5nDbkWzXMTOuC1CD0moNcHkcqzGKJs9qWWnHEDHQde', NULL, '1762141514', 'Dhaka', '2005-08-03', 2, 4, 1, '2025-07-21 11:45:51', '2025-08-08 05:52:36'),
+(5, 'Monir Hossain', 'monir@gmail.com', NULL, NULL, NULL, '$2y$12$MZDiecuA.sgUIlnlbe5uHOtX.c9sIu4a1qtNHfuZX4TLiKyIcxs0W', NULL, NULL, NULL, NULL, 0, 3, 1, '2025-08-08 05:29:52', '2025-08-08 05:52:38'),
+(6, 'Rabby Hossain', 'rabby@gmail.com', NULL, NULL, NULL, '$2y$12$PIwkn6XvkE.Wlt8a8.DkruR1lpEV236fqv3u1AEf.XXfWQpMs5yJC', NULL, NULL, NULL, NULL, 0, 4, 0, '2025-08-08 05:48:33', '2025-08-08 05:52:32'),
+(7, 'Mofiz Hossain', 'mofiz@gmail.com', NULL, NULL, NULL, '$2y$12$crS/EFHSYNMkEWJIuxdI.Os3Im1S/p0uovWPuBuBEY8WRLZW4Cov.', NULL, NULL, NULL, NULL, 0, 3, 1, '2025-08-08 05:49:30', '2025-08-08 05:50:44');
 
 -- --------------------------------------------------------
 
@@ -148,7 +151,17 @@ INSERT INTO `carts` (`id`, `reg`, `date`, `user_id`, `product_id`, `branch_id`, 
 (48, 20250731010013, '2025-07-31', 1, 2, 1, 1, 100, '2025-07-31 10:26:19', '2025-07-31 10:26:19'),
 (56, 20250731010014, '2025-07-31', 1, 3, 1, 1, 120, '2025-07-31 10:29:19', '2025-07-31 10:29:19'),
 (57, 20250731010015, '2025-07-31', 1, 6, 1, 110, 120, '2025-07-31 10:41:59', '2025-07-31 10:42:09'),
-(60, 20250801010016, '2025-08-01', 1, 11, 1, 5, 420, '2025-08-01 04:50:40', '2025-08-01 04:50:47');
+(60, 20250801010016, '2025-08-01', 1, 11, 1, 5, 420, '2025-08-01 04:50:40', '2025-08-01 04:50:47'),
+(61, 20250808010017, '2025-08-08', 1, 2, 1, 3, 100, '2025-08-08 08:04:57', '2025-08-08 08:05:22'),
+(62, 20250808010017, '2025-08-08', 1, 3, 1, 3, 120, '2025-08-08 08:04:58', '2025-08-08 08:05:23'),
+(63, 20250808010017, '2025-08-08', 1, 4, 1, 3, 80, '2025-08-08 08:04:58', '2025-08-08 08:05:24'),
+(64, 20250808010017, '2025-08-08', 1, 5, 1, 3, 180, '2025-08-08 08:04:59', '2025-08-08 08:05:30'),
+(65, 20250808010017, '2025-08-08', 1, 9, 1, 3, 100, '2025-08-08 08:05:00', '2025-08-08 08:05:27'),
+(66, 20250808010017, '2025-08-08', 1, 8, 1, 3, 80, '2025-08-08 08:05:01', '2025-08-08 08:05:26'),
+(67, 20250808010017, '2025-08-08', 1, 7, 1, 2, 140, '2025-08-08 08:05:03', '2025-08-08 08:05:36'),
+(68, 20250808010017, '2025-08-08', 1, 6, 1, 3, 120, '2025-08-08 08:05:05', '2025-08-08 08:05:36'),
+(69, 20250808010017, '2025-08-08', 1, 10, 1, 3, 160, '2025-08-08 08:05:15', '2025-08-08 08:05:37'),
+(70, 20250808010017, '2025-08-08', 1, 11, 1, 3, 420, '2025-08-08 08:05:16', '2025-08-08 08:05:38');
 
 -- --------------------------------------------------------
 
@@ -388,18 +401,19 @@ INSERT INTO `orders` (`id`, `date`, `user_id`, `branch_id`, `reg`, `total`, `dis
 (2, '2025-07-22', 1, 1, 20250722010002, 480, 50, 72, 502, 50, 452, 3, '2025-07-22 05:25:53', '2025-07-22 05:25:53'),
 (3, '2025-07-31', 1, 1, 20250731010003, 7500, 25, 1125, 8600, 8600, 0, 2, '2025-07-31 06:12:12', '2025-07-31 06:12:12'),
 (4, '2025-07-31', 1, 1, 20250731010004, 2980, 27, 447, 3400, 3300, 100, 3, '2025-07-31 06:13:37', '2025-07-31 06:14:09'),
-(5, '2025-07-31', 1, 1, 20250731010005, 2060, 9, 309, 2360, 2360, 0, 2, '2025-07-31 06:21:35', '2025-07-31 06:21:35'),
-(6, '2025-07-31', 1, 1, 20250731010006, 1500, 5, 225, 1720, 1720, 0, 2, '2025-07-31 06:56:51', '2025-07-31 06:56:51'),
-(7, '2025-07-31', 1, 1, 20250731010007, 1420, 3, 213, 1630, 1630, 0, 2, '2025-07-31 10:06:45', '2025-07-31 10:06:45'),
-(8, '2025-07-31', 1, 1, 20250731010008, 2620, 13, 393, 3000, 3000, 0, 2, '2025-07-31 10:08:06', '2025-07-31 10:08:06'),
-(9, '2025-07-31', 1, 1, 20250731010009, 1280, 22, 192, 1450, 1450, 0, 2, '2025-07-31 10:15:00', '2025-07-31 10:15:00'),
+(5, '2025-08-03', 1, 1, 20250731010005, 2060, 9, 309, 2360, 2360, 0, 2, '2025-07-31 06:21:35', '2025-07-31 06:21:35'),
+(6, '2025-08-04', 1, 1, 20250731010006, 1500, 5, 225, 1720, 1720, 0, 2, '2025-07-31 06:56:51', '2025-07-31 06:56:51'),
+(7, '2025-08-05', 1, 1, 20250731010007, 1420, 3, 213, 1630, 1630, 0, 2, '2025-07-31 10:06:45', '2025-07-31 10:06:45'),
+(8, '2025-08-06', 1, 1, 20250731010008, 2620, 13, 393, 3000, 3000, 0, 2, '2025-07-31 10:08:06', '2025-07-31 10:08:06'),
+(9, '2025-08-07', 1, 1, 20250731010009, 1280, 22, 192, 1450, 1450, 0, 2, '2025-07-31 10:15:00', '2025-07-31 10:15:00'),
 (10, '2025-07-31', 1, 1, 20250731010010, 160, 0, 24, 184, 184, 0, 2, '2025-07-31 10:15:42', '2025-07-31 10:15:42'),
-(11, '2025-07-31', 1, 1, 20250731010011, 160, 0, 0, 160, 160, 0, 2, '2025-07-31 10:21:47', '2025-07-31 10:21:47'),
-(12, '2025-07-31', 1, 1, 20250731010012, 160, 0, 0, 160, 160, 0, 2, '2025-07-31 10:22:30', '2025-07-31 10:22:30'),
-(13, '2025-07-31', 1, 1, 20250731010013, 100, 0, 0, 100, 100, 0, 2, '2025-07-31 10:26:22', '2025-07-31 10:26:22'),
-(14, '2025-07-31', 1, 1, 20250731010014, 120, 0, 18, 138, 138, 0, 2, '2025-07-31 10:39:05', '2025-07-31 10:39:05'),
+(11, '2025-08-07', 1, 1, 20250731010011, 160, 0, 0, 160, 160, 0, 2, '2025-07-31 10:21:47', '2025-07-31 10:21:47'),
+(12, '2025-08-06', 1, 1, 20250731010012, 160, 0, 0, 160, 160, 0, 2, '2025-07-31 10:22:30', '2025-07-31 10:22:30'),
+(13, '2025-08-05', 1, 1, 20250731010013, 100, 0, 0, 100, 100, 0, 2, '2025-07-31 10:26:22', '2025-07-31 10:26:22'),
+(14, '2025-08-04', 1, 1, 20250731010014, 120, 0, 18, 138, 138, 0, 2, '2025-07-31 10:39:05', '2025-07-31 10:39:05'),
 (15, '2025-07-31', 1, 1, 20250731010015, 13200, 30, 1980, 15150, 15150, 0, 2, '2025-07-31 10:42:24', '2025-07-31 10:42:24'),
-(16, '2025-08-01', 1, 1, 20250801010016, 2100, 15, 315, 2400, 2400, 0, 2, '2025-08-01 04:50:55', '2025-08-01 04:50:55');
+(16, '2025-08-02', 1, 1, 20250801010016, 2100, 15, 315, 2400, 2400, 0, 2, '2025-08-01 04:50:55', '2025-08-01 04:50:55'),
+(17, '2025-08-08', 1, 1, 20250808010017, 4360, 14, 654, 5000, 4000, 1000, 3, '2025-08-08 08:05:58', '2025-08-08 08:05:58');
 
 -- --------------------------------------------------------
 
@@ -473,16 +487,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `subcategory_id`, `price`, `stock`, `description`, `image`, `availability`, `size`, `ingredients`, `manufactured`, `expired`, `created_at`, `updated_at`) VALUES
-(2, 'Vanilla Cupcake', 2, 7, 100, 204, 'Soft and moist individual cake with sweet vanilla flavor and creamy topping.', 'FD-1752485052.jpg', 1, '1 pcs', 'Flour, Sugar, Eggs, Vanilla essence, Butter, Baking powder', '2025-07-14', '2026-02-27', '2025-07-14 03:24:12', '2025-08-01 04:50:42'),
-(3, 'Chocolate Donut', 4, 15, 120, 84, 'Ring-shaped fried dough topped with rich chocolate glaze.', 'FD-1752485100.jpg', 1, '1 pcs', 'Flour, Cocoa powder, Sugar, Yeast, Milk, Butter, Chocolate glaze', '2025-07-14', '2026-02-10', '2025-07-14 03:25:00', '2025-08-01 04:47:29'),
-(4, 'Chicken Patties', 5, 19, 80, 85, 'Crispy puff stuffed with spicy chicken filling, ideal for snacks.', 'FD-1752485151.jpg', 1, '1 pcs', 'Flour, Butter, Chicken, Onion, Garlic, Spices', '2025-07-14', '2025-12-31', '2025-07-14 03:25:51', '2025-08-01 04:47:29'),
-(5, 'Red Velvet Slice', 2, 6, 180, 103, 'Moist red cake slice layered with smooth cream cheese frosting.', 'FD-1752485194.jpg', 1, '1 pcs', 'Flour, Cocoa, Buttermilk, Vinegar, Sugar, Eggs, Cream cheese frosting', '2025-07-15', '2026-01-15', '2025-07-14 03:26:34', '2025-08-01 04:47:30'),
-(6, 'Cheese Bun', 1, 4, 120, 90, 'Soft and fluffy bun filled or topped with melted cheese.', 'FD-1752485249.jpg', 1, '1 pcs', 'Flour, Yeast, Milk, Sugar, Cheese, Butter', '2025-07-14', '2026-03-04', '2025-07-14 03:27:29', '2025-08-01 04:47:31'),
-(7, 'Butter Croissant', 4, 15, 140, 105, 'Flaky and buttery French-style crescent-shaped pastry.', 'FD-1752485306.jpg', 1, '1 pcs', 'Laminated dough (Flour, Butter), Yeast, Sugar, Salt', '2025-07-14', '2026-03-05', '2025-07-14 03:28:26', '2025-08-01 04:49:09'),
-(8, 'Veg Sandwich', 6, 25, 80, 100, 'Fresh sandwich packed with vegetables and creamy dressing.', 'FD-1752485357.jpg', 1, '10 pcs', 'Bread, Tomato, Cucumber, Lettuce, Cheese, Mayonnaise', '2025-07-14', '2026-04-09', '2025-07-14 03:29:17', '2025-08-01 04:49:10'),
-(9, 'Chocolate Cookie', 3, 12, 100, 105, 'Crispy outside, chewy inside, loaded with chocolate chips.', 'FD-1752485413.jpg', 1, '1 pcs', 'Flour, Butter, Eggs, Chocolate chips, Baking soda, Sugar', '2025-07-09', '2026-04-14', '2025-07-14 03:30:13', '2025-08-01 04:49:11'),
-(10, 'Garlic Bread', 1, 2, 160, 122, 'Toasted bread slices flavored with garlic butter and herbs.', 'FD-1752485456.jpg', 1, '1 pcs', 'Flour, Garlic, Butter, Herbs, Yeast, Salt', '2025-07-14', '2026-05-06', '2025-07-14 03:30:56', '2025-08-01 04:50:42'),
-(11, 'Birthday Cake', 2, 5, 420, 13, 'Classic round cake decorated with cream, ideal for celebrations.', 'FD-1752485498.jpg', 1, '1 LB', 'Flour, Eggs, Sugar, Butter, Milk, Cream, Flavoring, Food color', '2025-07-14', '2026-04-15', '2025-07-14 03:31:38', '2025-08-01 04:50:47');
+(2, 'Vanilla Cupcake', 2, 7, 100, 201, 'Soft and moist individual cake with sweet vanilla flavor and creamy topping.', 'FD-1752485052.jpg', 1, '1 pcs', 'Flour, Sugar, Eggs, Vanilla essence, Butter, Baking powder', '2025-07-14', '2026-02-27', '2025-07-14 03:24:12', '2025-08-08 08:05:22'),
+(3, 'Chocolate Donut', 4, 15, 120, 81, 'Ring-shaped fried dough topped with rich chocolate glaze.', 'FD-1752485100.jpg', 1, '1 pcs', 'Flour, Cocoa powder, Sugar, Yeast, Milk, Butter, Chocolate glaze', '2025-07-14', '2026-02-10', '2025-07-14 03:25:00', '2025-08-08 08:05:23'),
+(4, 'Chicken Patties', 5, 19, 80, 82, 'Crispy puff stuffed with spicy chicken filling, ideal for snacks.', 'FD-1752485151.jpg', 1, '1 pcs', 'Flour, Butter, Chicken, Onion, Garlic, Spices', '2025-07-14', '2025-12-31', '2025-07-14 03:25:51', '2025-08-08 08:05:24'),
+(5, 'Red Velvet Slice', 2, 6, 180, 100, 'Moist red cake slice layered with smooth cream cheese frosting.', 'FD-1752485194.jpg', 1, '1 pcs', 'Flour, Cocoa, Buttermilk, Vinegar, Sugar, Eggs, Cream cheese frosting', '2025-07-15', '2026-01-15', '2025-07-14 03:26:34', '2025-08-08 08:05:30'),
+(6, 'Cheese Bun', 1, 4, 120, 87, 'Soft and fluffy bun filled or topped with melted cheese.', 'FD-1752485249.jpg', 1, '1 pcs', 'Flour, Yeast, Milk, Sugar, Cheese, Butter', '2025-07-14', '2026-03-04', '2025-07-14 03:27:29', '2025-08-08 08:05:36'),
+(7, 'Butter Croissant', 4, 15, 140, 103, 'Flaky and buttery French-style crescent-shaped pastry.', 'FD-1752485306.jpg', 1, '1 pcs', 'Laminated dough (Flour, Butter), Yeast, Sugar, Salt', '2025-07-14', '2026-03-05', '2025-07-14 03:28:26', '2025-08-08 08:05:36'),
+(8, 'Veg Sandwich', 6, 25, 80, 97, 'Fresh sandwich packed with vegetables and creamy dressing.', 'FD-1752485357.jpg', 1, '10 pcs', 'Bread, Tomato, Cucumber, Lettuce, Cheese, Mayonnaise', '2025-07-14', '2026-04-09', '2025-07-14 03:29:17', '2025-08-08 08:05:26'),
+(9, 'Chocolate Cookie', 3, 12, 100, 102, 'Crispy outside, chewy inside, loaded with chocolate chips.', 'FD-1752485413.jpg', 1, '1 pcs', 'Flour, Butter, Eggs, Chocolate chips, Baking soda, Sugar', '2025-07-09', '2026-04-14', '2025-07-14 03:30:13', '2025-08-08 08:05:27'),
+(10, 'Garlic Bread', 1, 2, 160, 119, 'Toasted bread slices flavored with garlic butter and herbs.', 'FD-1752485456.jpg', 1, '1 pcs', 'Flour, Garlic, Butter, Herbs, Yeast, Salt', '2025-07-14', '2026-05-06', '2025-07-14 03:30:56', '2025-08-08 08:05:37'),
+(11, 'Birthday Cake', 2, 5, 420, 10, 'Classic round cake decorated with cream, ideal for celebrations.', 'FD-1752485498.jpg', 1, '1 LB', 'Flour, Eggs, Sugar, Butter, Milk, Cream, Flavoring, Food color', '2025-07-14', '2026-04-15', '2025-07-14 03:31:38', '2025-08-08 08:05:38');
 
 -- --------------------------------------------------------
 
@@ -683,7 +697,17 @@ INSERT INTO `stocks` (`id`, `reg`, `date`, `product_id`, `stockIn`, `stockOut`, 
 (89, 250801000100000002, '2025-08-01', 9, 100, 0, 'In from Factory.', 2, '2025-08-01 04:49:11', '2025-08-01 04:49:11'),
 (90, 250801000100000002, '2025-08-01', 2, 100, 0, 'In from Factory.', 2, '2025-08-01 04:49:11', '2025-08-01 04:49:11'),
 (91, 250801000100000003, '2025-08-01', 11, 15, 0, 'In from Factory.', 2, '2025-08-01 04:49:58', '2025-08-01 04:49:58'),
-(94, 20250801010016, '2025-08-01', 11, 0, 5, 'Out', 1, '2025-08-01 04:50:40', '2025-08-01 04:50:47');
+(94, 20250801010016, '2025-08-01', 11, 0, 5, 'Out', 1, '2025-08-01 04:50:40', '2025-08-01 04:50:47'),
+(95, 20250808010017, '2025-08-08', 2, 0, 3, 'Out', 1, '2025-08-08 08:04:57', '2025-08-08 08:05:22'),
+(96, 20250808010017, '2025-08-08', 3, 0, 3, 'Out', 1, '2025-08-08 08:04:58', '2025-08-08 08:05:23'),
+(97, 20250808010017, '2025-08-08', 4, 0, 3, 'Out', 1, '2025-08-08 08:04:58', '2025-08-08 08:05:24'),
+(98, 20250808010017, '2025-08-08', 5, 0, 3, 'Out', 1, '2025-08-08 08:04:59', '2025-08-08 08:05:30'),
+(99, 20250808010017, '2025-08-08', 9, 0, 3, 'Out', 1, '2025-08-08 08:05:00', '2025-08-08 08:05:27'),
+(100, 20250808010017, '2025-08-08', 8, 0, 3, 'Out', 1, '2025-08-08 08:05:01', '2025-08-08 08:05:26'),
+(101, 20250808010017, '2025-08-08', 7, 0, 2, 'Out', 1, '2025-08-08 08:05:03', '2025-08-08 08:05:36'),
+(102, 20250808010017, '2025-08-08', 6, 0, 3, 'Out', 1, '2025-08-08 08:05:05', '2025-08-08 08:05:36'),
+(103, 20250808010017, '2025-08-08', 10, 0, 3, 'Out', 1, '2025-08-08 08:05:15', '2025-08-08 08:05:37'),
+(104, 20250808010017, '2025-08-08', 11, 0, 3, 'Out', 1, '2025-08-08 08:05:16', '2025-08-08 08:05:38');
 
 -- --------------------------------------------------------
 
@@ -903,7 +927,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `branches`
@@ -915,7 +939,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -957,7 +981,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -987,7 +1011,7 @@ ALTER TABLE `purchaseorders`
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `subcategories`

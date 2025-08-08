@@ -132,6 +132,7 @@
                             </ul>
                         </li>
                         <li class="pc-item"><a class="pc-link" href="{{url('/expired-list')}}">Expired</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{url('/chart')}}">Chart</a></li>
                     </ul>
                 </li>
                 <li class="pc-item">
@@ -140,17 +141,13 @@
                         <span class="pc-mtext">Expenses</span>
                     </a>
                 </li>
-                <li class="pc-item">
-                    <a href="#" class="pc-link">
-                        <span class="pc-micon"><i class="fa-solid fa-gear"></i></span>
-                        <span class="pc-mtext">Setting</span>
-                    </a>
-                </li>
-                <li class="pc-item">
-                    <a href="{{url('/backup-database')}}" class="pc-link">
-                        <span class="pc-micon"><i class="fa-solid fa-download"></i></span>
-                        <span class="pc-mtext">Backup DB</span>
-                    </a>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-gears"></i></span><span class="pc-mtext">Setting</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="{{url('/setting')}}"><i class="fa-solid fa-gear me-3"></i>Setting</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{url('/permission')}}"><i class="fa-solid fa-lock me-3"></i>Permission</a></li>
+                        <li class="pc-item"><a href="{{url('/backup-database')}}" class="pc-link"><i class="fa-solid fa-download me-3"></i></i>Backup DB</a></li>
+                    </ul>
                 </li>
                 <li class="pc-item">
                     <a href="{{url('/login')}}" class="pc-link">
@@ -375,7 +372,7 @@
                         <i class="ti ti-help"></i>
                         <span>Support</span>
                         </a>
-                        <a href="#!" class="dropdown-item">
+                        <a href="{{url('/edit-profile')}}" class="dropdown-item">
                         <i class="ti ti-user"></i>
                         <span>Account Settings</span>
                         </a>
