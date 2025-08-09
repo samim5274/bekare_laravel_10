@@ -72,7 +72,7 @@
                                 <td><a href="{{url('/edit-product/'.$val->id)}}">{{$val->name}}</a></td>
                                 <td>{{$val->category->name}}</td>
                                 <td>{{$val->subcategory->name}}</td>
-                                <td class="text-center" data-bs-toggle="modal" data-bs-target="#exampleModal{{$val->id}}">{{$val->stock}}</td>
+                                <td class="text-center">{{$val->stock}}</td>
                                 <td class="text-center">৳{{$val->price}}/-</td>
                                 <td class="text-center">
                                     @if($val->availability)
@@ -103,32 +103,6 @@
         </div>
     </div> 
 
-<!-- Modal -->
-@foreach($product as $key => $val)
-<div class="modal fade" id="exampleModal{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="{{url('/stock-in/'.$val->id)}}" method="POST">
-                @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><a href="{{url('/edit-product/'.$val->id)}}">{{ $val->name }}</a></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <label for="Stock" class="form-label">Stock Qty:</label>
-                        <input type="number" id="Stock" name="txtStock" class="form-control" min="0" placeholder="Enter stock qty" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endforeach
 
     @include('layouts.footer')
 

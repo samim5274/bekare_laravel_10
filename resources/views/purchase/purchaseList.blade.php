@@ -46,9 +46,9 @@
             <div class="container mt-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="m-0">Purchase Order List</h4>
-                    <!-- <h5 class="m-0 text-primary">
-                        <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
-                    </h5> -->
+                    <h5 class="m-0 text-primary">
+                        <a href="{{url('/print-all-purchase-list')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                    </h5>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped " id="printableTable">
@@ -61,7 +61,7 @@
                                 <th>Branch</th>
                                 <th>Reg</th>
                                 <th>Total (৳)</th>
-                                <th>Status</th>
+                                <th class="text-center">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,7 +74,7 @@
                                 <td>{{$val->branchs->name}}</td>
                                 <td><a href="{{url('/edit-purchase-order/'.$val->chalan_reg)}}">CH-{{$val->chalan_reg}}</a></td>
                                 <td>৳{{$val->total}}/-</td>
-                                <td>
+                                <td class="text-center">
                                     @switch($val->status)
                                         @case(1)
                                             <span class="badge bg-warning text-dark">Pending</span>
@@ -99,6 +99,7 @@
                                         @default
                                             <span class="badge bg-secondary">Unknown</span>
                                     @endswitch
+                                    <a href="{{url('/print-specific-purchase-order/'.$val->chalan_reg)}}" target="_blank"><i class="fa-solid fa-print"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -107,7 +108,7 @@
                 </div>
                 <div class="d-flex justify-content-end mt-3">
                     <div class="d-flex justify-content-end mt-3">
-                        1 of 1
+                        {{$order->links()}}
                     </div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Models\Product;
+use App\Models\Company;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
@@ -36,7 +37,8 @@ class ReportController extends Controller
         $pay = Order::sum('pay');
         $due = Order::sum('due');
         $vat = Order::sum('vat');
-        return view('report.print.printTotalSale', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+        $company = Company::all();
+        return view('report.print.printTotalSale', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
     }
 
     public function dueList() {
@@ -58,7 +60,8 @@ class ReportController extends Controller
         $pay = Order::where('status', 3)->sum('pay');
         $due = Order::where('status', 3)->sum('due');
         $vat = Order::where('status', 3)->sum('vat');
-        return view('report.print.printDuelist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+        $company = Company::all();
+        return view('report.print.printDuelist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
     }
 
     public function paidList(){
@@ -80,7 +83,8 @@ class ReportController extends Controller
         $pay = Order::where('status', 2)->sum('pay');
         $due = Order::where('status', 2)->sum('due');
         $vat = Order::where('status', 2)->sum('vat');
-        return view('report.print.printPaidlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+        $company = Company::all();
+        return view('report.print.printPaidlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat', 'company'));
     }
 
     public function selsectDayWiseSaleReport(){
@@ -109,8 +113,9 @@ class ReportController extends Controller
         $pay = Order::whereBetween('date', [$start, $end])->sum('pay');
         $due = Order::whereBetween('date', [$start, $end])->sum('due');
         $vat = Order::whereBetween('date', [$start, $end])->sum('vat');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.printSelectDayTotalSale', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end'));
+            return view('report.print.printSelectDayTotalSale', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end','company'));
         }
         return view('report.sale.select-date-wise-sale-report', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
@@ -138,8 +143,9 @@ class ReportController extends Controller
         $pay = Order::whereBetween('date', [$start, $end])->where('status', 2)->sum('pay');
         $due = Order::whereBetween('date', [$start, $end])->where('status', 2)->sum('due');
         $vat = Order::whereBetween('date', [$start, $end])->where('status', 2)->sum('vat');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.printSelectDayTotalPaidSale', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end'));
+            return view('report.print.printSelectDayTotalPaidSale', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end','company'));
         }
         return view('report.sale.select-date-wise-paid-sale-report', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
@@ -167,8 +173,9 @@ class ReportController extends Controller
         $pay = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('pay');
         $due = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('due');
         $vat = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('vat');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.printSelectDayTotalDueSale', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end'));
+            return view('report.print.printSelectDayTotalDueSale', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end','company'));
         }
         return view('report.sale.select-date-wise-due-sale-report', compact('data', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
@@ -187,8 +194,9 @@ class ReportController extends Controller
         $product = Product::all();
         $cart = Cart::where('product_id', $item)->orderBy('id', 'desc')->paginate(15);
         $price = Cart::where('product_id', $item)->sum('price');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.itemWiseReportPrint', compact('cart', 'price', 'product','item'));
+            return view('report.print.itemWiseReportPrint', compact('cart', 'price', 'product','item','company'));
         }
         return view('report.sale.item-wise-report', compact('cart', 'price', 'product'));
     }
@@ -212,8 +220,9 @@ class ReportController extends Controller
         $product = Product::all();
         $price = Cart::where('product_id', $item)->whereBetween('date', [$start, $end])->sum('price');
         $cart = Cart::where('product_id', $item)->whereBetween('date', [$start, $end])->orderBy('id', 'desc')->paginate(15);
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.itemDateSaleReportPrint', compact('cart', 'price', 'product','start','end'));
+            return view('report.print.itemDateSaleReportPrint', compact('cart', 'price', 'product','start','end','company'));
         }
         return view('report.sale.itemDateSaleReport', compact('cart', 'price', 'product','start','end'));
     }
@@ -239,8 +248,9 @@ class ReportController extends Controller
         $productId = Product::where('category_id', $catId)->pluck('id');
         $cart = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->with('product')->orderBy('id', 'desc')->paginate(15);
         $price = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->sum('price');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.categorySaleReportPrint', compact('category','cart','price','start','end','findCatName'));
+            return view('report.print.categorySaleReportPrint', compact('category','cart','price','start','end','findCatName','company'));
         }
         return view('report.sale.categorySaleReport', compact('category','cart','price'));
     }
@@ -266,8 +276,9 @@ class ReportController extends Controller
         $productId = Product::where('category_id', $catId)->pluck('id');
         $cart = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->with('product')->orderBy('id', 'desc')->paginate(15);
         $price = Cart::whereBetween('date', [$start, $end])->whereIn('product_id', $productId)->with('product')->sum('price');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.categoryDateSaleReportPrint', compact('category','cart','price','start','end','findCatName'));
+            return view('report.print.categoryDateSaleReportPrint', compact('category','cart','price','start','end','findCatName','company'));
         }
         return view('report.sale.categoryDateSaleReport', compact('category','cart','price'));
     }
@@ -296,7 +307,8 @@ class ReportController extends Controller
         $product = Product::all();
         $stock = Product::sum('stock');
         $price = Product::sum('price');
-        return view('report.stock.totalStockPrint', compact('product','stock','price'));
+        $company = Company::all();
+        return view('report.stock.totalStockPrint', compact('product','stock','price','company'));
     }
 
     public function productStock(){
@@ -328,6 +340,35 @@ class ReportController extends Controller
         return view('report.stock.productStock', compact('product','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
     }
 
+    public function productStockReport(){
+        $product = Product::all();
+
+        $stockSummary = DB::table('stocks')
+                            ->select('product_id', 
+                                DB::raw('SUM(stockIn) as total_in'), 
+                                DB::raw('SUM(stockOut) as total_out'))
+                            ->groupBy('product_id')->get();
+
+        $totalStockIn = $stockSummary->sum('total_in');
+        $totalStockOut = $stockSummary->sum('total_out');
+
+        $perPage = 20;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $paginatedSummary = new LengthAwarePaginator(
+            $stockSummary->forPage($currentPage, $perPage),
+            $stockSummary->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $productIds = $paginatedSummary->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+        $company = Company::all();
+        return view('report.stock.printProductStock', compact('product','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut','company'));
+    }
+
     public function itemStockFind(Request $request){
         $product = Product::all();
         $item = $request->input('cbxProduct', '');        
@@ -337,8 +378,9 @@ class ReportController extends Controller
         $stock = Stock::where('product_id', $item)->paginate(20);
         $stockIn = Stock::where('product_id', $item)->sum('stockIn');
         $stockOut = Stock::where('product_id', $item)->sum('stockOut');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.stock.productStockPrint', compact('product','stock','stockOut','stockIn'));
+            return view('report.stock.productStockPrint', compact('product','stock','stockOut','stockIn','company'));
         }
         return view('report.stock.productStock', compact('product','stock','stockOut','stockIn'));
     }
@@ -370,6 +412,33 @@ class ReportController extends Controller
         return view('report.stock.productStockCategory', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
     }
 
+    public function CategoryStockPrint(){
+        $category = Category::all();
+        $stockSummary = DB::table('stocks')
+                            ->select('product_id', 
+                                DB::raw('SUM(stockIn) as total_in'), 
+                                DB::raw('SUM(stockOut) as total_out'))
+                            ->groupBy('product_id')->get();
+
+        $totalStockIn = $stockSummary->sum('total_in');
+        $totalStockOut = $stockSummary->sum('total_out');
+
+        $perPage = 20;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $paginatedSummary = new LengthAwarePaginator(
+            $stockSummary->forPage($currentPage, $perPage),
+            $stockSummary->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+        $company = Company::all();
+        $productIds = $paginatedSummary->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+        return view('report.stock.printProductStockCategory', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut','company'));
+    }
+
     public function categoryStockFind(Request $request){
         $category = Category::all();
         $catId = $request->input('cbxCategory','');
@@ -397,8 +466,9 @@ class ReportController extends Controller
 
         $productIds = $paginatedSummary->pluck('product_id')->toArray();
         $products = Product::with('category')->whereIn('id', $productIds)->get()->keyBy('id');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.stock.productStockCategoryPrint', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
+            return view('report.stock.productStockCategoryPrint', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut','company'));
         }
         // dd($catId, $productIdsByCategory, $stockSummary, $paginatedSummary, $productIds, $products);
         return view('report.stock.productStockCategory', compact('category','products','stockSummary','paginatedSummary','totalStockIn','totalStockOut'));
@@ -417,8 +487,9 @@ class ReportController extends Controller
         }
         $product = Product::whereBetween('expired', [$start, $end])->get();
         $total = Product::whereBetween('expired', [$start, $end])->sum('price');
+        $company = Company::all();
         if ($request->has('print')) {
-            return view('report.print.expired-list-print', compact('product','start','end','total'));
+            return view('report.print.expired-list-print', compact('product','start','end','total','company'));
         }
         return view('report.product.expired-list', compact('product'));
     }

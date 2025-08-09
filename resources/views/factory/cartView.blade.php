@@ -38,8 +38,8 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('/factory')}}">Factory</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Order Details</li>
+                                <li class="breadcrumb-item"><a href="{{url('/received-order')}}">Purchase Received</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Order Cart</li>
                             </ul>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="readyQty" class="form-label">Ready Qty - <span class="small"> {{ $val->ready_qty }}</span></label>
+                            <label for="readyQty" class="form-label">Ready Qty - <span class="small"> {{ $val->order_qty }}</span></label>
                             <input type="number"
                                 id="readyQty"
                                 name="ready_qty"
@@ -146,7 +146,7 @@
                                 placeholder="Enter ready quantity">
                         </div>
                         <div class="mb-3">
-                            <label for="deliveryQty" class="form-label">Delivery Qty - <span class="small"> {{ $val->delivery_qty }}</span></label>
+                            <label for="deliveryQty" class="form-label">Delivery Qty - <span class="small"> {{ $val->order_qty }}</span></label>
                             <input type="number"
                                 id="deliveryQty"
                                 name="delivery_qty"

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
+use App\Models\Company;
 use Auth;
 
 class OrderController extends Controller
@@ -145,15 +146,17 @@ class OrderController extends Controller
         $pay = Order::whereBetween('date', [$start, $end])->sum('pay');
         $due = Order::whereBetween('date', [$start, $end])->sum('due');
         $vat = Order::whereBetween('date', [$start, $end])->sum('vat');
+        $company = Company::all();
         // dd($order);
-        return view('order.print.printOrderlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+        return view('order.print.printOrderlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
     }
 
     public function specificOrderPrint($reg){
         $order = Order::where('reg', $reg)->orderBy('id', 'desc')->firstOrFail();        
         $cart = Cart::where('reg', $reg)->get();
+        $company = Company::all();
         // dd($cart);
-        return view('order.print.printSpecificOrderlist', compact('order','cart'));
+        return view('order.print.printSpecificOrderlist', compact('order','cart','company'));
     }
 
     public function returnOrderList(){
@@ -196,7 +199,8 @@ class OrderController extends Controller
         $pay = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('pay');
         $due = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('due');
         $vat = Order::whereBetween('date', [$start, $end])->where('status', 1)->sum('vat');
+        $company = Company::all();
         // dd($order);
-        return view('order.print.printReturnlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+        return view('order.print.printReturnlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
     }
 }

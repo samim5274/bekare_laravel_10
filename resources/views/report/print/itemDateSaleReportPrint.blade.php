@@ -3,26 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Print Total Order List</title>
-    <link rel="icon" href="./img/LOGO35 pix.png" type="image/x-icon"> 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{ asset('assets/fonts/tabler-icons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/feather.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/material.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="main-style-link">
-    <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}">
     <style>
-        body { font-family: DejaVu Sans, sans-serif; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f4f4f4; }
-        h2 { margin-bottom: 0; }
-        p { margin-top: 2px; margin-bottom: 5px; }
+        body { 
+            font-family: DejaVu Sans, sans-serif; 
+            margin: 20px;
+            position: relative;
+        }
+        h1, h3, p { 
+            margin: 0; 
+            text-align: center; 
+        }
+        hr {
+            margin: 10px 0;
+            border: none;
+            border-top: 1px solid #000;
+        }
+        .qrImg {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        th, td { 
+            border: 1px solid #000; 
+            padding: 6px 8px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: #f4f4f4; 
+            font-weight: bold;
+        }
         .signature-section {
             display: flex;
             justify-content: space-between;
-            margin-top: 80px;
+            margin-top: 60px;
             page-break-inside: avoid;
         }
         .signature-block {
@@ -32,15 +51,24 @@
             padding-top: 5px;
             font-weight: bold;
         }
+        .note {
+            font-size: 12px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        @media print {
+            body { margin: 0; }
+            .note { page-break-after: avoid; }
+        }
     </style>
 </head>
 <body>
 
     <div class="invoice-box">
-        <h1 style="text-align:center;">Abir Bekare & Foods</h1>
-        <p style="text-align:center;">House # 02, Road # 11, Sector # 6, Uttara, Dhaka-1230</p>
+        <h1>{{ $company[0]->name }}</h1>
+        <p>{{ $company[0]->address }}</p>
+        <p>Email: {{ $company[0]->email }} || Phone: {{ $company[0]->phone }} || Website: {{ $company[0]->website }}</p>
         <h5 style="text-align:center;">{{$cart[0]->product->name}} and {{$start}} to {{$end}} Wise Sale List</h5>
-        <p><mark>Note: All company info get from database company info table.</mark></p>
         <hr>
         <div class="qrImg">
             {!! QrCode::size(60)->generate('Abir Bekare & Foods') !!}

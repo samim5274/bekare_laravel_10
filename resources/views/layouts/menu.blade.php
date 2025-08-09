@@ -70,23 +70,23 @@
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-shop"></i></span></span><span class="pc-mtext">Purchase</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-shop"></i></span></span><span class="pc-mtext">Purchase</span> @if($purchaseOrderPendding)<span class="badge bg-primary">{{ $purchaseOrderPendding }}</span>@endif<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{url('/purchase')}}">Purchase Order</a></li>
-                        <li class="pc-item"><a class="pc-link" href="{{url('/purchase-list')}}">Purchase List</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{url('/purchase-list')}}">Purchase List @if($purchaseOrderPendding)<span class="badge bg-primary">{{ $purchaseOrderPendding }}</span>@endif</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-industry"></i></i></span><span class="pc-mtext">Factory</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="{{url('/factory')}}">Purchase Order List</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{url('/factory')}}">Purchase Order List @if($purchaseOrderPendding)<span class="badge bg-primary">{{ $purchaseOrderPendding }}</span>@endif</a></li>
                         <li class="pc-item pc-hasmenu">
                             <a href="#!" class="pc-link">Purchase Report<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                             <ul class="pc-submenu">
                                 <li class="pc-item"><a class="pc-link" href="{{url('/order-list-branch')}}">Branch Order</a></li> 
                                 <li class="pc-item"><a class="pc-link" href="{{url('/product-order')}}">Product Order</a></li>                               
-                                <li class="pc-item"><a class="pc-link" href="{{url('/received-order')}}">Received Order</a></li>
-                                <li class="pc-item"><a class="pc-link" href="{{url('/delivery-order')}}">Delivery Order</a></li>                               
+                                <li class="pc-item"><a class="pc-link" href="{{url('/received-order')}}">Received Order @if($purchaseOrderProcessing)<span class="badge bg-primary">{{ $purchaseOrderProcessing }}</span>@endif</a></li>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/delivery-order')}}">Delivery Order @if($purchaseOrderDelivery)<span class="badge bg-primary">{{ $purchaseOrderDelivery }}</span>@endif</a></li> 
                             </ul>
                         </li>
                     </ul>

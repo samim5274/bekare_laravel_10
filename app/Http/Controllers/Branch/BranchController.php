@@ -28,6 +28,10 @@ class BranchController extends Controller
         if (collect([$name, $location, $phone, $manager])->contains(null)) {
             return redirect()->back()->with('warning', 'Some information is missing. Please full fill all information & try again. Thanks!');
         }
+
+        if(Branch::where('manager_id',$manager)->first()){
+            return redirect()->back()->with('warning', 'This user already assign one branch. Try to another user or branch to assign. Thanks!');
+        }
         
         $branch = new Branch();
         $branch->name = $name;
@@ -46,6 +50,10 @@ class BranchController extends Controller
 
         if (collect([$name, $location, $phone, $manager])->contains(null)) {
             return redirect()->back()->with('warning', 'Some information is missing. Please full fill all information & try again. Thanks!');
+        }
+
+        if(Branch::where('manager_id',$manager)->first()){
+            return redirect()->back()->with('warning', 'This user already assign one branch. Try to another user or branch to assign. Thanks!');
         }
         
         $branch = Branch::where('id', $id)->first();

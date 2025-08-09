@@ -48,7 +48,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="m-0">Total Product Stock Report</h4>
                     <h5 class="m-0 text-primary">
-                        <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                        <a href="{{url('/print-all-product-order-list')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5>
                 </div>
                 <div class="row">
@@ -72,8 +72,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="input-group mb-3">
-                                                <input type="submit" class="btn btn-outline-primary w-50 py-2" value="Search">
-                                                <button type="submit" name="print" value="1" class="btn btn-sm btn-primary d-flex align-items-center justify-content-center w-50 gap-1"><i class="fa-solid fa-print"></i><span>Print</span></button>
+                                                <input type="submit" class="btn btn-outline-primary w-100 py-2" value="Search">
                                             </div>
                                         </div>
                                     </div>

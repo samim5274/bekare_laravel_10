@@ -123,6 +123,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/item-stock-find', [ReportController::class, 'itemStockFind']);
     Route::get('/category-stock', [ReportController::class, 'categoryStock'])->name('category.stock.view');
     Route::get('/category-stock-find', [ReportController::class, 'categoryStockFind']);
+    Route::get('/print-total-prodcut-stock', [ReportController::class, 'productStockReport']);
+    Route::get('/print-product-stock-category', [ReportController::class, 'CategoryStockPrint']);
 
     Route::get('/branch', [BranchController::class, 'branch'])->name('branch.view');
     Route::post('/add-branch', [BranchController::class, 'addBranch']);
@@ -136,6 +138,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/purchase-list', [PurchaseController::class, 'purchaseList'])->name('purchase.list.view');
     Route::get('/edit-purchase-order/{reg}', [PurchaseController::class, 'editPurchaseOrder']);
     Route::get('/update-order-qty/{reg}/{id}', [PurchaseController::class, 'UpdatePurchaseQty']);
+    Route::get('/print-all-purchase-list', [PurchaseController::class, 'printPurchaseList']);
+    Route::get('/print-specific-purchase-order/{reg}', [PurchaseController::class, 'printSpecificPurchaseOrder']);
 
     Route::get('/factory', [FactoryController::class, 'factoryView'])->name('factory.view');
     Route::get('/view-order-item/{reg}', [FactoryController::class, 'orderViewById']);
@@ -152,6 +156,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/search-date-purchase-order', [FactoryController::class, 'searchDeliveryOrder']);
     Route::get('/view-delivery-item/{reg}', [FactoryController::class, 'deliveryCart']);
     Route::get('/stock-received/{p_id}/{reg}', [FactoryController::class, 'stockReceived']);
+    Route::get('/print-all-product-order-list', [FactoryController::class, 'printProductPurchaseOrder']);
 
     Route::get('/expenses-view', [ExpensesController::class, 'expensesView'])->name('expenses.view');
     Route::get('/getSubCategory/{id}', [ExpensesController::class, 'getSubcategory']);

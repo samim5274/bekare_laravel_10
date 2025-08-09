@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Branch;
+use App\Models\Company;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             SubcategorySeeder::class,
             BranchSeeder::class,
+            CompanySeeder::class,
         ]);
     }
 }

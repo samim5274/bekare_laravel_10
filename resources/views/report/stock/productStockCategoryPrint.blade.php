@@ -116,8 +116,9 @@
             }
 
             .qr-section {
-                text-align: left;
-                margin-top: 10px;
+                position: absolute;
+                top: 0;
+                right: 0;
             }
 
             .invoice-print-wrapper {
@@ -131,15 +132,13 @@
 
     <div class="invoice-print-wrapper">
         <div class="company-header">
-            <h2>Abir Bekare & Foods</h2>
-            <p>House # 02, Road # 11, Sector # 6, Uttara, Dhaka-1230</p>
+            <h1>{{ $company[0]->name }}</h1>
+            <p>{{ $company[0]->address }}</p>
+            <p>Email: {{ $company[0]->email }} || Phone: {{ $company[0]->phone }} || Website: {{ $company[0]->website }}</p>
             @php
                 $firstProduct = $products->first();
             @endphp
-
             <h4>{{ $firstProduct?->category->name ?? 'Unknown Category' }} - Category Stock Report</h4>
-
-            <small>Note: All company info is fetched from the database (company_info table).</small>
         </div>
 
         <div class="qr-section">

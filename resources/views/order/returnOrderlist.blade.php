@@ -121,7 +121,7 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{$val->date}}</td>
                                 <td>{{$val->user->name}}</td>
-                                <td><a href="{{url('/return-product-cart/'.$val->reg)}}">{{$val->reg}}</a></td>
+                                <td><a href="{{url('/return-product-cart/'.$val->reg)}}">ORD-{{$val->reg}}</a></td>
                                 <td>৳{{$val->total}}/-</td>
                                 <td>৳{{$val->discount}}/-</td>
                                 <td>৳{{$val->vat}}/-</td>

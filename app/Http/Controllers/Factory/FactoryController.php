@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Models\Branch;
+use App\Models\Company;
 use App\Models\Purchaseorder;
 use App\Models\Purchasecart;
 use App\Models\Product;
@@ -28,8 +29,8 @@ class FactoryController extends Controller
 
     public function factoryView(){
         $chalanReg = $this->generateChalanNum();
-        $userId = Auth::guard('admin')->user()->id;
-        $order = Purchaseorder::where('status', '!=', 4)->with('user','branchs')->paginate(20);
+        $date = Carbon::now()->format('Y-m-d');
+        $order = Purchaseorder::where('status', '!=', 4)->where('date', $date)->with('user','branchs')->paginate(20);
         return view('factory.factory', compact('order'));
     }
 
@@ -61,8 +62,9 @@ class FactoryController extends Controller
     }
 
     public function OrderListBranch(){
-        $order = Purchaseorder::with('user','branchs')->paginate(20);
-        $branch = Branch::with('manager')->paginate(20);
+        $date = Carbon::now()->format('Y-m-d');
+        $order = Purchaseorder::where('date', $date)->with('user','branchs')->paginate(20);
+        $branch = Branch::with('manager')->get();
         return view('factory.branch', compact('order','branch'));
     }
 
@@ -117,6 +119,38 @@ class FactoryController extends Controller
         return view('factory.productOrder', compact('product','stockSummary','totalOrder_qty','totalReady_qty','totalDelivery_qty','paginatedSummary'));
     }
 
+    public function printProductPurchaseOrder(){
+        $product = Product::orderByRaw('LOWER(name) ASC')->get()->keyBy('id');
+        $stockSummary = Purchasecart::with('product')
+                            ->select('product_id', 
+                                DB::raw('SUM(order_qty) as order_qty'), 
+                                DB::raw('SUM(ready_qty) as ready_qty'),
+                                DB::raw('SUM(delivery_qty) as delivery_qty'))
+                            ->whereDate('date', Carbon::today())
+                            ->groupBy('product_id')->get();
+
+        $totalOrder_qty = $stockSummary->sum('order_qty');
+        $totalReady_qty = $stockSummary->sum('ready_qty');
+        $totalDelivery_qty = $stockSummary->sum('delivery_qty');
+
+        $perPage = 20;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        $paginatedSummary = new LengthAwarePaginator(
+            $stockSummary->forPage($currentPage, $perPage),
+            $stockSummary->count(),
+            $perPage,
+            $currentPage,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $productIds = $paginatedSummary->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+        $company = Company::all();
+        // dd($product,$stockSummary,$totalOrder_qty,$totalReady_qty,$totalDelivery_qty,$paginatedSummary);
+        return view('factory.print.printProductOrder', compact('product','stockSummary','totalOrder_qty','totalReady_qty','totalDelivery_qty','paginatedSummary','company'));
+    }
+
     public function findOrderStock(Request $request){
         $product = Product::orderByRaw('LOWER(name) ASC')->get()->keyBy('id');
         $item = $request->input('cbxProduct', '');        
@@ -127,11 +161,7 @@ class FactoryController extends Controller
         $stockOrder = Purchasecart::where('product_id', $item)->sum('order_qty');
         $stockReady = Purchasecart::where('product_id', $item)->sum('ready_qty');
         $stockDelivery = Purchasecart::where('product_id', $item)->sum('delivery_qty');
-        // dd($stock,$stockOrder,$stockReady,$stockDelivery);
-
-        // if ($request->has('print')) {
-        //     return view('report.stock.productStockPrint', compact('product','stock','stockOut','stockIn'));
-        // }
+        // dd($stock,$stockOrder,$stockReady,$stockDelivery);        
         return view('factory.productOrder', compact('product','stockOrder','stockReady','stockDelivery','stock'));
     }
 
@@ -161,16 +191,14 @@ class FactoryController extends Controller
     }
 
     public function deliveryOrder(){
-        $branch = Auth::guard('admin')->user()->branch_id;
-        $order = Purchaseorder::where('date', Carbon::today())->where('status', 4)->where('branch', $branch)->with('user','branchs')->paginate(20);
+        $order = Purchaseorder::where('date', Carbon::today())->where('status', 4)->with('user','branchs')->paginate(20);
         return view('factory.delivaryOrder', compact('order'));
     }
 
     public function searchDeliveryOrder(Request $request){
         $start = $request->input('dtpStart','');
         $end = $request->input('dtpEnd','');
-        $branch = Auth::guard('admin')->user()->branch_id;
-        $order = Purchaseorder::whereBetween('date', [$start, $end])->where('status', 4)->where('branch', $branch)->with('user','branchs')->paginate(20);
+        $order = Purchaseorder::whereBetween('date', [$start, $end])->where('status', 4)->with('user','branchs')->paginate(20);
         return view('factory.delivaryOrder', compact('order'));
     }
 

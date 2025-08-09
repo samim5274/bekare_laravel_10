@@ -69,7 +69,7 @@
         <h1>{{ $company[0]->name }}</h1>
         <p>{{ $company[0]->address }}</p>
         <p>Email: {{ $company[0]->email }} || Phone: {{ $company[0]->phone }} || Website: {{ $company[0]->website }}</p>
-        <h3 style="text-align:center;">Total Sale List</h3>
+        <h3 style="text-align:center;">Total Product Category Stock</h3>
         <hr>
         <div class="qrImg">
             {!! QrCode::size(60)->generate('Abir Bekare & Foods') !!}
@@ -77,50 +77,28 @@
         <table class="table table-bordered table-striped " id="printableTable">
             <thead class="table-primary">
                 <tr>
-                    <th>#</th>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th>Reg</th>
-                    <th>Total (৳)</th>
-                    <th>Discount (৳)</th>
-                    <th>VAT % (৳)</th>
-                    <th>Payable (৳)</th>
-                    <th>Pay (৳)</th>
-                    <th>Due (৳)</th>
-                    <th class="text-center">Status</th>
+                    <th class="text-center">#</th>
+                    <th>Product</th>
+                    <th class="text-center">Stock In</th>
+                    <th class="text-center">Stock Out</th>
+                    <th class="text-center">Available</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($order as $key => $val)
+                @foreach($stockSummary as $key => $val)
                 <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{$val->date}}</td>
-                    <td>{{$val->user->name}}</td>
-                    <td>{{$val->reg}}</td>
-                    <td>৳{{$val->total}}/-</td>
-                    <td>৳{{$val->discount}}/-</td>
-                    <td>৳{{$val->vat}}/-</td>
-                    <td>৳{{$val->payable}}/-</td>
-                    <td>৳{{$val->pay}}/-</td>
-                    <td>৳{{$val->due}}/-</td>
-                    <td class="text-center">
-                        @if($val->status == 2)
-                            <span class="badge bg-success">Paid</span>
-                        @else
-                            <span class="badge bg-danger">Due</span>
-                        @endif
-                    </td>
+                    <td class="text-center">{{ $key + 1 }}</td>
+                    <td>{{ $products[$val->product_id]->name ?? 'Unknown' }}</td>
+                    <td class="text-center">{{$val->total_in}}</td>
+                    <td class="text-center">{{$val->total_out}}</td>
+                    <td class="text-center">{{$val->total_in - $val->total_out}}</td>
                 </tr>
                 @endforeach
                 <tr class="table-info">
-                    <td colspan="4">Total:</td>
-                    <td>৳{{$total}}/-</td>
-                    <td>৳{{$discount}}/-</td>
-                    <td>৳{{$vat}}/-</td>
-                    <td>৳{{$payable}}/-</td>
-                    <td>৳{{$pay}}/-</td>
-                    <td>৳{{$due}}/-</td>
-                    <td></td>
+                    <td colspan="2">Total:</td>
+                    <td class="text-center">{{$totalStockIn}}</td>
+                    <td class="text-center">{{$totalStockOut}}</td>
+                    <td class="text-center">{{$totalStockIn - $totalStockOut}}</td>
                 </tr>
             </tbody>
         </table>

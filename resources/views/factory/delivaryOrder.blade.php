@@ -35,8 +35,8 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('/purchase')}}">Purchase Order</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Order List</li>
+                                <li class="breadcrumb-item"><a href="{{url('/delivery-order')}}">Delivery-order</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Delivery List</li>
                             </ul>
                         </div>
                     </div>
@@ -103,28 +103,12 @@
                                 <td>৳{{$val->total}}/-</td>
                                 <td>
                                     @switch($val->status)
-                                        @case(1)
-                                            <span class="badge bg-warning text-dark">Pending</span>
-                                            @break
-
-                                        @case(2)
-                                            <span class="badge bg-info text-dark">Processing</span>
-                                            @break
-
-                                        @case(3)
-                                            <span class="badge bg-success">Completed</span>
-                                            @break
-
-                                        @case(4)
-                                            <span class="badge bg-primary">Delivery</span>
-                                            @break
-
-                                        @case(0)
-                                            <span class="badge bg-danger">Cancelled</span>
-                                            @break
-
-                                        @default
-                                            <span class="badge bg-secondary">Unknown</span>
+                                        @case(1)<span class="badge bg-warning text-dark">Pending</span> @break
+                                        @case(2)<span class="badge bg-info text-dark">Processing</span> @break
+                                        @case(3)<span class="badge bg-success">Completed</span> @break
+                                        @case(4)<span class="badge bg-primary">Delivery</span> @break
+                                        @case(0) <span class="badge bg-danger">Cancelled</span> @break
+                                        @default<span class="badge bg-secondary">Unknown</span>
                                     @endswitch
                                 </td>
                             </tr>

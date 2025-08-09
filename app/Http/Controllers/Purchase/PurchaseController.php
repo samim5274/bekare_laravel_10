@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
+use App\Models\Company;
 use App\Models\Purchaseorder;
 use App\Models\Purchasecart;
 use App\Models\Product;
@@ -121,9 +122,19 @@ class PurchaseController extends Controller
 
     public function purchaseList(){
         $chalanReg = $this->generateChalanNum();
-        $userId = Auth::guard('admin')->user()->id;
-        $order = Purchaseorder::where('user_id', $userId)->with('user','branchs')->paginate(20);
+        $date = Carbon::now()->format('Y-m-d');
+        $branch = Auth::guard('admin')->user()->branch_id;
+        $order = Purchaseorder::where('date', $date)->where('branch', $branch)->with('user','branchs')->paginate(20);
         return view('purchase.purchaseList', compact('order'));
+    }
+
+    public function printPurchaseList(){
+        $chalanReg = $this->generateChalanNum();
+        $date = Carbon::now()->format('Y-m-d');
+        $branch = Auth::guard('admin')->user()->branch_id;
+        $order = Purchaseorder::where('date', $date)->where('branch', $branch)->with('user','branchs')->get();
+        $company = Company::all();
+        return view('purchase.print.printPurchaseList', compact('order','company'));
     }
 
     public function editPurchaseOrder($reg){
@@ -142,5 +153,11 @@ class PurchaseController extends Controller
         $product->total_price = $product->unit_price * $qty;
         $product->update();
         return redirect()->back()->with('success','Order qty update successfully.');
+    }
+
+    public function printSpecificPurchaseOrder($reg){
+        $cart = Purchasecart::where('chalan_reg', $reg)->get();
+        $company = Company::all();
+        return view('purchase.print.printPurchaseOrder', compact('cart','reg','company'));
     }
 }

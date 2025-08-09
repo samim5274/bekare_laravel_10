@@ -48,7 +48,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="m-0">Total Product Category Stock Report</h4>
                     <h5 class="m-0 text-primary">
-                        <a href="#" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                        <a href="{{url('/print-product-stock-category')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5>
                 </div>
                 <div class="row">

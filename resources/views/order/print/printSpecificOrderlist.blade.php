@@ -50,16 +50,17 @@
 <body>
 
     <div class="invoice-header">
-        <h2>Abir Bekare & Foods</h2>
-        <p>House #02, Road #11, Sector #6, Uttara, Dhaka-1230</p>
+        <h2>{{$company[0]->name}}</h2>
+        <p>{{$company[0]->address}}</p>
+        <p>Email:{{$company[0]->email}} || Phone:{{$company[0]->phone}} || website:{{$company[0]->website}}</p>
         <h4>Order Invoice</h4>
-    </div><hr>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
-        <p style="margin: 0;">Billing office: {{$cart[0]->user_id}}</p>
-        <div class="qrImg">
-            {!! QrCode::size(60)->generate('welcome to laravel 10') !!}
-        </div>
     </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+        <p style="margin: 0;">Billing office: {{$cart[0]->user->name}}</p>
+        <div class="qrImg">
+            {!! QrCode::size(60)->generate('welcome Abir Bekare & Foods') !!}
+        </div>
+    </div><hr>
 
     <table class="invoice-table">
         <thead>
