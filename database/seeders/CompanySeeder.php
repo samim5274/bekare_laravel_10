@@ -15,11 +15,11 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         Company::create([
-            'name'    => 'Abir Bekare & Foods',
-            'address' => 'House #02, Road #11, Sector #6, Uttara, Dhaka-1230',
-            'email'   => 'info@example.com',
-            'phone'   => '01762164746',
-            'website' => 'https://example.com',
+            'name'    => 'Mr. Paul Bakers',
+            'address' => '150, BB Road, Suraiya Tower, narayangonj-1400',
+            'email'   => 'mrpaulbakers2025@gmail.com',
+            'phone'   => '01675962338',
+            'website' => 'https://bekare.deegau.com/',
         ]);
     }
 }

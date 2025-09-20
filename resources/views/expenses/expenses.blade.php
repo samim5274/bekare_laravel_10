@@ -77,6 +77,9 @@
                         <a href="{{url('/print-expenses-list')}}" target="_Blank" class="btn btn-primary">
                             <i class="fa-solid fa-print"></i>
                         </a>
+                        <a href="{{url('/expenses-setting')}}" class="btn btn-primary">
+                            <i class="fa-solid fa-sliders"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -84,7 +87,7 @@
                     <table class="table table-bordered table-striped ">
                         <thead class="table-primary">
                             <tr>
-                                <th>#</th>
+                                <th class="text-center">#</th>
                                 <th>Date</th>
                                 <th>User</th>
                                 <th>Category</th>
@@ -98,7 +101,7 @@
                             @if($expenses)
                             @foreach($expenses as $key => $val)
                             <tr>
-                                <td>{{$key+1}}</td>
+                                <td class="text-center">{{$loop->iteration}}</td>
                                 <td>{{$val->date}}</td>
                                 <td>{{$val->user->name}}</td>
                                 <td>{{$val->category->name}}</td>

@@ -10,7 +10,7 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{url('/')}}" class="b-brand text-primary">
-                <img src="{{ asset('/img/LOGO35 pix.png') }}" class="img-fluid logo-lg" alt="logo"> ABID Foods & Bekare
+                <img src="{{ asset('/img/LOGO35 pix.png') }}" class="img-fluid logo-lg" alt="logo"> Mr. Paul Bakers
             </a>
         </div>
         <div class="navbar-content">
@@ -90,6 +90,12 @@
                             </ul>
                         </li>
                     </ul>
+                </li>                
+                <li class="pc-item">
+                    <a href="{{url('/expenses-view')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-circle-dollar-to-slot"></i></i></span>
+                        <span class="pc-mtext">Expenses</span>
+                    </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Reports</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
@@ -107,13 +113,14 @@
                                 <li class="pc-item"><a class="pc-link" href="{{url('/item-date-wise-sale')}}">Item & Date wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="{{url('/category-wise-sale')}}">Category Wise Sale</a></li>
                                 <li class="pc-item"><a class="pc-link" href="{{url('/category-date-sale')}}">Category & Date Wise Sale</a></li>
-                                <li class="pc-item pc-hasmenu">
-                                <a href="#!" class="pc-link">Level 3.3<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <li class="pc-item"><a class="pc-link" href="{{url('/payment-mathods')}}">Peyment Method</a></li>
+                                <!-- <li class="pc-item pc-hasmenu">
+                                    <a href="#!" class="pc-link">Level 3.3<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                                     <ul class="pc-submenu">
                                         <li class="pc-item"><a class="pc-link" href="#!">Level 4.1</a></li>
                                         <li class="pc-item"><a class="pc-link" href="#!">Level 4.2</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li class="pc-item pc-hasmenu">
@@ -133,12 +140,20 @@
                         </li>
                         <li class="pc-item"><a class="pc-link" href="{{url('/expired-list')}}">Expired</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{url('/chart')}}">Chart</a></li>
+                        <li class="pc-item pc-hasmenu">
+                            <a href="#!" class="pc-link">Expenses Report<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                            <ul class="pc-submenu">
+                                <li class="pc-item"><a class="pc-link" href="{{url('/expenses-details')}}">Expenses</a></li>
+                                <li class="pc-item"><a class="pc-link" href="#">Category Expenses</a></li>
+                                <li class="pc-item"><a class="pc-link" href="#">Sub-Category Expenses</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li class="pc-item">
-                    <a href="{{url('/expenses-view')}}" class="pc-link">
-                        <span class="pc-micon"><i class="fa-solid fa-circle-dollar-to-slot"></i></i></span>
-                        <span class="pc-mtext">Expenses</span>
+                    <a href="{{url('/ber-code')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-barcode"></i></i></span>
+                        <span class="pc-mtext">Ber-code</span>
                     </a>
                 </li>
                 <li class="pc-item pc-hasmenu">
@@ -380,7 +395,7 @@
                         <i class="ti ti-lock"></i>
                         <span>Permission Center</span>
                         </a>
-                        <a href="#!" class="dropdown-item">
+                        <a href="#!" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <i class="ti ti-messages"></i>
                         <span>Feedback</span>
                         </a>

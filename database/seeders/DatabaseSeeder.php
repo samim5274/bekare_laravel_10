@@ -9,6 +9,9 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Branch;
 use App\Models\Company;
+use App\Models\PaymentMethod;
+use App\Models\Excategory;
+use App\Models\Exsubcategory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +25,9 @@ class DatabaseSeeder extends Seeder
             SubcategorySeeder::class,
             BranchSeeder::class,
             CompanySeeder::class,
+            PaymentMethodSeeder::class,
+            ExCategroySeeder::class,
+            ExSubCategorySeeder::class,
         ]);
     }
 }

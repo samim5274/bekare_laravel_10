@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Excategory;
 use App\Models\Exsubcategory;
 use App\Models\Expenses;
+use App\Models\Company;
 use Auth;
 
 class ExpensesController extends Controller
@@ -76,5 +77,44 @@ class ExpensesController extends Controller
         $expenses = Expenses::where('date', $date)->paginate(40);
         $total = Expenses::where('date', $date)->sum('amount');
         return view('report.expenses.print-expenses-list', compact('expenses','total'));
+    }
+
+    public function settingView(){
+        $category = Excategory::paginate(20);
+        $subCategory = Exsubcategory::paginate(20);
+        return view('expenses.setting-expenses', compact('category','subCategory'));
+    }
+
+    public function editExCategory(Request $request, $category){
+        $data = Excategory::where('id', $category)->first();
+        if(empty($data)){
+            return redirect()->back()->with('error', 'Expenses category can not be finded. Please try again. Thank you!');
+        }
+        $catName = $request->input('txtCategory', '');
+        if(empty($catName)){
+            return redirect()->back()->with('error', 'You must be insert your expenses category name. Thank you!');
+        }
+        $data->name = $catName;
+        // $data->update();
+        return redirect()->back()->with('success', 'Expenses category name chnaged successfully. Thank you!');
+    }
+
+    public function expensesDetails(){
+        $date = Carbon::now()->format('Ymd');
+        $expenses = Expenses::where('date', $date)->paginate(40);
+        $total = Expenses::where('date', $date)->sum('amount');
+        return view('expenses.report.expenses-report', compact('expenses','total'));
+    }
+
+    public function findExpenses(Request $request){
+        $start = $request->input('dtpStartDate', '');
+        $end = $request->input('dtpEndDate', '');
+        $expenses = Expenses::where('date', [$start, $end])->paginate(40);
+        $total = Expenses::whereBetween('date', [$start, $end])->sum('amount');
+        $company = Company::all();
+        if ($request->has('print')) {
+            return view('expenses.report.expenses-report-print', compact('expenses','total','company','start','end'));
+        }
+        return view('expenses.report.expenses-report', compact('expenses','total'));
     }
 }

@@ -22,7 +22,17 @@ class Product extends Model
         'ingredients',
         'manufactured',
         'expired',
+        'sku',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($product) {
+            if (empty($product->sku)) {
+                $product->sku = 'SKU-' . strtoupper(Str::random(6));
+            }
+        });
+    }
 
     public function category()
     {

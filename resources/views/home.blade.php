@@ -1,110 +1,125 @@
 <div class="row g-4">
     <label for="">Account Details <span class="small"> <i class="fa-solid fa-sack-dollar"></i> ৳ {{$pay - $expenses}}/-</span></label>
+    
     <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3">
-                <!-- BS5 classes দিয়ে icon circle -->
-                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-chart-line"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted mb-1">Total Sale</h6>
-                    <h4 class="mb-1">৳ {{$total}}/-</h4>
-                    <small class="text-muted">Extra <span class="text-primary fw-bold">35,000</span> this year</small>
+        <a href="{{url('/total-sale')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <!-- BS5 classes দিয়ে icon circle -->
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Total Sale</h6>
+                        <h4 class="mb-1">৳ {{$total}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-primary fw-bold">35,000</span> this year</small>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3">
-                <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-percent"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted mb-1">Discount</h6>
-                    <h4 class="mb-1">৳ {{$discount}}/-</h4>
-                    <small class="text-muted">Extra <span class="text-danger fw-bold">8,900</span> this year</small>
+        <a href="{{url('/total-sale')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-percent"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Discount</h6>
+                        <h4 class="mb-1">৳ {{$discount}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-danger fw-bold">8,900</span> this year</small>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3">
-                <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <!-- <i class="fa-solid fa-money-bill-1-wave"></i> -->
-                    <i class="fa-solid fa-wallet"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted mb-1">Vat</h6>
-                    <h4 class="mb-1">৳ {{$vat}}/-</h4>
-                    <small class="text-muted">Extra <span class="text-warning fw-bold">1,943</span> this year</small>
+        <a href="{{url('/total-sale')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <!-- <i class="fa-solid fa-money-bill-1-wave"></i> -->
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Vat</h6>
+                        <h4 class="mb-1">৳ {{$vat}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-warning fw-bold">1,943</span> this year</small>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3">
-                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-money-bill-transfer"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted mb-1">Due</h6>
-                    <h4 class="mb-1">৳ {{$due}}/-</h4>
-                    <small class="text-muted">Extra <span class="text-success fw-bold">$20,395</span> this year</small>
+        <a href="{{url('/total-sale')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Due</h6>
+                        <h4 class="mb-1">৳ {{$due}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-success fw-bold">$20,395</span> this year</small>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3">
-                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-comments-dollar"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted mb-1">Payable</h6>
-                    <h4 class="mb-1">৳ {{$payable}}/-</h4>
-                    <small class="text-muted">Extra <span class="text-info fw-bold">35,000</span> this year</small>
+        <a href="{{url('/total-sale')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-comments-dollar"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Payable</h6>
+                        <h4 class="mb-1">৳ {{$payable}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-info fw-bold">35,000</span> this year</small>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3">
-                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted mb-1">Pay</h6>
-                    <h4 class="mb-1">৳ {{$pay}}/-</h4>
-                    <small class="text-muted">Extra <span class="text-secondary fw-bold">8,900</span> this year</small>
+        <a href="{{url('/total-sale')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Pay</h6>
+                        <h4 class="mb-1">৳ {{$pay}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-secondary fw-bold">8,900</span> this year</small>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <div class="col-md-6 col-xl-3">
-        <div class="card shadow-sm border-0 h-100">
-            <div class="card-body d-flex align-items-center gap-3">
-                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center icon">
-                    <i class="fa-solid fa-hand-holding-dollar"></i>
-                </div>
-                <div>
-                    <h6 class="text-muted mb-1">Expenses</h6>
-                    <h4 class="mb-1">৳ {{$expenses}}/-</h4>
-                    <small class="text-muted">Extra <span class="text-info fw-bold">8,900</span> this year</small>
+        <a href="{{url('/expenses-details')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Expenses</h6>
+                        <h4 class="mb-1">৳ {{$expenses}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-info fw-bold">8,900</span> this year</small>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 

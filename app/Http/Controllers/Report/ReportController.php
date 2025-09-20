@@ -14,6 +14,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
 use App\Models\Category;
+use App\Models\PaymentMethod;
 use Auth;
 
 class ReportController extends Controller
@@ -281,6 +282,40 @@ class ReportController extends Controller
             return view('report.print.categoryDateSaleReportPrint', compact('category','cart','price','start','end','findCatName','company'));
         }
         return view('report.sale.categoryDateSaleReport', compact('category','cart','price'));
+    }
+
+    public function paymentMethod(){
+        $paymentMethods = PaymentMethod::all();
+        $order = Order::orderBy('id', 'desc')->paginate(15);
+        $total = Order::sum('total');
+        $discount = Order::sum('discount');
+        $payable = Order::sum('payable');
+        $pay = Order::sum('pay');
+        $due = Order::sum('due');
+        $vat = Order::sum('vat');
+        return view('report.sale.payment-method-sale-report', compact('paymentMethods','order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+    }
+
+    public function findPaymentMethodSaleReport(Request $request){
+        $start = $request->input('dtpStartDate', '');
+        $end = $request->input('dtpEndDate', '');
+        $payMethod = $request->input('cbxPayMethod', '');
+        if(empty($start) || empty($end) || empty($payMethod)){
+            return redirect()->back()->with('error', 'You need must be set date duration and payment method. Thank You.');
+        }
+        $order = Order::whereBetween('date', [$start, $end])->where('paymentMethod', $payMethod)->orderBy('id', 'desc')->paginate(15);
+        $total = Order::whereBetween('date', [$start, $end])->where('paymentMethod', $payMethod)->sum('total');
+        $discount = Order::whereBetween('date', [$start, $end])->where('paymentMethod', $payMethod)->sum('discount');
+        $payable = Order::whereBetween('date', [$start, $end])->where('paymentMethod', $payMethod)->sum('payable');
+        $pay = Order::whereBetween('date', [$start, $end])->where('paymentMethod', $payMethod)->sum('pay');
+        $due = Order::whereBetween('date', [$start, $end])->where('paymentMethod', $payMethod)->sum('due');
+        $vat = Order::whereBetween('date', [$start, $end])->where('paymentMethod', $payMethod)->sum('vat');
+        $company = Company::all();
+        $paymentMethods = PaymentMethod::all();
+        if ($request->has('print')) {
+            return view('report.print.payment-method-sale-report-print', compact('company','order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+        }
+        return view('report.sale.payment-method-sale-report', compact('paymentMethods','company','order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 
 

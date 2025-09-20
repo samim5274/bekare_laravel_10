@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('ingredients')->nullable(); 
             $table->date('manufactured')->nullable(); 
             $table->date('expired')->nullable(); 
+            $table->string('sku')->unique();
             $table->timestamps();
         });
     }

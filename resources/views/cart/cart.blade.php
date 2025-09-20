@@ -182,11 +182,31 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            <label for="paymentMethods" class="col-sm-3 col-form-label">Payment:</label>
+                                            <div class="col-sm-9">
+                                                <select name="paymentMethods" id="paymentMethods" class="col-sm-3 form-control">
+                                                    <option disabled>-- Select Payment Method --</option>
+                                                    @foreach($payMathod as $val)
+                                                    <option value="{{$val->id}}">{{ $val->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label for="num2" class="col-sm-3 col-form-label">Pay:</label>
                                             <div class="col-sm-9">
                                                 <input type="number" class="form-control" id="num2" name="txtPay" placeholder="Pay" onkeyup="calculateAmount()" onchange="calculateAmount()" min="0">
                                             </div>
                                         </div><hr>
+
+                                        <div id="customer-info" style="display: none; margin-top: 10px;">
+                                            <label for="customerName">Customer Name:</label>
+                                            <input type="text" name="txtCustomerName" id="customerName" placeholder="Enter Name" class="form-control mb-2">
+
+                                            <label for="customerPhone">Customer Phone:</label>
+                                            <input type="text" name="txtCustomerPhone" id="customerPhone" placeholder="Enter Phone" class="form-control">
+                                        </div>
 
                                         <br>
 
@@ -196,6 +216,8 @@
                                                 <p id="result" class="display-6 text-danger">Amount: 00/-</p>
                                             </div>
                                         </div>
+
+                                        
 
                                         <button type="submit" id="confirmBtn" class="btn btn-outline-success w-100">
                                             <span id="btnText">

@@ -23,7 +23,10 @@ return new class extends Migration
             $table->unsignedBigInteger('payable')->nullable();
             $table->unsignedBigInteger('pay')->nullable();
             $table->bigInteger('due')->nullable();
+            $table->Integer('paymentMethod')->constrained('payment_methods')->onDelete('restrict');
             $table->Integer('status')->default(0);
+            $table->string('customerName')->default(0);
+            $table->Integer('customerPhone')->default(0);
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
+use App\Models\PaymentMethod;
 use Auth;
 
 class SaleController extends Controller
@@ -152,10 +153,11 @@ class SaleController extends Controller
 
     public function cartView(){
         $reg = $this->generateRegNum();
+        $payMathod = PaymentMethod::all();
         $cart = Cart::where('reg', $reg)->get();
         $count = Cart::where('reg', $reg)->count();
         // dd($data);
-        return view('cart.cart', compact('cart','count','reg'));
+        return view('cart.cart', compact('cart','count','reg','payMathod'));
     }
 
     public function updateQuantity(Request $request)

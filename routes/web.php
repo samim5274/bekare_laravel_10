@@ -18,6 +18,7 @@ use App\Http\Controllers\Factory\FactoryController;
 use App\Http\Controllers\Expenses\ExpensesController;
 use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Permission\PermissionController;
+use App\Http\Controllers\Bercode\BercodeController;
 
 
 Auth::routes();
@@ -116,6 +117,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/search-report-date-category', [ReportController::class, 'categoryDateReportFind']);
     Route::get('/expired-list', [ReportController::class, 'ExpiredList']);
     Route::get('/search-expired-item', [ReportController::class, 'findExpiredItem']);
+    Route::get('/payment-mathods', [ReportController::class, 'paymentMethod'])->name('payment-methods-wise-report-view');
+    Route::get('/search-report-date-payment-method', [ReportController::class, 'findPaymentMethodSaleReport']);
 
     Route::get('/stock-report', [ReportController::class, 'stockReport'])->name('stock.report.view');
     Route::get('/print-total-stock', [ReportController::class, 'printStockReport']);
@@ -165,6 +168,10 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/update-expenses/{id}', [ExpensesController::class, 'updateExpenses']);
     Route::get('/specific-expenses-list-print/{id}', [ExpensesController::class, 'expensesSpecificPrint']);
     Route::get('/print-expenses-list', [ExpensesController::class, 'expensesListPrint']);
+    Route::get('/expenses-setting', [ExpensesController::class, 'settingView'])->name('expenses-setting-view');
+    Route::post('/edit-expenses-category/{category}', [ExpensesController::class, 'editExCategory']);
+    Route::get('/expenses-details', [ExpensesController::class, 'expensesDetails'])->name('expenses-report-view');
+    Route::post('/search-report-date-wise-expenses-report', [ExpensesController::class, 'findExpenses']);
 
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile.view');
     Route::get('/edit-profile', [AdminController::class, 'editProfile'])->name('profile.edit.view');
@@ -178,4 +185,8 @@ Route::group(['middleware' => ['admin']], function() {
 
     Route::get('/permission', [PermissionController::class, 'permission'])->name('user.permission.view');
     Route::get('/user-permission-update', [PermissionController::class, 'permissionUpdate']);
+
+    Route::get('/ber-code', [BercodeController::class, 'berCodeView'])->name('product-bercode-view');
+    Route::get('/generate/bercode/{product_id}', [BercodeController::class, 'generateBercode']);
+    Route::post('/print-bercode/{product_id}', [BercodeController::class, 'printBercode']);
 });
