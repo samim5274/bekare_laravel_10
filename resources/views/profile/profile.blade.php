@@ -105,7 +105,7 @@
 
                                             <div class="mb-3">
                                                 <label class="form-label text-muted">Branch</label>
-                                                <div class="fs-5">{{ $user->branch[0]->name }}</div>
+                                                <div class="fs-5">{{ $user->branch[0]->name ?? 'No Branch' }}</div>
                                             </div>
 
                                             <div class="mb-3">

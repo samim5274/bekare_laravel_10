@@ -375,7 +375,7 @@ class ReportController extends Controller
         if(!$item){
             return redirect()->back()->with('warning', 'You need must be select Product.');
         }
-        $stock = Stock::where('product_id', $item)->paginate(20);
+        $stock = Stock::where('product_id', $item)->get();
         $stockIn = Stock::where('product_id', $item)->sum('stockIn');
         $stockOut = Stock::where('product_id', $item)->sum('stockOut');
         $company = Company::all();

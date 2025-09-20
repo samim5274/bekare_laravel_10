@@ -162,7 +162,7 @@
 
                                                 <div class="form-group">
                                                     <label for="email">Branch</label>
-                                                    <input type="text" name="branch" class="form-control" value="{{ $user->branch[0]->name }}">
+                                                    <input type="text" name="branch" class="form-control" value="{{ $user->branch[0]->name ?? 'No Branch' }}">
                                                 </div>
 
                                                 <div class="form-group">

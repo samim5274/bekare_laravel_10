@@ -142,17 +142,6 @@
                     </table>
                     @endif
                 </div>
-                
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5></h5>
-                    <div class="d-flex justify-content-end mt-3">
-                        @isset($stock)
-                        {{$stock->links()}}
-                        @else
-                        {{ $paginatedSummary->links() }}
-                        @endif
-                    </div>
-                </div>
             </div>
         </div>
     </div> 
