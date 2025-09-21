@@ -54,10 +54,19 @@ class FactoryController extends Controller
         $ProductId = $request->input('txtProductId','');
         $ready = $request->input('ready_qty','');
         $delivery = $request->input('delivery_qty','');
+        $mgfDate = $request->input('mgfDate', '');
+        $expDate = $request->input('expDate', '');
+
         $order = Purchasecart::where('chalan_reg', $chalanReg)->where('product_id', $ProductId)->first();
         $order->ready_qty = $ready;
         $order->delivery_qty = $delivery;
+        
+        $product = Product::where('id', $ProductId)->first();
+        $product->manufactured = $mgfDate;
+        $product->expired = $expDate;
+
         $order->update();
+        $product->update();
         return redirect()->back()->with('success', 'Updated successfully submited your ready & delivery qty.');
     }
 

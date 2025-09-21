@@ -108,7 +108,7 @@ class SaleController extends Controller
         $id = $request->input('search', '');
         $cart = new Cart();
         $stock = new Stock();
-        $product = Product::where('name', 'like', '%'.$id.'%')->orWhere('id', 'like', '%'.$id.'%')->first();
+        $product = Product::where('name', 'like', '%'.$id.'%')->orWhere('id', 'like', '%'.$id.'%')->orWhere('sku', 'like', '%'.$id.'%')->first();
 
         if(empty($product) || $product->availability == 0) {
             return redirect()->back()->with('error','This item not availabel righ now');

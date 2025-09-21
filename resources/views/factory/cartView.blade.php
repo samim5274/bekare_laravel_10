@@ -131,10 +131,10 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">{{ $val->product->name }}</h5>                        
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <input type="text" value="{{$val->chalan_reg}}" name="txtReg" hidden>
-                        <input type="text" value="{{$val->product_id}}" name="txtProductId" hidden>
+                        <input type="hidden" value="{{$val->chalan_reg}}" name="txtReg" >
+                        <input type="hidden" value="{{$val->product_id}}" name="txtProductId">
                     </div>
-                    <div class="modal-body">
+                    <!-- <div class="modal-body">
                         <div class="mb-3">
                             <label for="readyQty" class="form-label">Ready Qty - <span class="small"> {{ $val->order_qty }}</span></label>
                             <input type="number"
@@ -146,6 +146,14 @@
                                 placeholder="Enter ready quantity">
                         </div>
                         <div class="mb-3">
+                            <label for="mgfDate" class="form-label">Mgf. Date - <span class="small"> {{ $val->product->manufactured }}</span></label>
+                            <input type="date"
+                                id="mgfDate"
+                                name="mgfDate"
+                                class="form-control form-control-sm"
+                                required>
+                        </div>
+                        <div class="mb-3">
                             <label for="deliveryQty" class="form-label">Delivery Qty - <span class="small"> {{ $val->order_qty }}</span></label>
                             <input type="number"
                                 id="deliveryQty"
@@ -154,6 +162,71 @@
                                 min="0"
                                 required
                                 placeholder="Enter delivery quantity">
+                        </div>
+                        <div class="mb-3">
+                            <label for="expDate" class="form-label">Exp. Date - <span class="small"> {{ $val->product->expired }}</span></label>
+                            <input type="date"
+                                id="expDate"
+                                name="expDate"
+                                class="form-control form-control-sm"
+                                required>
+                        </div>
+                    </div> -->
+                    <div class="modal-body bg-light p-4 rounded-3 shadow-sm">
+                        <!-- Ready Quantity -->
+                        <div class="mb-4">
+                            <label for="readyQty" class="form-label fw-semibold text-dark">
+                                Ready Quantity 
+                                <span class="badge bg-secondary ms-2">{{ $val->order_qty }}</span>
+                            </label>
+                            <input type="number"
+                                id="readyQty"
+                                name="ready_qty"
+                                class="form-control form-control-lg border-0 shadow-sm"
+                                min="0"
+                                required
+                                placeholder="Enter ready quantity">
+                        </div>
+
+                        <!-- Manufacturing Date -->
+                        <div class="mb-4">
+                            <label for="mgfDate" class="form-label fw-semibold text-dark">
+                                Manufacturing Date 
+                                <span class="badge bg-info ms-2">{{ $val->product->manufactured }}</span>
+                            </label>
+                            <input type="date"
+                                id="mgfDate"
+                                name="mgfDate"
+                                class="form-control form-control-lg border-0 shadow-sm"
+                                required>
+                        </div>
+
+                        <!-- Delivery Quantity -->
+                        <div class="mb-4">
+                            <label for="deliveryQty" class="form-label fw-semibold text-dark">
+                                Delivery Quantity 
+                                <span class="badge bg-secondary ms-2">{{ $val->order_qty }}</span>
+                            </label>
+                            <input type="number"
+                                id="deliveryQty"
+                                name="delivery_qty"
+                                class="form-control form-control-lg border-0 shadow-sm"
+                                min="0"
+                                required
+                                placeholder="Enter delivery quantity">
+                        </div>
+
+                        <!-- Expiry Date -->
+                        <div class="mb-4">
+                            <label for="expDate" class="form-label fw-semibold text-dark">
+                                Expiry Date 
+                                <span class="badge bg-danger ms-2">{{ $val->product->expired }}</span>
+                            </label>
+                            <input type="date"
+                                id="expDate"
+                                name="expDate"
+                                class="form-control form-control-lg border-0 shadow-sm"
+                                required>
                         </div>
                     </div>
                     <div class="modal-footer">

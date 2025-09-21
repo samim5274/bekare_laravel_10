@@ -17,7 +17,7 @@ class ExpensesController extends Controller
     public function expensesView(){
         $date = Carbon::now()->format('Ymd');
         $category = Excategory::all();
-        $expenses = Expenses::paginate(40);
+        $expenses = Expenses::where('date', $date)->paginate(40);
         $total = Expenses::where('date', $date)->sum('amount');
         return view('expenses.expenses', compact('category','expenses','total'));
     }

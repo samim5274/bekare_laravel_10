@@ -36,7 +36,7 @@ class PurchaseController extends Controller
     public function purchaseCart(Request $request){
         $id = $request->input('search', '');
         $cart = new Purchasecart();
-        $product = Product::where('name', 'like', '%'.$id.'%')->orWhere('id', 'like', '%'.$id.'%')->first();
+        $product = Product::where('name', 'like', '%'.$id.'%')->orWhere('id', 'like', '%'.$id.'%')->orWhere('sku', 'like', '%'.$id.'%')->first();
 
         if(!$product) {
             return redirect()->back()->with('error','This item not availabel righ now');
