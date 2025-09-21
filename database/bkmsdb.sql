@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 20, 2025 at 04:07 PM
+-- Generation Time: Sep 21, 2025 at 09:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,11 +109,8 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `reg`, `date`, `user_id`, `product_id`, `branch_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
-(1, 20250920010001, '2025-09-20', 1, 11, 1, 2, 420, '2025-09-20 09:29:57', '2025-09-20 09:30:00'),
-(2, 20250920010001, '2025-09-20', 1, 10, 1, 2, 160, '2025-09-20 09:29:58', '2025-09-20 09:30:01'),
-(3, 20250920010002, '2025-09-20', 1, 10, 1, 3, 160, '2025-09-20 10:05:11', '2025-09-20 10:05:15'),
-(4, 20250920010002, '2025-09-20', 1, 2, 1, 3, 100, '2025-09-20 10:05:11', '2025-09-20 10:05:14'),
-(5, 20250920010002, '2025-09-20', 1, 3, 1, 3, 120, '2025-09-20 10:05:12', '2025-09-20 10:05:13');
+(9, 20250921010001, '2025-09-21', 1, 2, 1, 1, 100, '2025-09-21 06:32:03', '2025-09-21 06:32:03'),
+(10, 20250921010002, '2025-09-21', 1, 11, 1, 1, 420, '2025-09-21 06:32:44', '2025-09-21 06:32:44');
 
 -- --------------------------------------------------------
 
@@ -164,7 +161,7 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id`, `name`, `address`, `email`, `phone`, `website`, `created_at`, `updated_at`) VALUES
-(1, 'Mr. Paul Bakers', '150, BB Road, Suraiya Tower, narayangonj-1400', 'mrpaulbakers2025@gmail.com', '01675962338', 'https://bekare.deegau.com/', '2025-09-20 09:28:58', '2025-09-20 09:28:58');
+(1, 'Mr. Paul Bakers', '150, BB Road, Suraiya Tower, narayangonj-1400', 'mrpaulbakers2025@gmail.com', '01675962338', 'https://bekare.deegau.com', '2025-09-20 09:28:58', '2025-09-20 09:28:58');
 
 -- --------------------------------------------------------
 
@@ -213,11 +210,7 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`id`, `catId`, `subcatId`, `userId`, `date`, `amount`, `remark`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, '2025-09-20', 250, 'N/A', '2025-09-20 11:19:02', '2025-09-20 11:19:13'),
-(2, 2, 3, 1, '2025-09-20', 40, 'N/A', '2025-09-20 11:19:27', '2025-09-20 11:19:27'),
-(3, 3, 5, 1, '2025-09-20', 500, 'N/A', '2025-09-20 11:19:35', '2025-09-20 11:19:35'),
-(4, 4, 7, 1, '2025-09-20', 1500, 'N/A', '2025-09-20 11:19:42', '2025-09-20 11:19:42'),
-(5, 5, 9, 1, '2025-09-20', 280, 'N/A', '2025-09-20 11:19:50', '2025-09-20 11:19:50');
+(7, 1, 2, 1, '2025-09-21', 300, 'N/A', '2025-09-21 06:33:08', '2025-09-21 06:33:08');
 
 -- --------------------------------------------------------
 
@@ -334,8 +327,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `date`, `user_id`, `branch_id`, `reg`, `total`, `discount`, `vat`, `payable`, `pay`, `due`, `paymentMethod`, `status`, `customerName`, `customerPhone`, `created_at`, `updated_at`) VALUES
-(1, '2025-09-20', 1, 1, 20250920010001, 1160, 15, 174, 1319, 1000, 319, 1, 3, 'shamim', 1762164746, '2025-09-20 10:04:32', '2025-09-20 10:04:32'),
-(2, '2025-09-20', 1, 1, 20250920010002, 1140, 15, 171, 1296, 1296, 0, 2, 2, '0', 0, '2025-09-20 10:05:29', '2025-09-20 10:05:29');
+(4, '2025-09-21', 1, 1, 20250921010001, 100, 15, 25, 110, 80, 30, 1, 3, 'shamim', 1762164746, '2025-09-21 06:32:27', '2025-09-21 06:32:27'),
+(5, '2025-09-21', 1, 1, 20250921010002, 420, 0, 0, 420, 420, 0, 1, 2, '0', 0, '2025-09-21 06:32:54', '2025-09-21 06:32:54');
 
 -- --------------------------------------------------------
 
@@ -436,16 +429,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `subcategory_id`, `price`, `stock`, `description`, `image`, `availability`, `size`, `ingredients`, `manufactured`, `expired`, `sku`, `created_at`, `updated_at`) VALUES
-(2, 'Vanilla Cupcake', 2, 7, 100, 172, 'Soft and moist individual cake with sweet vanilla flavor and creamy topping.', 'FD-1752485052.jpg', 1, '1 pcs', 'Flour, Sugar, Eggs, Vanilla essence, Butter, Baking powder', '2025-07-14', '2026-02-27', 'PROD002', '2025-07-13 09:24:12', '2025-09-20 10:05:14'),
-(3, 'Chocolate Donut', 4, 15, 120, 56, 'Ring-shaped fried dough topped with rich chocolate glaze.', 'FD-1752485100.jpg', 1, '1 pcs', 'Flour, Cocoa powder, Sugar, Yeast, Milk, Butter, Chocolate glaze', '2025-07-14', '2026-02-10', 'PROD003', '2025-07-13 09:25:00', '2025-09-20 10:05:13'),
-(4, 'Chicken Patties', 5, 19, 80, 75, 'Crispy puff stuffed with spicy chicken filling, ideal for snacks.', 'FD-1752485151.jpg', 1, '1 pcs', 'Flour, Butter, Chicken, Onion, Garlic, Spices', '2025-07-14', '2025-12-31', 'PROD004', '2025-07-13 09:25:51', '2025-09-19 20:44:00'),
+(2, 'Vanilla Cupcake', 2, 7, 100, 171, 'Soft and moist individual cake with sweet vanilla flavor and creamy topping.', 'FD-1752485052.jpg', 1, '1 pcs', 'Flour, Sugar, Eggs, Vanilla essence, Butter, Baking powder', '2025-07-14', '2026-02-27', 'PROD002', '2025-07-13 09:24:12', '2025-09-21 06:32:03'),
+(3, 'Chocolate Donut', 4, 15, 120, 63, 'Ring-shaped fried dough topped with rich chocolate glaze.', 'FD-1752485100.jpg', 1, '1 pcs', 'Flour, Cocoa powder, Sugar, Yeast, Milk, Butter, Chocolate glaze', '2025-09-21', '2025-09-24', 'PROD003', '2025-07-13 09:25:00', '2025-09-21 05:23:00'),
+(4, 'Chicken Patties', 5, 19, 80, 85, 'Crispy puff stuffed with spicy chicken filling, ideal for snacks.', 'FD-1752485151.jpg', 1, '1 pcs', 'Flour, Butter, Chicken, Onion, Garlic, Spices', '2025-09-21', '2025-09-26', 'PROD004', '2025-07-13 09:25:51', '2025-09-21 05:23:01'),
 (5, 'Red Velvet Slice', 2, 6, 180, 72, 'Moist red cake slice layered with smooth cream cheese frosting.', 'FD-1752485194.jpg', 1, '1 pcs', 'Flour, Cocoa, Buttermilk, Vinegar, Sugar, Eggs, Cream cheese frosting', '2025-07-15', '2026-01-15', 'PROD005', '2025-07-13 09:26:34', '2025-09-19 20:44:00'),
 (6, 'Cheese Bun', 1, 4, 120, 86, 'Soft and fluffy bun filled or topped with melted cheese.', 'FD-1752485249.jpg', 1, '1 pcs', 'Flour, Yeast, Milk, Sugar, Cheese, Butter', '2025-07-14', '2026-03-04', 'PROD006', '2025-07-13 09:27:29', '2025-09-19 20:44:13'),
 (7, 'Butter Croissant', 4, 15, 140, 98, 'Flaky and buttery French-style crescent-shaped pastry.', 'FD-1752485306.jpg', 1, '1 pcs', 'Laminated dough (Flour, Butter), Yeast, Sugar, Salt', '2025-07-14', '2026-03-05', 'PROD007', '2025-07-13 09:28:26', '2025-09-19 20:44:16'),
 (8, 'Veg Sandwich', 6, 25, 80, 73, 'Fresh sandwich packed with vegetables and creamy dressing.', 'FD-1752485357.jpg', 1, '10 pcs', 'Bread, Tomato, Cucumber, Lettuce, Cheese, Mayonnaise', '2025-07-14', '2026-04-09', 'PROD008', '2025-07-13 09:29:17', '2025-09-19 20:44:04'),
 (9, 'Chocolate Cookie', 3, 12, 100, 69, 'Crispy outside, chewy inside, loaded with chocolate chips.', 'FD-1752485413.jpg', 1, '1 pcs', 'Flour, Butter, Eggs, Chocolate chips, Baking soda, Sugar', '2025-07-09', '2026-04-14', 'PROD009', '2025-07-13 09:30:13', '2025-09-20 03:19:37'),
-(10, 'Garlic Bread', 1, 2, 160, 78, 'Toasted bread slices flavored with garlic butter and herbs.', 'FD-1752485456.jpg', 1, '1 pcs', 'Flour, Garlic, Butter, Herbs, Yeast, Salt', '2025-07-14', '2026-05-06', 'PROD010', '2025-07-13 09:30:56', '2025-09-20 10:05:15'),
-(11, 'Birthday Cake', 2, 5, 420, 44, 'Classic round cake decorated with cream, ideal for celebrations.', 'FD-1752485498.jpg', 1, '1 LB', 'Flour, Eggs, Sugar, Butter, Milk, Cream, Flavoring, Food color', '2025-07-14', '2026-04-15', 'PROD011', '2025-07-13 09:31:38', '2025-09-20 09:30:00');
+(10, 'Garlic Bread', 1, 2, 160, 79, 'Toasted bread slices flavored with garlic butter and herbs.', 'FD-1752485456.jpg', 1, '1 pcs', 'Flour, Garlic, Butter, Herbs, Yeast, Salt', '2025-07-14', '2026-05-06', 'PROD010', '2025-07-13 09:30:56', '2025-09-21 04:55:23'),
+(11, 'Birthday Cake', 2, 5, 420, 43, 'Classic round cake decorated with cream, ideal for celebrations.', 'FD-1752485498.jpg', 1, '1 LB', 'Flour, Eggs, Sugar, Butter, Milk, Cream, Flavoring, Food color', '2025-07-14', '2026-04-15', 'PROD011', '2025-07-13 09:31:38', '2025-09-21 06:32:44');
 
 -- --------------------------------------------------------
 
@@ -487,7 +480,11 @@ INSERT INTO `purchasecarts` (`id`, `date`, `time`, `user_id`, `chalan_reg`, `pro
 (7, '2025-09-20', '20:02:29', 1, 250920000100000001, 7, 1, 4, 0, 0, 1, 'N/A', 140, 140, '1 pcs', '2025-09-20 14:02:29', '2025-09-20 14:02:49'),
 (8, '2025-09-20', '20:02:29', 1, 250920000100000001, 8, 1, 4, 0, 0, 1, 'N/A', 80, 80, '10 pcs', '2025-09-20 14:02:29', '2025-09-20 14:02:48'),
 (9, '2025-09-20', '20:02:30', 1, 250920000100000001, 9, 1, 5, 0, 0, 1, 'N/A', 100, 100, '1 pcs', '2025-09-20 14:02:30', '2025-09-20 14:02:47'),
-(10, '2025-09-20', '20:02:31', 1, 250920000100000001, 11, 1, 4, 0, 0, 1, 'N/A', 420, 420, '1 LB', '2025-09-20 14:02:31', '2025-09-20 14:02:50');
+(10, '2025-09-20', '20:02:31', 1, 250920000100000001, 11, 1, 4, 0, 0, 1, 'N/A', 420, 420, '1 LB', '2025-09-20 14:02:31', '2025-09-20 14:02:50'),
+(11, '2025-09-21', '10:45:59', 1, 250921000100000001, 10, 1, 1, 1, 1, 2, 'N/A', 160, 160, '1 pcs', '2025-09-21 04:45:59', '2025-09-21 04:55:23'),
+(12, '2025-09-21', '10:55:00', 1, 250921000100000002, 5, 1, 1, 0, 0, 2, 'N/A', 180, 180, '1 pcs', '2025-09-21 04:55:00', '2025-09-21 04:55:31'),
+(14, '2025-09-21', '11:05:20', 1, 250921000100000003, 3, 1, 5, 10, 10, 2, 'N/A', 120, 600, '1 pcs', '2025-09-21 05:05:20', '2025-09-21 05:23:00'),
+(15, '2025-09-21', '11:05:24', 1, 250921000100000003, 4, 1, 5, 10, 10, 2, 'N/A', 80, 400, '1 pcs', '2025-09-21 05:05:24', '2025-09-21 05:23:01');
 
 -- --------------------------------------------------------
 
@@ -519,7 +516,10 @@ CREATE TABLE `purchaseorders` (
 --
 
 INSERT INTO `purchaseorders` (`id`, `date`, `delivary_date`, `time`, `user_id`, `branch`, `chalan_reg`, `total`, `discount`, `vat`, `payable`, `pay`, `due`, `status`, `created_at`, `updated_at`) VALUES
-(1, '2025-09-20', NULL, '20:02:53', 1, 1, 250920000100000001, 1500, 0, 0, 1500, 0, 1500, 3, '2025-09-20 14:02:53', '2025-09-20 14:03:02');
+(1, '2025-09-20', NULL, '20:02:53', 1, 1, 250920000100000001, 1500, 0, 0, 1500, 0, 1500, 3, '2025-09-20 14:02:53', '2025-09-20 14:03:02'),
+(2, '2025-09-21', NULL, '10:52:46', 1, 1, 250921000100000001, 160, 0, 0, 160, 0, 160, 4, '2025-09-21 04:52:46', '2025-09-21 04:53:46'),
+(3, '2025-09-21', NULL, '10:55:01', 1, 1, 250921000100000002, 180, 0, 0, 180, 0, 180, 4, '2025-09-21 04:55:01', '2025-09-21 04:55:08'),
+(4, '2025-09-21', NULL, '11:05:26', 1, 1, 250921000100000003, 200, 0, 0, 200, 0, 200, 4, '2025-09-21 05:05:26', '2025-09-21 05:22:55');
 
 -- --------------------------------------------------------
 
@@ -549,7 +549,14 @@ INSERT INTO `stocks` (`id`, `reg`, `date`, `product_id`, `stockIn`, `stockOut`, 
 (2, 20250920010001, '2025-09-20', 10, 0, 2, 'Out', 1, '2025-09-20 09:29:58', '2025-09-20 09:30:01'),
 (3, 20250920010002, '2025-09-20', 10, 0, 3, 'Out', 1, '2025-09-20 10:05:11', '2025-09-20 10:05:15'),
 (4, 20250920010002, '2025-09-20', 2, 0, 3, 'Out', 1, '2025-09-20 10:05:11', '2025-09-20 10:05:14'),
-(5, 20250920010002, '2025-09-20', 3, 0, 3, 'Out', 1, '2025-09-20 10:05:12', '2025-09-20 10:05:13');
+(5, 20250920010002, '2025-09-20', 3, 0, 3, 'Out', 1, '2025-09-20 10:05:12', '2025-09-20 10:05:13'),
+(8, 20250921010003, '2025-09-21', 3, 0, 3, 'Out', 1, '2025-09-21 04:44:49', '2025-09-21 04:44:50'),
+(9, 250921000100000001, '2025-09-21', 10, 1, 0, 'In from Factory.', 2, '2025-09-21 04:55:23', '2025-09-21 04:55:23'),
+(10, 250921000100000002, '2025-09-21', 5, 0, 0, 'In from Factory.', 2, '2025-09-21 04:55:31', '2025-09-21 04:55:31'),
+(11, 250921000100000003, '2025-09-21', 3, 10, 0, 'In from Factory.', 2, '2025-09-21 05:23:00', '2025-09-21 05:23:00'),
+(12, 250921000100000003, '2025-09-21', 4, 10, 0, 'In from Factory.', 2, '2025-09-21 05:23:01', '2025-09-21 05:23:01'),
+(13, 20250921010001, '2025-09-21', 2, 0, 1, 'Out', 1, '2025-09-21 06:32:03', '2025-09-21 06:32:03'),
+(14, 20250921010002, '2025-09-21', 11, 0, 1, 'Out', 1, '2025-09-21 06:32:44', '2025-09-21 06:32:44');
 
 -- --------------------------------------------------------
 
@@ -796,7 +803,7 @@ ALTER TABLE `branches`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -820,7 +827,7 @@ ALTER TABLE `excategories`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `exsubcategories`
@@ -844,7 +851,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payment_methods`
@@ -862,25 +869,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `purchasecarts`
 --
 ALTER TABLE `purchasecarts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `purchaseorders`
 --
 ALTER TABLE `purchaseorders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `subcategories`

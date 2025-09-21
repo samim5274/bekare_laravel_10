@@ -19,6 +19,7 @@ use App\Http\Controllers\Expenses\ExpensesController;
 use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Bercode\BercodeController;
+use App\Http\Controllers\Account\AccountController;
 
 
 Auth::routes();
@@ -189,4 +190,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/ber-code', [BercodeController::class, 'berCodeView'])->name('product-bercode-view');
     Route::get('/generate/bercode/{product_id}', [BercodeController::class, 'generateBercode']);
     Route::post('/print-bercode/{product_id}', [BercodeController::class, 'printBercode']);
+
+    Route::get('/account-details', [AccountController::class, 'account'])->name('total-transection-account-view');
+    Route::get('/print-closing-balance', [AccountController::class, 'printAccount']);
 });

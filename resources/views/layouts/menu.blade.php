@@ -160,6 +160,7 @@
                     <a href="#!" class="pc-link"><span class="pc-micon"><i class="fa-solid fa-gears"></i></span><span class="pc-mtext">Setting</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
                         <li class="pc-item"><a class="pc-link" href="{{url('/setting')}}"><i class="fa-solid fa-gear me-3"></i>Setting</a></li>
+                        <li class="pc-item"><a class="pc-link" href="{{url('/account-details')}}"><i class="fa-solid fa-circle-dollar-to-slot me-3"></i>Total Transection</a></li>
                         <li class="pc-item"><a class="pc-link" href="{{url('/permission')}}"><i class="fa-solid fa-lock me-3"></i>Permission</a></li>
                         <li class="pc-item"><a href="{{url('/backup-database')}}" class="pc-link"><i class="fa-solid fa-download me-3"></i></i>Backup DB</a></li>
                     </ul>

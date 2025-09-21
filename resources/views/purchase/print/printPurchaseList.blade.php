@@ -118,7 +118,7 @@
         <div class="signature-block">Admin Signature</div>
     </div>
 
-    <p class="note"><strong>Note:</strong> This software was developed by <strong>BGMIT</strong> and created by <strong>SAMIM HOSSEIN</strong>. Call: +8801 62420 9291. Thank You!</p>
+    <p class="note"><strong>Note:</strong> Developed by <strong>SAMIM-HosseN</strong>, created by <strong>SAMIM-HosseN</strong>. Call: +8801624209291</p>
 
     <script>
         window.onload = function() {
