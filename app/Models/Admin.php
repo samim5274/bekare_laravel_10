@@ -62,4 +62,9 @@ class Admin extends Authenticatable
     public function branchs(){
         return $this->belongsTo(Branch::class, 'branch_id', 'id');
     }
+
+    public function dueCollections()
+    {
+        return $this->hasMany(DueCollection::class);
+    }
 }

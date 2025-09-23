@@ -11,6 +11,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
 use App\Models\Company;
+use App\Models\DueCollection;
 use Auth;
 
 class OrderController extends Controller
@@ -107,7 +108,7 @@ class OrderController extends Controller
         return view('order.orderlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 
-    public function dueCollection(Request $request, $reg) {
+    public function dueCollectionOld(Request $request, $reg) {        
         $order = Order::where('reg', $reg)->first();
 
         if (!$order) {
@@ -137,11 +138,75 @@ class OrderController extends Controller
         $newDue = $newPayable - $order->pay;
         $order->due = $newDue;
 
-        $order->status = ($order->due <= 0) ? 2 : 3;
+        $order->status = ($order->due <= 0) ? 2 : 3; // 1 order confrim and 2 bill paid, 3 due
 
         // dd($order);
-        $order->update();
+        // $order->update();
         return redirect()->back()->with('success', 'Due collection successfully done. ORD-'.$reg);
+    }
+
+    public function dueCollection(Request $request, $reg) {
+
+        $order = Order::where('reg', $reg)->first();
+
+        if (!$order) {
+            return back()->with('error', 'Order not found!');
+        }
+
+        $newPay = $request->input('txtPay', '');
+        $newDiscount = $request->input('txtDiscount', '');
+
+        $oldDue = $order->due;
+        $oldPayable = $order->payable;
+
+        if($newDiscount > $oldDue) {
+            return redirect()->back()->with('warning', 'Discount more then due. It is not possible.');
+        }
+        
+        $totalDiscount = $order->discount + $newDiscount;
+        $newPayable = $oldPayable - $newDiscount;     
+
+        if ($newPay >= $newPayable || $newPay >= $oldDue) {
+            $newPay2 = $newPayable;
+        } else {
+            $newPay2 = $order->pay + $newPay;
+        }
+
+        $newDue = $newPayable - $newPay2;
+
+        $order->status = ($newDue <= 0) ? 2 : 3; // 1 order confrim and 2 bill paid, 3 due
+
+        $findDueCollection = DueCollection::where('reg', $order->reg)->where('order_id', $order->id)->first();
+
+        if($findDueCollection){
+            $findDueCollection->order_id = $order->id;
+            $findDueCollection->reg = $order->reg;
+            $findDueCollection->total = $order->total;
+            $findDueCollection->discount = $totalDiscount;
+            $findDueCollection->vat = $order->vat;
+            $findDueCollection->payable = $newPayable;
+            $findDueCollection->pay = $newPay2;
+            $findDueCollection->due = $newDue;
+            $findDueCollection->user_id = Auth::guard('admin')->user()->id;
+            $findDueCollection->update();
+            $order->update();
+            return redirect()->back()->with('success', 'Due collection successfully done. ORD-'.$reg);
+        } else {
+            $dueCollection = new DueCollection();
+            $dueCollection->order_id = $order->id;
+            $dueCollection->reg = $order->reg;
+            $dueCollection->total = $order->total;
+            $dueCollection->discount = $totalDiscount;
+            $dueCollection->vat = $order->vat;
+            $dueCollection->payable = $newPayable;
+            $dueCollection->pay = $newPay2;
+            $dueCollection->due = $newDue;
+            $dueCollection->user_id = Auth::guard('admin')->user()->id;
+
+            $order->update();
+            $dueCollection->save();
+            return redirect()->back()->with('success', 'Due collection successfully done. ORD-'.$reg);
+        }
     }
 
     public function printAllOrder() {

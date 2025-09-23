@@ -35,4 +35,9 @@ class Order extends Model
     {
         return $this->belongsTo(PaymentMethod::class, 'paymentMethod', 'id');
     }
+
+    public function dueCollections()
+    {
+        return $this->hasMany(DueCollection::class);
+    }
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\Bercode\BercodeController;
 use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Email\EmailController;
 
 
 Auth::routes();
@@ -100,6 +101,9 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/print-total-sale', [ReportController::class, 'printTotalSale']);
     Route::get('/due-list', [ReportController::class, 'dueList'])->name('due.list.view');
     Route::get('/print-all-due-order', [ReportController::class, 'printDue']);
+    Route::get('/due-collection-list', [ReportController::class, 'dueCollection'])->name('due-collection-list-view');
+    Route::get('/print-all-due-collection', [ReportController::class, 'printDueCollection']);
+    Route::post('/search-report-date-wise-due-collection-report', [ReportController::class, 'findDueCollectionReport']);
     Route::get('/paid-list', [ReportController::class, 'paidList'])->name('paid.list.view');
     Route::get('/print-all-paid-order', [ReportController::class, 'printPaid']);
     Route::get('/select-day-wise-sale-report', [ReportController::class, 'selsectDayWiseSaleReport'])->name('select.date.wise.sale.report.view');
@@ -144,6 +148,8 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/update-order-qty/{reg}/{id}', [PurchaseController::class, 'UpdatePurchaseQty']);
     Route::get('/print-all-purchase-list', [PurchaseController::class, 'printPurchaseList']);
     Route::get('/print-specific-purchase-order/{reg}', [PurchaseController::class, 'printSpecificPurchaseOrder']);
+    Route::get('/sale-return', [PurchaseController::class, 'purchaseReturn'])->name('purchase-return-view');
+    Route::post('/purchase-return-confirm', [PurchaseController::class, 'purchaseReturnConfirm']);
 
     Route::get('/factory', [FactoryController::class, 'factoryView'])->name('factory.view');
     Route::get('/view-order-item/{reg}', [FactoryController::class, 'orderViewById']);
@@ -193,4 +199,7 @@ Route::group(['middleware' => ['admin']], function() {
 
     Route::get('/account-details', [AccountController::class, 'account'])->name('total-transection-account-view');
     Route::get('/print-closing-balance', [AccountController::class, 'printAccount']);
+
+    // ================================================== Email section route ==================================================
+    Route::get('/send-email', [EmailController::class, 'sendEmail']);
 });

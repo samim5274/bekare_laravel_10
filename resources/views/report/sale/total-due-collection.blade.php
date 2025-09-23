@@ -35,19 +35,49 @@
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                                <li class="breadcrumb-item"><a href="{{url('/product-view')}}">Product</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Product</li>
+                                <li class="breadcrumb-item"><a href="{{url('/total-sale')}}">Report</a></li>
+                                <li class="breadcrumb-item" aria-current="page">Due Collection</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            @include('layouts.message')
+            
             <div class="container mt-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 grid-margin stretch-card">
+                        <div class="card mt-2">
+                            <div class="card-body p-2 p-md-4">
+                                <form action="{{url('/search-report-date-wise-due-collection-report')}}" method="POST" target="_blank">
+                                    @CSRF
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="input-group mb-3">
+                                                <input type="date" id="dtpStartDate" required class="form-control py-2" name="dtpStartDate">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="input-group mb-3">
+                                                <input type="date" id="dtpEndDate" required class="form-control py-2" name="dtpEndDate">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="input-group mb-3">
+                                                <input type="submit" class="btn btn-outline-primary w-50 py-2" value="Search">
+                                                <button type="submit" name="print" value="1" class="btn btn-sm btn-primary d-flex align-items-center justify-content-center w-50 gap-1"><i class="fa-solid fa-print"></i><span>Print</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="m-0">Bakery Product List</h4>
+                    <h4 class="m-0">Total Due Collection - ৳{{$due}}/-</h4>
                     <h5 class="m-0 text-primary">
-                        <a href="{{url('/print-all-order')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
+                        <a href="{{url('/print-all-due-collection')}}" target="_blank"><i class="fa-solid fa-print"></i> Print </a>
                     </h5>
                 </div>
                 <div class="table-responsive">
@@ -56,7 +86,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Date</th>
-                                <th>C.Name</th>
                                 <th>Reg</th>
                                 <th>Total (৳)</th>
                                 <th>Discount (৳)</th>
@@ -64,15 +93,13 @@
                                 <th>Payable (৳)</th>
                                 <th>Pay (৳)</th>
                                 <th>Due (৳)</th>
-                                <th class="text-center">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($order as $key => $val)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{$val->date}}</td>
-                                <td>{{ $val->customerName ?? 'N/A' }}</td>
+                                <td>{{$val->payment_date}}</td>
                                 <td>{{$val->reg}}</td>
                                 <td>৳{{$val->total}}/-</td>
                                 <td>৳{{$val->discount}}/-</td>
@@ -80,26 +107,16 @@
                                 <td>৳{{$val->payable}}/-</td>
                                 <td>৳{{$val->pay}}/-</td>
                                 <td>৳{{$val->due}}/-</td>
-                                <td class="text-center">
-                                    @if($val->status == 2)
-                                        <span class="badge bg-success">Paid</span>
-                                    @else
-                                        <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#due{{$val->id}}">Due</span>
-                                    @endif
-                                    <span class="text-primary"><a href="{{url('/specific-order-print/'.$val->reg)}}" target="_blank"><i class="fa-solid fa-print"></i></a></span>
-                                    <a href="{{url('/return-product-cart/'.$val->reg)}}" class="text-danger"><i class="fa-regular fa-share-from-square"></i></a>
-                                </td>
                             </tr>
                             @endforeach
                             <tr class="table-info">
-                                <td colspan="4">Total:</td>
+                                <td colspan="3">Total:</td>
                                 <td>৳{{$total}}/-</td>
                                 <td>৳{{$discount}}/-</td>
                                 <td>৳{{$vat}}/-</td>
                                 <td>৳{{$payable}}/-</td>
                                 <td>৳{{$pay}}/-</td>
                                 <td>৳{{$due}}/-</td>
-                                <td></td>
                             </tr>
                         </tbody>
                     </table>
@@ -113,60 +130,6 @@
         </div>
     </div> 
 
-    <!-- Modal -->
-    @foreach($order as $key => $val)
-    <div class="modal fade" id="due{{$val->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="{{url('/due-collection/'.$val->reg)}}" method="POST">
-                @csrf
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ORD-{{$val->reg}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="num1{{$val->id}}" class="col-sm-3 col-form-label">Total Amount:</label>
-                        <div class="col-sm-9">
-                            <!-- Hidden total input -->
-                            <input type="text" class="form-control" id="num1{{$val->id}}" name="txtDue" hidden readonly value="{{ $val->due }}">
-                            <!-- Display total as styled text -->
-                            <h1 class="display-1 text-danger">${{ $val->due }}/-</h1>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="num3{{$val->id}}" class="col-sm-3 col-form-label">Discount:</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="num3{{$val->id}}" name="txtDiscount" value="0" placeholder="Discount" onkeyup="calculateAmount({{$val->id}})" onchange="calculateAmount({{$val->id}})">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="num2{{$val->id}}" class="col-sm-3 col-form-label">Pay:</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="num2{{$val->id}}" name="txtPay" placeholder="Pay" onkeyup="calculateAmount({{$val->id}})" onchange="calculateAmount({{$val->id}})">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="num2" class="col-sm-3 col-form-label"></label>
-                        <div class="col-sm-9">
-                            <p id="result{{$val->id}}" class="display-6 text-danger">Amount: 00/-</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="btnSave{{$val->id}}" onclick="return confirm('Are you sure you want to collect this due?')">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    </div>
-    @endforeach
-
 
     @include('layouts.footer')
 
@@ -176,8 +139,21 @@
     <script src="{{ asset('assets/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
-    <script src="{{ asset('./js/due.js') }}"></script>
-    <script src="{{ asset('./js/orderListPrint.js') }}"></script>
+
+    <script>
+        window.onload = function () {
+            const today = new Date().toISOString().split('T')[0];
+
+            const startInput = document.getElementById('dtpStartDate');
+            const endInput = document.getElementById('dtpEndDate');
+
+            startInput.max = today;
+            endInput.max = today;
+
+            startInput.value = today;
+            endInput.value = today;
+        };
+    </script>
 
 </body>
 </html>

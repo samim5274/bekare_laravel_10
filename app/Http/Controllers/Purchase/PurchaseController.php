@@ -11,8 +11,10 @@ use App\Models\Purchaseorder;
 use App\Models\Purchasecart;
 use App\Models\Product;
 use App\Models\Stock;
+use App\Models\Order;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\purchaseReturn;
 use Auth;
 
 class PurchaseController extends Controller
@@ -159,5 +161,9 @@ class PurchaseController extends Controller
         $cart = Purchasecart::where('chalan_reg', $reg)->get();
         $company = Company::all();
         return view('purchase.print.printPurchaseOrder', compact('cart','reg','company'));
+    }
+
+    public function purchaseReturn(){
+        return view('purchase.purchaseReturnList');
     }
 }

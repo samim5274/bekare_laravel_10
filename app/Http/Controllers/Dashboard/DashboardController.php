@@ -17,6 +17,7 @@ use App\Models\Order;
 use App\Models\Stock;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\DueCollection;
 use Auth;
 
 class DashboardController extends Controller
@@ -31,6 +32,7 @@ class DashboardController extends Controller
         $payable = Order::where('date', Carbon::today())->sum('payable');
         $pay = Order::where('date', Carbon::today())->sum('pay');
         $due = Order::where('date', Carbon::today())->sum('due');
+        $dueCollection = DueCollection::where('payment_date', Carbon::today())->sum('due');
 
         $expenses = Expenses::where('date', Carbon::today())->sum('amount');
 
@@ -47,7 +49,7 @@ class DashboardController extends Controller
         $totalPhurchaseReady = Purchasecart::where('date', Carbon::today())->sum('ready_qty');
         $totalPhurchaseDelivery = Purchasecart::where('date', Carbon::today())->sum('delivery_qty');
 
-        return view('welcome', compact('total', 'discount', 'vat', 'due', 'payable', 'pay','expenses','totalProduct', 'active', 'deactive','expired','expiredSoon','bracnh','totalPhurchaseOrder','totalPhurchaseReady','totalPhurchaseDelivery'));
+        return view('welcome', compact('total', 'discount', 'vat', 'due', 'payable', 'pay','expenses','totalProduct', 'active', 'deactive','expired','expiredSoon','bracnh','totalPhurchaseOrder','totalPhurchaseReady','totalPhurchaseDelivery','dueCollection'));
     }
 
     public function chart(){

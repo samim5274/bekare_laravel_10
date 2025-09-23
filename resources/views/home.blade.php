@@ -1,5 +1,6 @@
 <div class="row g-4">
     <label for="">Account Details <span class="small"> <i class="fa-solid fa-sack-dollar"></i> ৳ {{$pay - $expenses}}/-</span></label>
+    <a href="/send-email">Send Eamil</a>
     
     <div class="col-md-6 col-xl-3">
         <a href="{{url('/total-sale')}}">
@@ -55,7 +56,7 @@
     </div>
 
     <div class="col-md-6 col-xl-3">
-        <a href="{{url('/total-sale')}}">
+        <a href="{{url('/due-list')}}">
             <div class="card shadow-sm border-0 h-100">
                 <div class="card-body d-flex align-items-center gap-3">
                     <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center icon">
@@ -64,12 +65,12 @@
                     <div>
                         <h6 class="text-muted mb-1">Due</h6>
                         <h4 class="mb-1">৳ {{$due}}/-</h4>
-                        <small class="text-muted">Extra <span class="text-success fw-bold">$20,395</span> this year</small>
+                        <small class="text-muted">Extra <span class="text-success fw-bold">20,395</span> this year</small>
                     </div>
                 </div>
             </div>
         </a>
-    </div>
+    </div>    
 
     <div class="col-md-6 col-xl-3">
         <a href="{{url('/total-sale')}}">
@@ -116,6 +117,23 @@
                         <h6 class="text-muted mb-1">Expenses</h6>
                         <h4 class="mb-1">৳ {{$expenses}}/-</h4>
                         <small class="text-muted">Extra <span class="text-info fw-bold">8,900</span> this year</small>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <a href="{{url('/due-collection-list')}}">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center icon">
+                        <i class="fa-solid fa-filter-circle-dollar"></i>
+                    </div>
+                    <div>
+                        <h6 class="text-muted mb-1">Due Collection</h6>
+                        <h4 class="mb-1">৳ {{$dueCollection}}/-</h4>
+                        <small class="text-muted">Extra <span class="text-warning fw-bold">20,395</span> this year</small>
                     </div>
                 </div>
             </div>
@@ -255,7 +273,7 @@
                     <div>
                         <h6 class="text-muted mb-1">Expired Product</h6>
                         <h4 class="mb-1">{{$expired}}</h4>
-                        <small class="text-muted">Extra <span class="text-danger fw-bold">$20,395</span> this year</small>
+                        <small class="text-muted">Extra <span class="text-danger fw-bold">20,395</span> this year</small>
                     </div>
                 </div>
             </a>

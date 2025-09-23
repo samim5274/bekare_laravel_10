@@ -36,7 +36,7 @@
     <div class="auth-wrapper v3">
       <div class="auth-form">
         <div class="auth-header">
-          <a href="#"><img src="./assets/images/logo-dark.svg" alt="img"></a>
+          <a href="#"><img src="./assets/images/logo.png" alt="img" style="height: 50px; width:auto;"></a>
         </div>
         
         <div class="card my-5">
@@ -50,11 +50,11 @@
               @csrf
               <div class="form-group mb-3">
                 <label class="form-label">Email Address</label>
-                <input type="email" name="txtEmail" value="sabbir@gmail.com" class="form-control" placeholder="Email Address">
+                <input type="email" name="txtEmail" class="form-control" placeholder="Email Address">
               </div>
               <div class="form-group mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" name="txtPassword" value="123456789" class="form-control" placeholder="Password">
+                <input type="password" name="txtPassword" class="form-control" placeholder="Password">
               </div>
               <div class="d-flex mt-1 justify-content-between">
                 <div class="form-check">
@@ -97,14 +97,7 @@
         </div>
         <div class="auth-footer row">
             <div class="col my-1">
-              <p class="m-0">Copyright © <a href="#">SAMIM-HosseN</a></p>
-            </div>
-            <div class="col-auto my-1">
-              <ul class="list-inline footer-link mb-0">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                <li class="list-inline-item"><a href="#">Contact us</a></li>
-              </ul>
+              <p class="m-0">Copyright © <a href="#">SAMIM-HosseN.</a></p>
             </div>
         </div>
       </div>

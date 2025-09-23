@@ -46,23 +46,23 @@
                     <div class="col-md-6">
                       <div class="form-group mb-3">
                         <label class="form-label">First Name*</label>
-                        <input type="text" name="txtFirstName" value="Sabbir" class="form-control" placeholder="First Name">
+                        <input type="text" name="txtFirstName" class="form-control" placeholder="First Name">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group mb-3">
                         <label class="form-label">Last Name</label>
-                        <input type="text" name="txtLastName" value="Hossain" class="form-control" placeholder="Last Name">
+                        <input type="text" name="txtLastName" class="form-control" placeholder="Last Name">
                       </div>
                     </div>
                   </div>
                   <div class="form-group mb-3">
                     <label class="form-label">Email Address*</label>
-                    <input type="email" name="txtEmail" value="sabbir@gmail.com" class="form-control" placeholder="Email Address">
+                    <input type="email" name="txtEmail" class="form-control" placeholder="Email Address">
                   </div>
                   <div class="form-group mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" name="txtPassword" value="123456789" class="form-control" placeholder="Password">
+                    <input type="password" name="txtPassword" class="form-control" placeholder="Password">
                   </div>
                   <p class="mt-4 text-sm text-muted">By Signing up, you agree to our <a href="#" class="text-primary"> Terms of Service </a> and <a href="#" class="text-primary"> Privacy Policy</a></p>
                   <div class="d-grid mt-3">

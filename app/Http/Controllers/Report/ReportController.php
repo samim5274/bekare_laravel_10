@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\Stock;
 use App\Models\Category;
 use App\Models\PaymentMethod;
+use App\Models\DueCollection;
 use Auth;
 
 class ReportController extends Controller
@@ -63,6 +64,51 @@ class ReportController extends Controller
         $vat = Order::where('status', 3)->sum('vat');
         $company = Company::all();
         return view('report.print.printDuelist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
+    }
+
+    public function dueCollection(){
+        $date = Carbon::now()->format('Ymd');
+        $order = DueCollection::where('payment_date', $date)->orderBy('id', 'desc')->paginate(15);
+        $total = DueCollection::where('payment_date', $date)->sum('total');
+        $discount = DueCollection::where('payment_date', $date)->sum('discount');
+        $payable = DueCollection::where('payment_date', $date)->sum('payable');
+        $pay = DueCollection::where('payment_date', $date)->sum('pay');
+        $due = DueCollection::where('payment_date', $date)->sum('due');
+        $vat = DueCollection::where('payment_date', $date)->sum('vat');
+        return view('report.sale.total-due-collection', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+    }
+
+    public function printDueCollection(){
+        $date = Carbon::now()->format('Ymd');
+        $order = DueCollection::where('payment_date', $date)->orderBy('id', 'desc')->get();
+        $total = DueCollection::where('payment_date', $date)->sum('total');
+        $discount = DueCollection::where('payment_date', $date)->sum('discount');
+        $payable = DueCollection::where('payment_date', $date)->sum('payable');
+        $pay = DueCollection::where('payment_date', $date)->sum('pay');
+        $due = DueCollection::where('payment_date', $date)->sum('due');
+        $vat = DueCollection::where('payment_date', $date)->sum('vat');
+        $company = Company::all();
+        return view('report.print.printDueCollection', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
+    }
+
+    public function findDueCollectionReport(Request $request){
+        $start = $request->input('dtpStartDate','');
+        $end = $request->input('dtpEndDate','');
+        $order = DueCollection::whereBetween('payment_date', [$start, $end])->orderBy('id', 'desc')->paginate(15);
+        if(empty($order)){
+            return redirect()->back()->with('error', 'Day wise data not found. Please try to find another day wise data searching. Thanks');
+        }
+        $total = DueCollection::whereBetween('payment_date', [$start, $end])->sum('total');
+        $discount = DueCollection::whereBetween('payment_date', [$start, $end])->sum('discount');
+        $payable = DueCollection::whereBetween('payment_date', [$start, $end])->sum('payable');
+        $pay = DueCollection::whereBetween('payment_date', [$start, $end])->sum('pay');
+        $due = DueCollection::whereBetween('payment_date', [$start, $end])->sum('due');
+        $vat = DueCollection::whereBetween('payment_date', [$start, $end])->sum('vat');
+        $company = Company::all();
+        if ($request->has('print')) {
+            return view('report.print.printDueCollection', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','start','end','company'));
+        }
+        return view('report.sale.total-due-collection', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
     }
 
     public function paidList(){
