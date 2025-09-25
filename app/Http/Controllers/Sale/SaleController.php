@@ -11,6 +11,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Stock;
 use App\Models\PaymentMethod;
+use App\Models\Company;
 use Auth;
 
 class SaleController extends Controller
@@ -156,8 +157,9 @@ class SaleController extends Controller
         $payMathod = PaymentMethod::all();
         $cart = Cart::where('reg', $reg)->get();
         $count = Cart::where('reg', $reg)->count();
+        $company = Company::all();
         // dd($data);
-        return view('cart.cart', compact('cart','count','reg','payMathod'));
+        return view('cart.cart', compact('cart','count','reg','payMathod','company'));
     }
 
     public function updateQuantity(Request $request)

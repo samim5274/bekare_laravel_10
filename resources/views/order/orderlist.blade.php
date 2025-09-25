@@ -55,7 +55,6 @@
                         <thead class="table-primary">
                             <tr>
                                 <th>#</th>
-                                <th>Date</th>
                                 <th>C.Name</th>
                                 <th>Reg</th>
                                 <th>Total (৳)</th>
@@ -71,9 +70,8 @@
                             @foreach($order as $key => $val)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{$val->date}}</td>
                                 <td>{{ $val->customerName ?? 'N/A' }}</td>
-                                <td>{{$val->reg}}</td>
+                                <td><a href="{{url('/order-view/'.$val->reg)}}">ORD-{{$val->reg}}</a></td>
                                 <td>৳{{$val->total}}/-</td>
                                 <td>৳{{$val->discount}}/-</td>
                                 <td>৳{{$val->vat}}/-</td>
@@ -92,7 +90,7 @@
                             </tr>
                             @endforeach
                             <tr class="table-info">
-                                <td colspan="4">Total:</td>
+                                <td colspan="3">Total:</td>
                                 <td>৳{{$total}}/-</td>
                                 <td>৳{{$discount}}/-</td>
                                 <td>৳{{$vat}}/-</td>
@@ -138,7 +136,7 @@
                     <div class="form-group row">
                         <label for="num3{{$val->id}}" class="col-sm-3 col-form-label">Discount:</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="num3{{$val->id}}" name="txtDiscount" value="0" placeholder="Discount" onkeyup="calculateAmount({{$val->id}})" onchange="calculateAmount({{$val->id}})">
+                            <input type="number" readonly class="form-control" id="num3{{$val->id}}" name="txtDiscount" value="0" placeholder="Discount" onkeyup="calculateAmount({{$val->id}})" onchange="calculateAmount({{$val->id}})">
                         </div>
                     </div>
 

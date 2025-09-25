@@ -88,7 +88,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/remove-to-cart/{id}/{reg}', [SaleController::class, 'removeCart']);
 
     Route::post('/confirm-order', [OrderController::class, 'confirmOrder']);
-    Route::get('/payment-order', [OrderController::class, 'paymentOrder'])->name('order.payment');
+    Route::get('/sale-order-list', [OrderController::class, 'paymentOrder'])->name('order.payment');
     Route::post('/due-collection/{reg}', [OrderController::class, 'dueCollection']);
     Route::get('/print-all-order', [OrderController::class, 'printAllOrder']);
     Route::get('/specific-order-print/{reg}', [OrderController::class, 'specificOrderPrint'])->name('specific.order.print');
@@ -96,6 +96,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/return-product-cart/{reg}', [OrderController::class, 'returnCart'])->name('return.cart');
     Route::get('/order-return-confirm/{reg}', [OrderController::class, 'returnConfirm']);
     Route::get('/print-return-list', [OrderController::class, 'printReturnList']);
+    Route::get('/order-view/{reg}', [OrderController::class, 'orderViewByReg'])->name('order.view.by.reg');
 
     Route::get('/total-sale', [ReportController::class, 'totalSale'])->name('total.sale.view');
     Route::get('/print-total-sale', [ReportController::class, 'printTotalSale']);

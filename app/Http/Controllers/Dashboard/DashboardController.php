@@ -23,16 +23,16 @@ use Auth;
 class DashboardController extends Controller
 {
     public function index(){
-        $today = Carbon::today();
+        $today = Carbon::now()->toDateString();
         $last3day = Carbon::today()->addDays(3);
-
+        
         $total = Order::where('date', Carbon::today())->sum('total');
         $discount = Order::where('date', Carbon::today())->sum('discount');
         $vat = Order::where('date', Carbon::today())->sum('vat');
         $payable = Order::where('date', Carbon::today())->sum('payable');
         $pay = Order::where('date', Carbon::today())->sum('pay');
         $due = Order::where('date', Carbon::today())->sum('due');
-        $dueCollection = DueCollection::where('payment_date', Carbon::today())->sum('due');
+        $dueCollection = DueCollection::where('payment_date', Carbon::today())->sum('pay');
 
         $expenses = Expenses::where('date', Carbon::today())->sum('amount');
 

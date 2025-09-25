@@ -35,9 +35,9 @@
                     </a>
                 </li>
                 <li class="pc-item">
-                    <a href="{{url('/payment-order')}}" class="pc-link">
+                    <a href="{{url('/sale-order-list')}}" class="pc-link">
                         <span class="pc-micon"><i class="fa-solid fa-cart-flatbed"></i></span>
-                        <span class="pc-mtext">Order list</span>
+                        <span class="pc-mtext">Sale list</span>
                     </a>
                 </li>
                 <li class="pc-item">

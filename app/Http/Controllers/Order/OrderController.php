@@ -13,6 +13,7 @@ use App\Models\Stock;
 use App\Models\Company;
 use App\Models\DueCollection;
 use Auth;
+use App\Notifications\SaleConfirmed;
 
 class OrderController extends Controller
 {
@@ -86,8 +87,9 @@ class OrderController extends Controller
             } else {
                 $order->status = 2; // Fully paid
             } 
-            // dd($reg);
+            
             $order->save();
+            $order->user->notify(new SaleConfirmed($order));
             return redirect()->back()->with('success', 'Order sale successfully.')->with('reg', $reg);
             // return response()->json([ 'success' => true, 'reg' => $reg ]);
         } catch(Exception $e) {
@@ -146,6 +148,7 @@ class OrderController extends Controller
     }
 
     public function dueCollection(Request $request, $reg) {
+        $date = Carbon::now()->format('Y-m-d');
 
         $order = Order::where('reg', $reg)->first();
 
@@ -157,6 +160,7 @@ class OrderController extends Controller
         $newDiscount = $request->input('txtDiscount', '');
 
         $oldDue = $order->due;
+        $oldPay = $order->pay;
         $oldPayable = $order->payable;
 
         if($newDiscount > $oldDue) {
@@ -169,10 +173,10 @@ class OrderController extends Controller
         if ($newPay >= $newPayable || $newPay >= $oldDue) {
             $newPay2 = $newPayable;
         } else {
-            $newPay2 = $order->pay + $newPay;
+            $newPay2 = $oldPay + $newPay;
         }
 
-        $newDue = $newPayable - $newPay2;
+        $order->due = $newDue = $newPayable - $newPay2;
 
         $order->status = ($newDue <= 0) ? 2 : 3; // 1 order confrim and 2 bill paid, 3 due
 
@@ -181,28 +185,25 @@ class OrderController extends Controller
         if($findDueCollection){
             $findDueCollection->order_id = $order->id;
             $findDueCollection->reg = $order->reg;
-            $findDueCollection->total = $order->total;
-            $findDueCollection->discount = $totalDiscount;
-            $findDueCollection->vat = $order->vat;
-            $findDueCollection->payable = $newPayable;
+            $findDueCollection->payment_date = $date;
             $findDueCollection->pay = $newPay2;
             $findDueCollection->due = $newDue;
             $findDueCollection->user_id = Auth::guard('admin')->user()->id;
-            $findDueCollection->update();
+            $order->pay = $newPay2;
+
             $order->update();
+            $findDueCollection->update();
             return redirect()->back()->with('success', 'Due collection successfully done. ORD-'.$reg);
         } else {
             $dueCollection = new DueCollection();
             $dueCollection->order_id = $order->id;
-            $dueCollection->reg = $order->reg;
-            $dueCollection->total = $order->total;
-            $dueCollection->discount = $totalDiscount;
-            $dueCollection->vat = $order->vat;
-            $dueCollection->payable = $newPayable;
+            $dueCollection->reg = $order->reg;    
+            $dueCollection->payment_date = $date;        
             $dueCollection->pay = $newPay2;
             $dueCollection->due = $newDue;
             $dueCollection->user_id = Auth::guard('admin')->user()->id;
 
+            $order->pay = $newPay2;
             $order->update();
             $dueCollection->save();
             return redirect()->back()->with('success', 'Due collection successfully done. ORD-'.$reg);
@@ -275,5 +276,13 @@ class OrderController extends Controller
         $company = Company::all();
         // dd($order);
         return view('order.print.printReturnlist', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat','company'));
+    }
+
+    public function orderViewByReg($reg){
+        $order = Order::where('reg', $reg)->orderBy('id', 'desc')->firstOrFail();        
+        $cart = Cart::where('reg', $reg)->get();
+        $company = Company::all();
+        // dd($cart);
+        return view('order.viewOrderByReg', compact('order','cart','company'));
     }
 }

@@ -8,10 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Branch;
 use App\Models\Order;
 use App\Models\Cart;
+use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
     use HasFactory;
+    use Notifiable;
 
     protected $fillable = [
         'name',

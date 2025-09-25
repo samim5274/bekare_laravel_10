@@ -9,7 +9,7 @@
     <div style="max-width: 700px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e0e0e0;">
         <h2 style="text-align: center; color: #333;">Mr. Paul Bekare</h2>
 
-        <p style="font-size: 16px; color: #555;">Hi , I'm<strong>{{ $data['name'] }}</strong>, <span style="font-size: 10px; color: #555;">(Billing office)</span></p>
+        <p style="font-size: 16px; color: #555;">Hi , I'm <strong>{{ $data['name'] }}</strong>, <span style="font-size: 10px; color: #555;">(Billing office)</span></p>
 
         <p style="font-size: 16px; color: #555;">Here is your order summary:</p>
 

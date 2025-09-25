@@ -30,7 +30,7 @@ class MoveExpiredProducts extends Command
      */
     public function handle()
     {
-        $expiredProducts = Product::whereDate('expired', '<=', Carbon::now())->get();
+        $expiredProducts = Product::whereDate('expired', '<=', Carbon::now())->where('stock', '>', '0')->get();
 
         $count = 0;
 
@@ -66,5 +66,7 @@ class MoveExpiredProducts extends Command
         }
 
         $this->info($count . ' expired products preserved in ProductBin.');
+
+        //php artisan app:move-expired-products. this line runs every day at midnight via cron job
     }
 }

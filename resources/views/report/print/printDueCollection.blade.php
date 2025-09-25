@@ -81,11 +81,8 @@
                     <th>Date</th>
                     <th>Name</th>
                     <th>Reg</th>
-                    <th>Total (৳)</th>
-                    <th>Discount (৳)</th>
-                    <th>VAT % (৳)</th>
-                    <th>Payable (৳)</th>
                     <th>Pay (৳)</th>
+                    <th>Due (৳)</th>
                 </tr>
             </thead>
             <tbody>
@@ -95,20 +92,14 @@
                     <td>{{$val->payment_date}}</td>
                     <td>{{$val->user->name}}</td>
                     <td>{{$val->reg}}</td>
-                    <td>৳{{$val->total}}/-</td>
-                    <td>৳{{$val->discount}}/-</td>
-                    <td>৳{{$val->vat}}/-</td>
-                    <td>৳{{$val->payable}}/-</td>
                     <td>৳{{$val->pay}}/-</td>
+                    <td>৳{{$val->due}}/-</td>
                 </tr>
                 @endforeach
                 <tr class="table-info">
                     <td colspan="4">Total:</td>
-                    <td>৳{{$total}}/-</td>
-                    <td>৳{{$discount}}/-</td>
-                    <td>৳{{$vat}}/-</td>
-                    <td>৳{{$payable}}/-</td>
                     <td>৳{{$pay}}/-</td>
+                    <td>৳{{$due}}/-</td>
                 </tr>
             </tbody>
         </table>

@@ -141,7 +141,7 @@
                                         <h4>ORD-{{ $reg }}</h4>
                                         <hr>
                                         <h4>Location</h4>
-                                        <p><i class="mdi mdi-map-marker"></i> Uttara, Dhaka-1230</p>
+                                        <p><i class="mdi mdi-map-marker"></i>{{$company[0]->address}}</p>
                                         <hr>
                                         
                                         <div class="d-flex justify-content-between align-items-center mb-3">

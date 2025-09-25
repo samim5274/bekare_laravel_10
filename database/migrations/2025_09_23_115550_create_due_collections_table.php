@@ -15,12 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('restrict');
             $table->unsignedBigInteger('reg')->nullable();
-            $table->unsignedBigInteger('total')->nullable();
-            $table->unsignedBigInteger('discount')->nullable();
-            $table->unsignedBigInteger('vat')->nullable();
-            $table->unsignedBigInteger('payable')->nullable();
+            $table->unsignedBigInteger('due')->nullable();
             $table->unsignedBigInteger('pay')->nullable();
-            $table->bigInteger('due')->nullable();
             $table->date('payment_date')->default(now());
             $table->foreignId('user_id')->constrained('admins')->onDelete('restrict');
             $table->string('note')->default('N/A');

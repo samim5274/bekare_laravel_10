@@ -12,12 +12,8 @@ class DueCollection extends Model
     protected $fillable = [
         'order_id',
         'reg',
-        'total',
-        'discount',
-        'vat',
-        'payable',
-        'pay',
         'due',
+        'pay',
         'payment_date',
         'user_id',
         'note',
