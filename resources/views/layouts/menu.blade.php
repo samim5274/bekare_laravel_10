@@ -41,6 +41,12 @@
                     </a>
                 </li>
                 <li class="pc-item">
+                    <a href="{{url('/sale-due-collection')}}" class="pc-link">
+                        <span class="pc-micon"><i class="fa-solid fa-sack-dollar"></i></span>
+                        <span class="pc-mtext">Due Collection</span>
+                    </a>
+                </li>
+                <li class="pc-item">
                     <a href="{{url('/return-order-list')}}" class="pc-link">
                         <span class="pc-micon"><i class="fa-regular fa-share-from-square"></i></i></span>
                         <span class="pc-mtext">Return</span>

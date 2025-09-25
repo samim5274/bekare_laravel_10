@@ -85,7 +85,7 @@ $(document).ready(function(){
             loader.show();
 
             $.ajax({
-                url: "/getSubCategory/" + categoryId,
+                url: "/get-SubCategory/" + categoryId,
                 type: "GET",
                 success: function(data){
                     var subCategory = data.subCategory;

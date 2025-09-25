@@ -72,7 +72,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/product-view', [ProductController::class, 'product'])->name('product.view');
 
     Route::post('/add-product', [ProductController::class, 'addProduct']);
-    Route::get('/getSubCategory/{id}', [ProductController::class, 'getSubcategory']);
+    Route::get('/get-SubCategory/{id}', [ProductController::class, 'getSubcategory']);
     Route::get('/edit-product/{id}', [ProductController::class, 'editProduct']);
     Route::post('/update-product/{id}', [ProductController::class, 'updateProduct']);
     Route::get('/product-delete/{id}', [ProductController::class, 'delete']);
@@ -90,6 +90,7 @@ Route::group(['middleware' => ['admin']], function() {
     Route::post('/confirm-order', [OrderController::class, 'confirmOrder']);
     Route::get('/sale-order-list', [OrderController::class, 'paymentOrder'])->name('order.payment');
     Route::post('/due-collection/{reg}', [OrderController::class, 'dueCollection']);
+    Route::get('/sale-due-collection', [OrderController::class, 'dueCollectionView'])->name('sale-due-collection');
     Route::get('/print-all-order', [OrderController::class, 'printAllOrder']);
     Route::get('/specific-order-print/{reg}', [OrderController::class, 'specificOrderPrint'])->name('specific.order.print');
     Route::get('/return-order-list', [OrderController::class, 'returnOrderList'])->name('return.order.list.view');

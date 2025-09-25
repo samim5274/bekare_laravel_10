@@ -16,27 +16,28 @@ class SubcategorySeeder extends Seeder
     public function run(): void
     {
         $subcategories = [
-            'Bread' => ['White Bread', 'Brown Bread', 'Multigrain Bread', 'Buns & Rolls'],
-            'Cakes' => ['Birthday Cake', 'Wedding Cake', 'Cupcakes', 'Cheese Cake', 'Chocolate Cake'],
-            'Cookies & Biscuits' => ['Chocolate Chip Cookies', 'Butter Cookies', 'Oatmeal Cookies', 'Digestive Biscuits'],
-            'Pastry' => ['Cream Pastry', 'Fruit Pastry', 'Black Forest Pastry', 'Éclair'],
-            'Snacks' => ['Patties', 'Pies', 'Sandwiches', 'Chicken Roll', 'Samosa'],
-            'Sweets' => ['Donuts', 'Brownies', 'Muffins', 'Gulab Jamun'],
-            'Dairy Items' => ['Fresh Cream', 'Butter', 'Cheese', 'Milk Shake'],
-            'Beverages' => ['Tea', 'Coffee', 'Juice', 'Soft Drinks'],
+            "BREAD & BUNS" => ["Burger Series","Bun Series","Bread Series","Rolls & Croissant","Special Breads"],
+            "FAST FOOD ITEMS" => ["Burger Items","Roll Items","Sandwich Items","Pizza & Pie","Special Fast Food"],
+            "TOAST & BISCUITS" => ["Toast Items","Cookies","Nut Cookies","Dry Cakes","Special Biscuits"],
+            "STICK & PUFFS" => ["Stick Series","Garlic & Cheese","Puffs Sweet","Puffs Spicy","Special Puffs"],
+            "CELEBRATION CAKE" => ["Chocolate Series","Vanilla & Mocha","Fruit Cakes","Designer Cakes","Premium Cakes"],
+            "SWEET" => ["Roshogolla & Jam","Chom Chom Series","Sondesh Items","Laddu & Doi","Special Traditional"],
         ];
+
 
         foreach ($subcategories as $categoryName => $subs) {
             $category = Category::where('name', $categoryName)->first();
+            if (!$category) {
+                continue;
+            }
 
-            if ($category) {
-                foreach ($subs as $sub) {
-                    Subcategory::create([
-                        'name' => $sub,
-                        'category_id' => $category->id,
-                    ]);
-                }
+            foreach ($subs as $sub) {
+                Subcategory::updateOrCreate(
+                    ['name' => $sub, 'category_id' => $category->id],
+                    []
+                );
             }
         }
+
     }
 }

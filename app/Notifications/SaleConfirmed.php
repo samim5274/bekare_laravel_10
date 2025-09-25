@@ -41,7 +41,7 @@ class SaleConfirmed extends Notification
 
         return (new MailMessage)
                     ->subject('Sale Confirmed')
-                    ->greeting('Hello ' . $notifiable->name)
+                    ->greeting('Hello Sir, I am ' . $notifiable->name)
                     ->line('Your sale with ID #' . $this->sale->reg . ' has been confirmed.')
                     ->view('email.sale-confirmed-notification', [
                         'sale' => $this->sale,

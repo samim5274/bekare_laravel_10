@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\Product;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\PaymentMethod;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             SubcategorySeeder::class,
+            ProductSeeder::class,
             BranchSeeder::class,
             CompanySeeder::class,
             PaymentMethodSeeder::class,

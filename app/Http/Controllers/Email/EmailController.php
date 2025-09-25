@@ -25,6 +25,7 @@ class EmailController extends Controller
         $mailAddress = [
             'banglarcele1122@gmail.com',
             'biswajitkp16@gmail.com',
+            'shahriarahmedshawon60@gmail.com'
         ];
 
         // dd($data);

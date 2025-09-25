@@ -16,15 +16,14 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'Bread',
-            'Cakes',
-            'Cookies & Biscuits',
-            'Pastry',
-            'Snacks',
-            'Sweets',
-            'Dairy Items',
-            'Beverages'
+            "BREAD & BUNS",
+            "FAST FOOD ITEMS",
+            "TOAST & BISCUITS",
+            "STICK & PUFFS",
+            "CELEBRATION CAKE",
+            "SWEET",
         ];
+
 
         foreach ($categories as $category) {
             Category::create(['name' => $category]);

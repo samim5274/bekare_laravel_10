@@ -147,6 +147,20 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Due collection successfully done. ORD-'.$reg);
     }
 
+    public function dueCollectionView(){
+        $start = Carbon::now()->format('Ymd');
+        $end = Carbon::now()->format('Ymd');
+        // 1 order confrim and 2 bill paid, 3 due
+        $order = Order::whereBetween('date', [$start, $end])->where('status', 3)->whereNot('status', 1)->orderBy('id', 'desc')->paginate(15);
+        $total = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('total');
+        $discount = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('discount');
+        $payable = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('payable');
+        $pay = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('pay');
+        $due = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('due');
+        $vat = Order::whereBetween('date', [$start, $end])->where('status', 3)->sum('vat');
+        return view('order.dueCollection', compact('order', 'total', 'discount', 'payable', 'payable', 'pay', 'due', 'vat'));
+    }
+
     public function dueCollection(Request $request, $reg) {
         $date = Carbon::now()->format('Y-m-d');
 
